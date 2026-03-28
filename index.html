@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiến dịch Sư Tử Gầm Thét — Khi Camera Giao Thông Tehran Trở Thành Vũ Khí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 290px;
+            --topbar-height: 56px;
+            --content-max: 840px;
+            --radius: 10px;
+            --transition: 0.3s cubic-bezier(.4,0,.2,1);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8f9fb;
+            --bg-secondary: #ffffff;
+            --bg-card: #f0f2f5;
+            --bg-hero: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --text-muted: #8888a0;
+            --text-hero: #ffffff;
+            --border-color: #d8dce6;
+            --accent-red: #dc3545;
+            --accent-cyan: #0077b6;
+            --accent-green: #198754;
+            --accent-orange: #e67e22;
+            --accent-purple: #7c3aed;
+            --accent-blue: #2563eb;
+            --terminal-bg: #f6f8fa;
+            --terminal-border: #d0d7de;
+            --terminal-text: #1f2328;
+            --terminal-comment: #6e7781;
+            --terminal-keyword: #cf222e;
+            --terminal-string: #0550ae;
+            --terminal-value: #0a3069;
+            --terminal-header-bg: #eaeef2;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --topbar-bg: rgba(255,255,255,0.92);
+            --sidebar-bg: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a2e;
+            --bg-hero: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+            --text-primary: #e8e8f0;
+            --text-secondary: #9898b0;
+            --text-muted: #5e5e78;
+            --text-hero: #ffffff;
+            --border-color: #2a2a40;
+            --accent-red: #e74c3c;
+            --accent-cyan: #00d4ff;
+            --accent-green: #00ff88;
+            --accent-orange: #ff9500;
+            --accent-purple: #a855f7;
+            --accent-blue: #3b82f6;
+            --terminal-bg: #0d1117;
+            --terminal-border: #21262d;
+            --terminal-text: #c9d1d9;
+            --terminal-comment: #6e7681;
+            --terminal-keyword: #ff7b72;
+            --terminal-string: #a5d6ff;
+            --terminal-value: #79c0ff;
+            --terminal-header-bg: rgba(255,255,255,0.04);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --topbar-bg: rgba(10,10,15,0.92);
+            --sidebar-bg: #12121a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.85;
+            overflow-x: hidden;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        /* TOPBAR */
+        .topbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: var(--topbar-height);
+            background: var(--topbar-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 1.5rem; z-index: 1000;
+            transition: background var(--transition), border-color var(--transition);
+        }
+        .topbar::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(220,53,69,0.04) 0%, rgba(0,119,182,0.04) 50%, rgba(124,58,237,0.04) 100%);
+            pointer-events: none;
+        }
+        [data-theme="dark"] .topbar::before {
+            background: linear-gradient(135deg, rgba(220,53,69,0.08) 0%, rgba(0,119,182,0.06) 50%, rgba(124,58,237,0.08) 100%);
+        }
+        .topbar > * { position: relative; z-index: 1; }
+        .topbar-brand {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700; font-size: 0.92rem;
+        }
+        .topbar-brand svg { flex-shrink: 0; }
+        .topbar-nav { display: flex; gap: 1.2rem; list-style: none; }
+        .topbar-nav a {
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 0.8rem; font-weight: 500; transition: color 0.2s;
+        }
+        .topbar-nav a:hover { color: var(--accent-cyan); }
+        .topbar-right { display: flex; align-items: center; gap: 12px; }
+        .theme-toggle {
+            width: 44px; height: 24px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 12px; cursor: pointer; position: relative;
+            transition: background var(--transition);
+        }
+        .theme-toggle::after {
+            content: ''; position: absolute; top: 2px; left: 2px;
+            width: 18px; height: 18px;
+            background: var(--accent-orange); border-radius: 50%;
+            transition: transform var(--transition), background var(--transition);
+        }
+        [data-theme="dark"] .theme-toggle::after {
+            transform: translateX(20px); background: var(--accent-cyan);
+        }
+        .theme-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; }
+        .btn-print {
+            display: flex; align-items: center; gap: 5px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            color: var(--text-secondary); padding: 4px 12px;
+            border-radius: 6px; cursor: pointer; font-size: 0.75rem;
+            font-family: 'Inter', sans-serif; font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-print:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
+        .btn-print span { white-space: nowrap; }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed; top: var(--topbar-height); left: 0;
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--topbar-height));
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 1.2rem 0; overflow-y: auto; z-index: 500;
+            transition: background var(--transition), border-color var(--transition);
+        }
+        .sidebar-section { padding: 0 1rem; margin-bottom: 1.4rem; }
+        .sidebar-section h4 {
+            font-size: 0.62rem; text-transform: uppercase;
+            letter-spacing: 0.15em; color: var(--text-muted);
+            margin-bottom: 0.6rem; padding-bottom: 0.35rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .sidebar-toc a {
+            display: flex; align-items: flex-start; gap: 8px;
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 0.78rem; padding: 0.35rem 0.5rem;
+            border-radius: 6px; transition: all 0.2s; line-height: 1.4;
+        }
+        .sidebar-toc a:hover, .sidebar-toc a.active {
+            color: var(--accent-cyan); background: rgba(0,119,182,0.06);
+        }
+        [data-theme="dark"] .sidebar-toc a:hover,
+        [data-theme="dark"] .sidebar-toc a.active { background: rgba(0,212,255,0.06); }
+        .sidebar-toc a .num {
+            color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; font-weight: 600; min-width: 18px;
+        }
+        .sidebar-stats { display: flex; flex-direction: column; gap: 0.45rem; }
+        .stat-item { display: flex; justify-content: space-between; font-size: 0.75rem; }
+        .stat-item .label { color: var(--text-muted); }
+        .stat-item .value { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+        .stat-item .value.green { color: var(--accent-green); }
+        .stat-item .value.red { color: var(--accent-red); }
+        .stat-item .value.cyan { color: var(--accent-cyan); }
+        .stat-item .value.orange { color: var(--accent-orange); }
+        .sidebar-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+        .sidebar-tags span {
+            background: rgba(124,58,237,0.08); color: var(--accent-purple);
+            font-size: 0.67rem; padding: 2px 9px; border-radius: 16px;
+            border: 1px solid rgba(124,58,237,0.15);
+        }
+        .author-card {
+            display: flex; align-items: center; gap: 10px;
+            padding: 0.7rem; background: var(--bg-card);
+            border-radius: 8px; margin-bottom: 0.5rem;
+        }
+        .author-avatar {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+        }
+        .author-info .author-name { font-size: 0.82rem; font-weight: 700; }
+        .author-info .author-title { font-size: 0.7rem; color: var(--text-muted); }
+
+        /* MAIN */
+        .main {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--topbar-height);
+            min-height: calc(100vh - var(--topbar-height));
+        }
+
+        /* Hero */
+        .hero {
+            position: relative; padding: 3.5rem 3rem 2.5rem;
+            background: var(--bg-hero); color: var(--text-hero); overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 70%, rgba(220,53,69,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(0,119,182,0.12) 0%, transparent 50%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+        @keyframes heroGlow {
+            0% { transform: translate(0,0); }
+            100% { transform: translate(-3%,-3%); }
+        }
+        .hero > * { position: relative; z-index: 1; }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(220,53,69,0.2); color: #ff8a8a;
+            font-size: 0.72rem; font-weight: 600;
+            padding: 5px 14px; border-radius: 20px;
+            border: 1px solid rgba(220,53,69,0.35);
+            margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .hero h1 {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 900; line-height: 1.2;
+            max-width: 780px; margin-bottom: 1rem;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 1.05rem; color: rgba(255,255,255,0.75);
+            max-width: 680px; line-height: 1.7; font-weight: 300;
+        }
+        .hero-meta {
+            display: flex; flex-wrap: wrap; gap: 1.5rem;
+            margin-top: 1.3rem; font-size: 0.78rem; color: rgba(255,255,255,0.5);
+        }
+
+        /* Content */
+        .content { max-width: var(--content-max); padding: 2.5rem 3rem 4rem; }
+        .content h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem; font-weight: 800;
+            margin-top: 3rem; margin-bottom: 0.8rem;
+            padding-top: 1.5rem; border-top: 1px solid var(--border-color);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .content h2 .sec-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem; font-weight: 600; color: var(--accent-cyan);
+            background: rgba(0,119,182,0.08); padding: 2px 8px; border-radius: 4px;
+        }
+        [data-theme="dark"] .content h2 .sec-num { background: rgba(0,212,255,0.1); }
+        .content h3 {
+            font-size: 1.1rem; font-weight: 700;
+            margin-top: 1.8rem; margin-bottom: 0.5rem; color: var(--accent-blue);
+        }
+        [data-theme="dark"] .content h3 { color: var(--accent-cyan); }
+        .content p { margin-bottom: 1.1rem; color: var(--text-secondary); font-size: 0.93rem; }
+        .content strong { color: var(--text-primary); font-weight: 600; }
+
+        /* Info box */
+        .info-box {
+            background: var(--bg-card); border-radius: var(--radius);
+            padding: 1.3rem 1.4rem; margin: 1.3rem 0;
+            border-left: 3px solid var(--accent-cyan); box-shadow: var(--shadow-sm);
+        }
+        .info-box.red { border-left-color: var(--accent-red); }
+        .info-box.green { border-left-color: var(--accent-green); }
+        .info-box.orange { border-left-color: var(--accent-orange); }
+        .info-box.purple { border-left-color: var(--accent-purple); }
+        .info-box h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .info-box p { margin-bottom: 0.4rem; font-size: 0.86rem; }
+        .info-box p:last-child { margin-bottom: 0; }
+
+        /* Terminal */
+        .terminal-block {
+            background: var(--terminal-bg); border: 1px solid var(--terminal-border);
+            border-radius: var(--radius); margin: 1.3rem 0; overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .terminal-header {
+            background: var(--terminal-header-bg); padding: 0.45rem 0.9rem;
+            display: flex; align-items: center; gap: 6px;
+            border-bottom: 1px solid var(--terminal-border);
+        }
+        .terminal-header .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .terminal-header .dot.r { background: #ff5f57; }
+        .terminal-header .dot.y { background: #febc2e; }
+        .terminal-header .dot.g { background: #28c840; }
+        .terminal-header .title {
+            margin-left: 8px; font-size: 0.72rem; color: var(--terminal-comment);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .terminal-body {
+            padding: 1rem 1.1rem; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem; line-height: 1.7; color: var(--terminal-text); overflow-x: auto;
+            white-space: pre-wrap; word-wrap: break-word;
+        }
+        .terminal-body .comment { color: var(--terminal-comment); }
+        .terminal-body .keyword { color: var(--terminal-keyword); font-weight: 600; }
+        .terminal-body .string { color: var(--terminal-string); }
+        .terminal-body .value { color: var(--terminal-value); }
+
+        /* Timeline */
+        .timeline { position: relative; padding-left: 2rem; margin: 1.3rem 0; }
+        .timeline::before {
+            content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-red), var(--accent-cyan), var(--accent-green));
+        }
+        .timeline-item { position: relative; padding: 0.6rem 0 1rem 1.2rem; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -1.65rem; top: 0.8rem;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--accent-cyan); border: 2px solid var(--bg-primary);
+            box-shadow: 0 0 0 3px rgba(0,119,182,0.15);
+        }
+        .timeline-item.critical::before { background: var(--accent-red); box-shadow: 0 0 0 3px rgba(220,53,69,0.15); }
+        .timeline-item.success::before { background: var(--accent-green); box-shadow: 0 0 0 3px rgba(25,135,84,0.15); }
+        .timeline-item .time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.73rem; font-weight: 600; color: var(--accent-cyan);
+        }
+        .timeline-item.critical .time { color: var(--accent-red); }
+        .timeline-item.success .time { color: var(--accent-green); }
+        .timeline-item .desc { font-size: 0.86rem; color: var(--text-secondary); margin-top: 0.15rem; }
+
+        /* SVG diagrams */
+        .svg-diagram { margin: 1.5rem 0; text-align: center; overflow-x: auto; }
+        .svg-diagram svg { max-width: 100%; height: auto; }
+        /* SVG dark nodes — adapt to theme */
+        .svg-dark-node { fill: #edf0f5; stroke: #c0c8d8; }
+        .svg-dark-node-text { fill: #1a1a2e; }
+        .svg-dark-node-sub { fill: #6b7280; }
+        .svg-dark-node-line { stroke: #d0d7de; }
+        .svg-dark-node-accent-cyan { fill: #0077b6; }
+        .svg-dark-node-accent-purple { fill: #7c3aed; }
+        .svg-dark-node-accent-orange { fill: #e67e22; }
+        .svg-dark-node-accent-green { fill: #198754; }
+        .svg-dark-node-accent-red { fill: #dc3545; }
+        [data-theme="dark"] .svg-dark-node { fill: #1a1a2e; stroke: #2a2a40; }
+        [data-theme="dark"] .svg-dark-node-text { fill: #e8e8f0; }
+        [data-theme="dark"] .svg-dark-node-sub { fill: rgba(255,255,255,0.5); }
+        [data-theme="dark"] .svg-dark-node-line { stroke: rgba(255,255,255,0.1); }
+        [data-theme="dark"] .svg-dark-node-accent-cyan { fill: #00d4ff; }
+        [data-theme="dark"] .svg-dark-node-accent-purple { fill: #a855f7; }
+        [data-theme="dark"] .svg-dark-node-accent-orange { fill: #e67e22; }
+        [data-theme="dark"] .svg-dark-node-accent-green { fill: #00ff88; }
+        [data-theme="dark"] .svg-dark-node-accent-red { fill: #ff7b72; }
+        .svg-bg { fill: #f0f2f5; stroke: #d8dce6; }
+        [data-theme="dark"] .svg-bg { fill: #12121a; stroke: #2a2a40; }
+        .svg-bg-warn { fill: #fef2f2; stroke: #fca5a5; }
+        [data-theme="dark"] .svg-bg-warn { fill: #1a0a0a; stroke: #4a2020; }
+        .svg-card { fill: #fff; stroke: #d8dce6; }
+        [data-theme="dark"] .svg-card { fill: #1a1a2e; stroke: #2a2a40; }
+        .svg-card-warn { fill: #fff; stroke: #fca5a5; }
+        [data-theme="dark"] .svg-card-warn { fill: #1a1a2e; stroke: #4a2020; }
+        .svg-title { fill: #1a1a2e; }
+        [data-theme="dark"] .svg-title { fill: #e8e8f0; }
+        .svg-muted { fill: #8888a0; }
+        .svg-body { fill: #4a4a68; }
+        [data-theme="dark"] .svg-body { fill: #9898b0; }
+
+        /* Image figure */
+        .figure {
+            margin: 1.5rem 0; border-radius: var(--radius); overflow: hidden;
+            border: 1px solid var(--border-color); box-shadow: var(--shadow-md);
+        }
+        .figure img {
+            width: 100%; height: auto; display: block;
+            object-fit: cover; max-height: 420px;
+            background: var(--bg-card);
+        }
+        .figure figcaption {
+            padding: 0.6rem 1rem; font-size: 0.78rem;
+            color: var(--text-muted); background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+        }
+        .figure figcaption a { color: var(--accent-blue); text-decoration: none; }
+        .figure figcaption a:hover { text-decoration: underline; }
+
+        /* MITRE table */
+        .mitre-table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.82rem; }
+        .mitre-table th {
+            background: var(--bg-card); padding: 0.6rem 0.8rem;
+            text-align: left; font-weight: 600; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            color: var(--text-muted); border-bottom: 2px solid var(--border-color);
+        }
+        .mitre-table td {
+            padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .mitre-table tr:hover td { background: rgba(0,119,182,0.03); }
+        .mitre-table .tid {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan); font-size: 0.73rem; font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Comparison grid */
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1.3rem 0; }
+        .comparison-card {
+            background: var(--bg-card); border-radius: var(--radius);
+            padding: 1.1rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);
+        }
+        .comparison-card h5 { font-size: 0.88rem; margin-bottom: 0.5rem; }
+        .comparison-card ul { list-style: none; padding: 0; }
+        .comparison-card li {
+            font-size: 0.8rem; color: var(--text-secondary);
+            padding: 0.2rem 0 0.2rem 1rem; position: relative;
+        }
+        .comparison-card li::before {
+            content: '\203A'; position: absolute; left: 0;
+            color: var(--accent-cyan); font-weight: 700;
+        }
+
+        /* Quote */
+        .quote-block {
+            border-left: 3px solid var(--accent-purple);
+            padding: 1rem 1.3rem; margin: 1.3rem 0;
+            background: rgba(124,58,237,0.04); border-radius: 0 8px 8px 0;
+        }
+        .quote-block p { font-style: italic; color: var(--text-primary); font-size: 0.98rem; margin-bottom: 0.4rem; }
+        .quote-block cite { font-size: 0.78rem; color: var(--text-muted); font-style: normal; }
+
+        /* VN warning */
+        .vn-warning {
+            background: linear-gradient(135deg, rgba(220,53,69,0.06), rgba(255,149,0,0.06));
+            border: 1px solid rgba(220,53,69,0.2); border-radius: var(--radius);
+            padding: 1.5rem; margin: 1.5rem 0;
+        }
+        [data-theme="dark"] .vn-warning {
+            background: linear-gradient(135deg, rgba(231,76,60,0.08), rgba(255,149,0,0.08));
+            border-color: rgba(231,76,60,0.25);
+        }
+        .vn-warning h4 { font-size: 0.95rem; font-weight: 700; color: var(--accent-red); margin-bottom: 0.6rem; }
+
+        /* References IEEE */
+        .references { margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid var(--border-color); }
+        .references h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .references ol { padding-left: 0; counter-reset: ref; list-style: none; }
+        .references ol li {
+            counter-increment: ref; font-size: 0.82rem;
+            color: var(--text-secondary); padding: 0.3rem 0 0.3rem 2.5rem;
+            line-height: 1.5; position: relative;
+        }
+        .references ol li::before {
+            content: '[' counter(ref) ']'; position: absolute; left: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; font-weight: 600; color: var(--accent-cyan);
+        }
+        .references a { color: var(--accent-blue); text-decoration: none; }
+        .references a:hover { text-decoration: underline; }
+
+        /* Citation */
+        .cite {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; font-weight: 600;
+            color: var(--accent-cyan); vertical-align: super;
+        }
+        .cite:hover { text-decoration: underline; }
+
+        /* Footer */
+        .footer {
+            margin-top: 3rem; padding: 1.5rem 3rem;
+            background: var(--bg-card); border-top: 1px solid var(--border-color);
+            text-align: center; font-size: 0.78rem; color: var(--text-muted);
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+        @media print {
+            .topbar, .sidebar, .theme-toggle, .theme-label, .btn-print { display: none !important; }
+            .main { margin-left: 0 !important; margin-top: 0 !important; }
+            .hero { background: #1a1a2e !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .content { max-width: 100%; padding: 1.5rem; }
+            .figure img { max-height: 300px; }
+            .svg-diagram svg { max-width: 100%; }
+            body { font-size: 11pt; line-height: 1.6; }
+            .content h2 { page-break-after: avoid; }
+            .info-box, .vn-warning, .comparison-card, .figure { page-break-inside: avoid; }
+            .references { page-break-before: always; }
+            a { color: #0077b6 !important; }
+            a::after { content: " (" attr(href) ")"; font-size: 8pt; color: #888; }
+            .cite::after { content: none; }
+            .topbar-nav a::after, .sidebar-toc a::after, .references a::after { content: none; }
+        }
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; }
+            .content { padding: 1.5rem 1.2rem 3rem; }
+            .hero { padding: 2rem 1.2rem 1.5rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .topbar-nav { display: none; }
+        }
+        /* Mobile */
+        @media (max-width: 640px) {
+            :root { --topbar-height: 48px; }
+            .topbar { padding: 0 0.8rem; }
+            .topbar-brand { font-size: 0.8rem; gap: 6px; }
+            .topbar-brand svg { width: 22px; height: 22px; }
+            .btn-print span { display: none; }
+            .btn-print { padding: 4px 8px; }
+            .theme-label { display: none; }
+            .theme-toggle { width: 36px; height: 20px; }
+            .theme-toggle::after { width: 14px; height: 14px; }
+            [data-theme="dark"] .theme-toggle::after { transform: translateX(16px); }
+
+            .hero { padding: 1.5rem 1rem 1.2rem; }
+            .hero h1 { font-size: 1.4rem; line-height: 1.25; }
+            .hero-subtitle { font-size: 0.88rem; line-height: 1.6; }
+            .hero-meta { gap: 0.8rem; font-size: 0.7rem; flex-direction: column; }
+            .hero-eyebrow { font-size: 0.65rem; padding: 4px 10px; }
+
+            .content { padding: 1.2rem 0.8rem 2.5rem; }
+            .content h2 { font-size: 1.2rem; margin-top: 2rem; padding-top: 1rem; flex-wrap: wrap; }
+            .content h2 .sec-num { font-size: 0.7rem; }
+            .content h3 { font-size: 0.95rem; margin-top: 1.3rem; }
+            .content p { font-size: 0.88rem; }
+
+            .info-box { padding: 1rem; margin: 1rem 0; }
+            .info-box h4 { font-size: 0.82rem; }
+            .info-box p { font-size: 0.82rem; }
+
+            .vn-warning { padding: 1rem; }
+            .vn-warning h4 { font-size: 0.88rem; }
+
+            .mitre-table { font-size: 0.75rem; display: block; overflow-x: auto; }
+            .mitre-table th { font-size: 0.65rem; padding: 0.4rem 0.5rem; white-space: nowrap; }
+            .mitre-table td { padding: 0.4rem 0.5rem; }
+            .mitre-table .tid { font-size: 0.68rem; }
+
+            .comparison-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+            .comparison-card { padding: 0.8rem; }
+            .comparison-card h5 { font-size: 0.82rem; }
+            .comparison-card li { font-size: 0.76rem; }
+
+            .quote-block { padding: 0.8rem 1rem; }
+            .quote-block p { font-size: 0.88rem; }
+
+            .timeline { padding-left: 1.5rem; }
+            .timeline-item .time { font-size: 0.7rem; }
+            .timeline-item .desc { font-size: 0.82rem; }
+            .timeline-item::before { left: -1.3rem; width: 10px; height: 10px; }
+
+            .svg-diagram { margin: 1rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .svg-diagram svg { min-width: 600px; }
+
+            .figure img { max-height: 250px; }
+            .figure figcaption { font-size: 0.72rem; padding: 0.5rem 0.8rem; }
+
+            .terminal-block { margin: 1rem 0; }
+            .terminal-body { font-size: 0.72rem; padding: 0.8rem; }
+
+            .references ol li { font-size: 0.75rem; padding-left: 2rem; }
+            .references ol li::before { font-size: 0.7rem; }
+
+            .footer { padding: 1.2rem 1rem; font-size: 0.72rem; }
+
+            .killchain { grid-template-columns: repeat(2, 1fr); }
+            .killchain-step { padding: 0.6rem 0.4rem; }
+            .killchain-step .step-name { font-size: 0.7rem; }
+        }
+        /* Small phones (iPhone SE, etc.) */
+        @media (max-width: 380px) {
+            .hero h1 { font-size: 1.2rem; }
+            .content { padding: 1rem 0.6rem 2rem; }
+            .content h2 { font-size: 1.05rem; }
+            .info-box, .vn-warning { padding: 0.8rem; }
+            .svg-diagram svg { min-width: 500px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+    <div class="topbar-brand">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="6" fill="url(#tbg)"/>
+            <path d="M8 14l4-6 4 6-4 6z" fill="rgba(255,255,255,0.9)"/>
+            <path d="M14 10l4 4-4 4" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"/>
+            <defs><linearGradient id="tbg" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#dc3545"/><stop offset="1" stop-color="#e67e22"/></linearGradient></defs>
+        </svg>
+        <span>CYBER WAR ANALYSIS</span>
+    </div>
+    <nav>
+        <ul class="topbar-nav">
+            <li><a href="#overview">Tổng Quan</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#cyber">Kỹ Thuật</a></li>
+            <li><a href="#ai-targeting">AI</a></li>
+            <li><a href="#mitre">MITRE</a></li>
+            <li><a href="#vietnam">Việt Nam</a></li>
+            <li><a href="#references">Nguồn</a></li>
+        </ul>
+    </nav>
+    <div class="topbar-right">
+        <button class="btn-print" onclick="window.print()" title="In / Lưu PDF">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span>In / PDF</span>
+        </button>
+        <span class="theme-label">Sáng/Tối</span>
+        <div class="theme-toggle" onclick="toggleTheme()" title="Chuyển đổi giao diện sáng/tối"></div>
+    </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sidebar-section">
+        <div class="author-card">
+            <div class="author-avatar">ĐT</div>
+            <div class="author-info">
+                <div class="author-name">TS. Đặng Minh Tuấn</div>
+                <div class="author-title">CMC ATI & CMC University</div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-section">
+        <h4>Mục Lục</h4>
+        <nav class="sidebar-toc">
+            <a href="#overview"><span class="num">01</span> Mở đầu — 28/02/2026</a>
+            <a href="#background"><span class="num">02</span> Bối cảnh chiến dịch</a>
+            <a href="#timeline"><span class="num">03</span> Timeline sự kiện</a>
+            <a href="#cyber"><span class="num">04</span> Hack Camera Tehran</a>
+            <a href="#ai-targeting"><span class="num">05</span> AI & Máy Sản Xuất Mục Tiêu</a>
+            <a href="#killchain"><span class="num">06</span> Kill Chain Analysis</a>
+            <a href="#mitre"><span class="num">07</span> MITRE ATT&CK</a>
+            <a href="#unit8200"><span class="num">08</span> Unit 8200 & Mossad</a>
+            <a href="#comparison"><span class="num">09</span> So sánh với Stuxnet</a>
+            <a href="#iran-response"><span class="num">10</span> Phản ứng của Iran</a>
+            <a href="#vietnam"><span class="num">11</span> Cảnh báo cho Việt Nam</a>
+            <a href="#lessons"><span class="num">12</span> Bài học ANTT</a>
+            <a href="#references"><span class="num">13</span> Tài liệu tham khảo</a>
+        </nav>
+    </div>
+    <div class="sidebar-section">
+        <h4>Chiến dịch</h4>
+        <div class="sidebar-stats">
+            <div class="stat-item"><span class="label">Mã (Israel)</span><span class="value orange">Roaring Lion</span></div>
+            <div class="stat-item"><span class="label">Mã (Mỹ)</span><span class="value cyan">Epic Fury</span></div>
+            <div class="stat-item"><span class="label">Ngày</span><span class="value green">28/02/2026</span></div>
+            <div class="stat-item"><span class="label">Không kích</span><span class="value red">~900 / 12h</span></div>
+            <div class="stat-item"><span class="label">Camera bị hack</span><span class="value cyan">Gần 100%</span></div>
+            <div class="stat-item"><span class="label">Thâm nhập</span><span class="value green">Nhiều năm</span></div>
+        </div>
+    </div>
+    <div class="sidebar-section">
+        <h4>Chủ đề</h4>
+        <div class="sidebar-tags">
+            <span>Cyber Warfare</span><span>SIGINT</span><span>AI Targeting</span>
+            <span>Unit 8200</span><span>SCADA/ICS</span><span>IoT Security</span><span>Việt Nam</span>
+        </div>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<section class="hero" id="overview">
+    <div class="hero-eyebrow">&#9679; Phân tích chuyên sâu</div>
+    <h1>Khi Camera Giao Thông Tehran<br>Trở Thành <span class="highlight">Vũ Khí Tình Báo Chiến Lược</span></h1>
+    <p class="hero-subtitle">
+        Câu chuyện về chiến dịch tình báo–công nghệ lớn nhất thế kỷ 21: Israel đã hack gần như toàn bộ hệ thống camera giao thông Tehran trong nhiều năm, dùng AI xây dựng "cỗ máy sản xuất mục tiêu", phối hợp cùng CIA để định vị Lãnh tụ Tối cao Ali Khamenei — và tiêu diệt ông vào ngày 28/02/2026.
+    </p>
+    <div class="hero-meta">
+        <span>Tác giả: TS. Đặng Minh Tuấn, CMC ATI & CMC University</span>
+        <span>28/03/2026</span>
+        <span>~25 phút đọc</span>
+    </div>
+</section>
+
+<article class="content">
+
+<!-- ══════════ 1. MỞ ĐẦU ══════════ -->
+<h2 id="background"><span class="sec-num">01</span> Ngày thế giới rung chuyển</h2>
+
+<p>
+    Sáng thứ Bảy, ngày 28 tháng 2 năm 2026, Tehran vẫn còn chìm trong sương mù đầu xuân. Không ai lường trước được rằng chỉ trong 12 giờ tiếp theo, <strong>gần 900 đợt không kích</strong> sẽ giáng xuống khắp lãnh thổ Iran <a class="cite" href="#ref1">[1]</a>. Đây không phải kiểu ra đòn bốc đồng — mà là cú đấm kết thúc của một ván cờ tình báo đã được chuẩn bị <strong>nhiều năm trời</strong>, nơi công nghệ hack, trí tuệ nhân tạo, mạng lưới gián điệp, và hỏa lực quân sự cùng hội tụ về một điểm.
+</p>
+
+<figure class="figure">
+    <img src="images/01-tehran-city.webp" alt="Nhân viên cứu trợ Hồng Nguyệt Iran đứng trước cột khói đen khổng lồ bốc lên từ Tehran sau đợt không kích ngày 28/02/2026">
+    <figcaption>Nhân viên Hội Trăng Lưỡi Liềm Đỏ Iran trước cột khói đen dày đặc bốc lên từ khu vực bị không kích tại Tehran, 28/02/2026. Nguồn: <a href="https://www.aljazeera.com/gallery/2026/3/8/aftermath-in-iran-of-us-and-israeli-air-strikes" target="_blank">Al Jazeera / AP</a></figcaption>
+</figure>
+
+<p>
+    Israel đặt tên chiến dịch là <strong>Sư Tử Gầm Thét (Operation Roaring Lion)</strong>. Washington gọi nó là <strong>Epic Fury</strong>. Nhưng dù tên gọi gì thì mục tiêu ưu tiên số một vẫn chỉ có một: <strong>khu phức hợp Leadership House</strong> — nơi ở và làm việc của Đại giáo chủ Ali Khamenei, nằm cạnh đường Pasteur ngay giữa lòng Tehran <a class="cite" href="#ref2">[2]</a>.
+</p>
+
+<div class="info-box red">
+    <h4>Kết quả chiến dịch</h4>
+    <p><strong>Ali Khamenei</strong> — Lãnh tụ Tối cao Iran, người nắm quyền lực tuyệt đối suốt 37 năm — thiệt mạng. Iran chính thức xác nhận một ngày sau đó <a class="cite" href="#ref3">[3]</a>.</p>
+    <p>Cùng với ông, <strong>Bộ trưởng Quốc phòng Aziz Nasirzadeh</strong> và ít nhất 6 quan chức cấp cao khác cũng bị tiêu diệt. IDF tuyên bố tổng cộng <strong>40 chỉ huy cấp cao</strong> Iran ngã xuống chỉ trong đợt tấn công mở màn <a class="cite" href="#ref4">[4]</a>.</p>
+</div>
+
+<figure class="figure">
+    <img src="images/03-satellite-earth.webp" alt="Ảnh vệ tinh khu phức hợp Leadership House của Khamenei tại Tehran sau khi bị không kích san phẳng">
+    <figcaption>Ảnh vệ tinh khu phức hợp Leadership House — nơi ở và làm việc của Đại giáo chủ Khamenei tại trung tâm Tehran — sau khi bị không kích phá hủy hoàn toàn. Nguồn: <a href="https://www.cbsnews.com/news/satellite-images-iran-strikes-before-after/" target="_blank">CBS News / Airbus Defence & Space / Vantar</a></figcaption>
+</figure>
+
+<p>
+    Nhưng điều thực sự khiến giới tình báo toàn cầu sửng sốt không phải bom đạn — mà là <strong>cách Israel đã lặng lẽ biến chính hệ thống giám sát mà Tehran dựng lên để giám sát người dân thành con mắt do thám phục vụ đối phương</strong>. Hàng nghìn camera giao thông lẽ ra để bắt người vượt đèn đỏ, cuối cùng lại chỉ điểm cho tên lửa tìm đến đúng phòng ngủ của Lãnh tụ Tối cao <a class="cite" href="#ref5">[5]</a>.
+</p>
+
+<!-- SVG: Sơ đồ tổng quan chiến dịch -->
+<div class="svg-diagram">
+    <svg width="760" height="200" viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="g1" x1="0%" y1="0%" x2="100%"><stop offset="0%" style="stop-color:#dc3545;stop-opacity:0.12"/><stop offset="100%" style="stop-color:#0077b6;stop-opacity:0.12"/></linearGradient>
+            <linearGradient id="g2" x1="0%" y1="0%" x2="100%"><stop offset="0%" style="stop-color:#dc3545"/><stop offset="1" stop-color="#e67e22"/></linearGradient>
+            <linearGradient id="g3" x1="0%" y1="0%" x2="100%"><stop offset="0%" style="stop-color:#0077b6"/><stop offset="1" stop-color="#198754"/></linearGradient>
+            <marker id="aR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#dc3545"/></marker>
+            <marker id="aB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#0077b6"/></marker>
+            <marker id="aG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#198754"/></marker>
+            <marker id="aP" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#7c3aed"/></marker>
+        </defs>
+        <rect width="760" height="200" rx="12" fill="url(#g1)" stroke="#d8dce6"/>
+        <text x="380" y="25" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" class="svg-title">TỔNG QUAN CHIẾN DỊCH 28/02/2026</text>
+        <!-- Israel -->
+        <rect x="30" y="45" width="150" height="60" rx="8" fill="url(#g2)" opacity="0.9"/>
+        <text x="105" y="68" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#fff">ISRAEL</text>
+        <text x="105" y="84" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,0.8)">Roaring Lion</text>
+        <text x="105" y="98" text-anchor="middle" font-family="Inter" font-size="7.5" fill="rgba(255,255,255,0.65)">Unit 8200 · Mossad · IAF</text>
+        <line x1="180" y1="75" x2="228" y2="75" stroke="#dc3545" stroke-width="1.5" marker-end="url(#aR)"/>
+        <!-- Cyber -->
+        <rect x="235" y="40" width="135" height="70" rx="8" class="svg-dark-node"/>
+        <text x="302" y="62" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" class="svg-dark-node-accent-cyan">CYBER OPS</text>
+        <text x="302" y="76" text-anchor="middle" font-family="Inter" font-size="8" class="svg-dark-node-sub">Camera hack (nhiều năm)</text>
+        <text x="302" y="88" text-anchor="middle" font-family="Inter" font-size="8" class="svg-dark-node-sub">Mobile intercept</text>
+        <text x="302" y="100" text-anchor="middle" font-family="Inter" font-size="8" class="svg-dark-node-accent-green">AI targeting → Tọa độ 14 số</text>
+        <line x1="370" y1="75" x2="423" y2="75" stroke="#0077b6" stroke-width="1.5" marker-end="url(#aB)"/>
+        <!-- Mục tiêu -->
+        <rect x="430" y="40" width="135" height="70" rx="8" fill="#dc3545" opacity="0.1" stroke="#dc3545"/>
+        <text x="497" y="62" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" fill="#dc3545">MỤC TIÊU</text>
+        <text x="497" y="76" text-anchor="middle" font-family="Inter" font-size="8" class="svg-body">Leadership House</text>
+        <text x="497" y="88" text-anchor="middle" font-family="Inter" font-size="8" class="svg-body">Hạ tầng quân sự</text>
+        <text x="497" y="100" text-anchor="middle" font-family="Inter" font-size="8" class="svg-body">Cơ sở hạt nhân</text>
+        <line x1="565" y1="75" x2="618" y2="75" stroke="#198754" stroke-width="1.5" marker-end="url(#aG)"/>
+        <!-- Kết quả -->
+        <rect x="625" y="40" width="110" height="70" rx="8" fill="#198754" opacity="0.1" stroke="#198754"/>
+        <text x="680" y="62" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" fill="#198754">KẾT QUẢ</text>
+        <text x="680" y="76" text-anchor="middle" font-family="Inter" font-size="8" class="svg-body">Khamenei thiệt mạng</text>
+        <text x="680" y="88" text-anchor="middle" font-family="Inter" font-size="8" class="svg-body">40+ chỉ huy cấp cao</text>
+        <text x="680" y="100" text-anchor="middle" font-family="Inter" font-size="8" class="svg-body">~900 mục tiêu bị phá</text>
+        <!-- Mỹ -->
+        <rect x="30" y="128" width="150" height="52" rx="8" fill="url(#g3)" opacity="0.9"/>
+        <text x="105" y="152" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#fff">HOA KỲ</text>
+        <text x="105" y="168" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,0.8)">Epic Fury · CIA</text>
+        <line x1="180" y1="154" x2="235" y2="105" stroke="#0077b6" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- CIA -->
+        <rect x="430" y="132" width="135" height="48" rx="8" fill="#7c3aed" opacity="0.1" stroke="#7c3aed"/>
+        <text x="497" y="152" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" fill="#7c3aed">CIA HUMINT</text>
+        <text x="497" y="168" text-anchor="middle" font-family="Inter" font-size="8" class="svg-body">Xác nhận vị trí Khamenei</text>
+        <line x1="497" y1="132" x2="497" y2="112" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#aP)"/>
+    </svg>
+</div>
+
+<!-- ══════════ 2. TIMELINE ══════════ -->
+<h2 id="timeline"><span class="sec-num">02</span> Dòng thời gian: Từ xâm nhập đến tiêu diệt</h2>
+
+<figure class="figure">
+    <img src="images/DUAL-2-1.webp" alt="Camera giám sát giao thông Tehran (trái) và Đại giáo chủ Ali Khamenei (phải) — hệ thống camera chính là vũ khí đã giúp Israel định vị ông">
+    <figcaption>Camera giám sát giao thông trên đường phố Tehran (trái) và Lãnh tụ Tối cao Ali Khamenei (phải). Chính hệ thống camera này đã bị Israel hack trong nhiều năm để theo dõi và định vị Khamenei. Nguồn: <a href="https://www.cnn.com/2026/03/03/middleeast/us-israel-plot-kill-iran-khamenei-latam-intl" target="_blank">CNN</a> / <a href="https://www.timesofisrael.com/report-israel-hacked-tehran-traffic-cameras-to-track-khamenei-ahead-of-assassination/" target="_blank">Times of Israel</a></figcaption>
+</figure>
+
+<p>Cái hay — và cũng cái đáng sợ — của câu chuyện này là nó không bắt đầu ngày 28/02/2026. Nó bắt đầu từ <strong>nhiều năm trước</strong>, khi những dòng code đầu tiên lặng lẽ chảy qua mạng camera Tehran mà không một ai hay biết.</p>
+
+<div class="timeline">
+    <div class="timeline-item">
+        <div class="time">~2020–2023 — Giai đoạn xâm nhập âm thầm</div>
+        <div class="desc">Unit 8200 — đơn vị tình báo tín hiệu tinh nhuệ nhất của Israel — bắt đầu thâm nhập hệ thống camera giao thông Tehran. Dữ liệu video được mã hóa rồi truyền thẳng về server ở Tel Aviv và miền nam Israel. Song song, mạng điện thoại di động Iran cũng bị "cắm rễ" sâu <a class="cite" href="#ref6">[6]</a>.</div>
+    </div>
+    <div class="timeline-item">
+        <div class="time">2021–2023 — Predatory Sparrow "nắn gân" hạ tầng</div>
+        <div class="desc">Nhóm Predatory Sparrow (nghi là "mặt nạ" của tình báo Israel) đánh liên tiếp: hệ thống đường sắt Iran (2021), nhà máy thép Khouzestan (2022), hệ thống trạm xăng — làm tê liệt 70% trạm nhiên liệu cả nước (2023). Nhìn lại, rất có thể đây là những đợt "tập trận thật" để thử năng lực xâm nhập SCADA/ICS (SCADA — Supervisory Control and Data Acquisition: hệ thống điều khiển giám sát và thu thập dữ liệu; ICS — Industrial Control Systems: hệ thống điều khiển công nghiệp) trước ngày D <a class="cite" href="#ref7">[7]</a>.</div>
+    </div>
+</div>
+
+<figure class="figure">
+    <img src="images/04-factory-fire.webp" alt="Ảnh vệ tinh cho thấy khu vực công nghiệp Iran bị tấn công, khói bốc lên từ nhiều điểm">
+    <figcaption>Ảnh vệ tinh khu vực công nghiệp Iran sau cuộc không kích. Trước đó, nhóm Predatory Sparrow đã nhiều lần tấn công mạng hạ tầng Iran — nhà máy thép Khuzestan (2022), trạm xăng (2023). Nguồn: <a href="https://www.malwarebytes.com/blog/news/2022/07/predatory-sparrow-massively-disrupts-steel-factories-while-keeping-workers-safe" target="_blank">Malwarebytes</a> / <a href="https://www.cbsnews.com/news/satellite-images-iran-strikes-before-after/" target="_blank">CBS News</a></figcaption>
+</figure>
+
+<figure class="figure">
+    <img src="images/05-gas-station.webp" alt="Trạm xăng Iran ngừng hoạt động sau vụ tấn công mạng của Predatory Sparrow, tháng 12/2023">
+    <figcaption>Trạm xăng tại Iran bị đóng cửa sau vụ tấn công mạng của nhóm Predatory Sparrow vào hệ thống phân phối nhiên liệu, tháng 12/2023. Khoảng 70% trạm xăng cả nước tê liệt. Nguồn: <a href="https://www.aljazeera.com/news/2023/12/18/iran-says-cyberattack-disrupts-petrol-stations-across-country" target="_blank">Al Jazeera</a></figcaption>
+</figure>
+
+<div class="timeline" style="margin-top: 0.5rem;">
+    <div class="timeline-item">
+        <div class="time">2023–2025 — "Vẽ bản đồ cuộc sống" của Khamenei</div>
+        <div class="desc">Từ camera, tín hiệu di động, và nguồn tin người (HUMINT), Israel dựng lên hồ sơ "pattern of life" cực kỳ chi tiết về Khamenei: ông di chuyển tuyến nào, mấy giờ, ai đi cùng, vệ sĩ đỗ xe ở đâu, thậm chí ai gọi điện cho ai lúc mấy giờ sáng <a class="cite" href="#ref8">[8]</a>.</div>
+    </div>
+    <div class="timeline-item">
+        <div class="time">2024–2025 — "Cỗ máy AI" vào guồng</div>
+        <div class="desc">Hệ thống AI Gospel (xác định mục tiêu hạ tầng) và Lavender (xác định mục tiêu cá nhân) được tinh chỉnh cho chiến trường Iran. Đến đầu 2026, hệ thống đã có khả năng xuất <strong>100 mục tiêu mỗi ngày</strong> — một con số mà hàng nghìn nhà phân tích cũng không thể đạt được bằng tay <a class="cite" href="#ref9">[9]</a>.</div>
+    </div>
+    <div class="timeline-item critical">
+        <div class="time">Cuối tháng 2/2026 — Mảnh ghép cuối cùng</div>
+        <div class="desc">CIA, vốn theo dõi sát mọi di chuyển của Khamenei, xác nhận: Đại giáo chủ sẽ có mặt tại khu phức hợp ở trung tâm Tehran vào sáng thứ Bảy 28/02. Đèn xanh được bật <a class="cite" href="#ref2">[2]</a>.</div>
+    </div>
+    <div class="timeline-item critical">
+        <div class="time">28/02/2026, sáng sớm — Sư Tử gầm lên</div>
+        <div class="desc">Đợt không kích đầu tiên nhắm thẳng vào Leadership House. Đồng thời, hàng trăm mục tiêu quân sự, phòng không, cơ sở tên lửa đạn đạo và hạt nhân trên khắp Iran bị tấn công cùng lúc. Tổng cộng gần 900 đợt trong 12 giờ <a class="cite" href="#ref1">[1]</a>.</div>
+    </div>
+    <div class="timeline-item success">
+        <div class="time">01/03/2026 — Iran xác nhận</div>
+        <div class="desc">Sau một ngày im lặng đáng sợ, chính phủ Iran chính thức tuyên bố Đại giáo chủ Ali Khamenei đã tử vong. Ngày 08/03, Hội đồng Chuyên gia bổ nhiệm con trai ông — Mojtaba Khamenei — kế vị <a class="cite" href="#ref3">[3]</a>.</div>
+    </div>
+</div>
+
+<!-- ══════════ 3. PHÂN TÍCH KỸ THUẬT ══════════ -->
+<h2 id="cyber"><span class="sec-num">03</span> Hack Camera Giao Thông Tehran — Chi tiết kỹ thuật</h2>
+
+<p>
+    Bây giờ mới đến phần hay nhất — và cũng là phần khiến bất kỳ ai làm về an ninh mạng đều phải giật mình.
+</p>
+
+<h3>Hệ thống camera giám sát của Iran</h3>
+
+<figure class="figure">
+    <img src="images/06-cctv-camera.jpg" alt="Camera giám sát CCTV — Iran triển khai mạng lưới camera dày đặc trên đường phố Tehran">
+    <figcaption>Camera giám sát CCTV (ảnh minh họa) — Iran triển khai mạng lưới camera dày đặc trên đường phố Tehran để kiểm soát người dân. Nguồn tham khảo: <a href="https://iranwire.com/en/features/146709-iran-rapidly-expands-surveillance-camera-network-across-cities/" target="_blank">IranWire</a>. Ảnh: Unsplash</figcaption>
+</figure>
+
+<p>
+    Từ lâu, Iran đã dựng lên một mạng lưới camera giám sát thuộc hàng dày đặc nhất Trung Đông. Mục đích ban đầu? <strong>Theo dõi người bất đồng chính kiến, giám sát biểu tình, kiểm tra phụ nữ có đội hijab hay không.</strong> Theo AP, mạng lưới này trải khắp Tehran và các thành phố lớn, phục vụ bộ máy kiểm soát xã hội của chế độ <a class="cite" href="#ref5">[5]</a>.
+</p>
+
+<p>
+    Mỉa mai thay: chính hệ thống được xây để bảo vệ chế độ lại trở thành <strong>đôi mắt của kẻ thù</strong>. Một thành viên hội đồng thành phố Tehran sau này đã ngầm xác nhận: hình ảnh từ mạng camera giao thông thủ đô quả thực đã bị truyền ra nước ngoài và Israel đã sử dụng chúng <a class="cite" href="#ref16">[16]</a>.
+</p>
+
+<!-- SVG: Kiến trúc tấn công -->
+<div class="svg-diagram">
+    <svg width="760" height="300" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <marker id="aO" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#e67e22"/></marker>
+            <marker id="aC" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#00d4ff"/></marker>
+        </defs>
+        <rect width="760" height="480" rx="12" class="svg-bg"/>
+        <text x="380" y="30" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" class="svg-title">KIẾN TRÚC TẤN CÔNG HỆ THỐNG CAMERA TEHRAN</text>
+
+        <!-- Row 1: Camera → NVR → C2 → AI -->
+        <!-- Camera IP -->
+        <rect x="15" y="55" width="165" height="95" rx="10" fill="#dc3545" opacity="0.1" stroke="#dc3545"/>
+        <text x="97" y="78" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#dc3545">CAMERA IP</text>
+        <text x="97" y="96" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-body">Default creds</text>
+        <text x="97" y="112" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-body">Firmware RCE/CVE</text>
+        <text x="97" y="128" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-body">RTSP/ONVIF exposed</text>
+
+        <line x1="180" y1="102" x2="198" y2="102" stroke="#e67e22" stroke-width="2" marker-end="url(#aO)"/>
+        <text x="189" y="94" text-anchor="middle" font-family="Inter" font-size="9" fill="#e67e22">Lateral</text>
+
+        <!-- NVR -->
+        <rect x="205" y="55" width="170" height="95" rx="10" fill="#e67e22" opacity="0.1" stroke="#e67e22"/>
+        <text x="290" y="78" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#e67e22">NVR / CONTROL</text>
+        <text x="290" y="96" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">Trung tâm điều khiển</text>
+        <text x="290" y="112" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">Flat network</text>
+        <text x="290" y="128" text-anchor="middle" font-family="Inter" font-size="10" fill="#dc3545">→ Toàn bộ mạng bị chiếm</text>
+
+        <line x1="375" y1="102" x2="398" y2="102" stroke="#198754" stroke-width="2" marker-end="url(#aG)"/>
+        <text x="386" y="94" text-anchor="middle" font-family="Inter" font-size="9" fill="#198754">Exfil</text>
+
+        <!-- C2 -->
+        <rect x="405" y="55" width="170" height="95" rx="10" fill="#198754" opacity="0.1" stroke="#198754"/>
+        <text x="490" y="78" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#198754">C2 SERVER</text>
+        <text x="490" y="96" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">Tel Aviv & miền nam Israel</text>
+        <text x="490" y="112" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">Encrypted tunnel</text>
+        <text x="490" y="128" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">Duy trì nhiều năm</text>
+
+        <line x1="575" y1="102" x2="598" y2="102" stroke="#00d4ff" stroke-width="2" marker-end="url(#aC)"/>
+
+        <!-- AI -->
+        <rect x="605" y="50" width="140" height="105" rx="10" class="svg-dark-node"/>
+        <text x="675" y="78" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" class="svg-dark-node-accent-cyan">AI ENGINE</text>
+        <text x="675" y="98" text-anchor="middle" font-family="Inter" font-size="10" class="svg-dark-node-sub">Gospel + Lavender</text>
+        <text x="675" y="118" text-anchor="middle" font-family="Inter" font-size="10" class="svg-dark-node-accent-green">→ Tọa độ 14 chữ số</text>
+        <text x="675" y="138" text-anchor="middle" font-family="Inter" font-size="10" class="svg-dark-node-accent-red">→ LỆNH KHÔNG KÍCH</text>
+
+        <!-- Row 2: Supply Chain + Mobile Network -->
+        <!-- Supply Chain -->
+        <rect x="15" y="180" width="245" height="75" rx="10" fill="#7c3aed" opacity="0.08" stroke="#7c3aed"/>
+        <text x="137" y="205" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#7c3aed">SUPPLY CHAIN ATTACK</text>
+        <text x="137" y="224" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">Backdoor firmware trước khi lắp đặt</text>
+        <text x="137" y="242" text-anchor="middle" font-family="Inter" font-size="9" class="svg-muted">Iran mua qua trung gian do bị cấm vận</text>
+        <path d="M137,180 L97,150" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+        <!-- Mobile Network -->
+        <rect x="15" y="270" width="245" height="75" rx="10" fill="#0077b6" opacity="0.08" stroke="#0077b6"/>
+        <text x="137" y="295" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#0077b6">MOBILE NETWORK</text>
+        <text x="137" y="314" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">SS7/Diameter exploit · SIM intercept</text>
+        <text x="137" y="332" text-anchor="middle" font-family="Inter" font-size="9" class="svg-muted">Theo dõi vị trí + nghe lén vệ sĩ Khamenei</text>
+        <path d="M260,307 C400,307 400,130 490,155" stroke="#0077b6" stroke-width="1.5" stroke-dasharray="5,4" fill="none"/>
+
+        <!-- Attack Vectors list -->
+        <rect x="290" y="180" width="455" height="200" rx="10" class="svg-card"/>
+        <text x="517" y="206" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" class="svg-title">CÁC VECTOR TẤN CÔNG</text>
+        <line x1="310" y1="216" x2="725" y2="216" class="svg-dark-node-line"/>
+        <text x="320" y="238" font-family="JetBrains Mono" font-size="10" fill="#dc3545">1.</text><text x="340" y="238" font-family="Inter" font-size="10.5" class="svg-body">Default credentials (admin/admin)</text>
+        <text x="320" y="258" font-family="JetBrains Mono" font-size="10" fill="#dc3545">2.</text><text x="340" y="258" font-family="Inter" font-size="10.5" class="svg-body">Exposed RTSP/ONVIF/HTTP admin</text>
+        <text x="320" y="278" font-family="JetBrains Mono" font-size="10" fill="#dc3545">3.</text><text x="340" y="278" font-family="Inter" font-size="10.5" class="svg-body">Firmware RCE & Auth bypass (CVE)</text>
+        <text x="320" y="298" font-family="JetBrains Mono" font-size="10" fill="#dc3545">4.</text><text x="340" y="298" font-family="Inter" font-size="10.5" class="svg-body">Supply chain backdoor</text>
+        <text x="320" y="318" font-family="JetBrains Mono" font-size="10" fill="#dc3545">5.</text><text x="340" y="318" font-family="Inter" font-size="10.5" class="svg-body">Flat network (không segmentation)</text>
+        <text x="320" y="338" font-family="JetBrains Mono" font-size="10" fill="#dc3545">6.</text><text x="340" y="338" font-family="Inter" font-size="10.5" class="svg-body">Mobile SS7 protocol exploitation</text>
+        <text x="320" y="358" font-family="JetBrains Mono" font-size="10" fill="#dc3545">7.</text><text x="340" y="358" font-family="Inter" font-size="10.5" class="svg-body">Không kiểm tra firmware integrity</text>
+
+        <!-- Bottom note -->
+        <rect x="100" y="400" width="560" height="60" rx="8" fill="rgba(0,119,182,0.05)" stroke="#0077b6" stroke-dasharray="5,4"/>
+        <text x="380" y="425" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="#0077b6">Camera → NVR → Encrypted Tunnel → C2 Israel → AI Gospel/Lavender → Tọa độ 14 số</text>
+        <text x="380" y="447" text-anchor="middle" font-family="Inter" font-size="10" class="svg-muted">Toàn bộ chuỗi hoạt động liên tục trong NHIỀU NĂM mà Iran không phát hiện</text>
+    </svg>
+</div>
+
+<h3>Kênh C2 (Command and Control — máy chủ chỉ huy và điều khiển) và cách dữ liệu "chảy" về Israel</h3>
+
+<p>
+    Theo Financial Times, video từ <strong>gần như toàn bộ camera giao thông Tehran</strong> đã được mã hóa và truyền đều đặn về server tại Tel Aviv trong nhiều năm liền <a class="cite" href="#ref6">[6]</a>. Nghĩ mà xem — hàng nghìn camera truyền video liên tục xuyên biên giới mà Iran không hề phát hiện. Điều này nói lên rất nhiều về trình độ của bên tấn công:
+</p>
+
+<div class="info-box green">
+    <h4>Hạ tầng C2 cấp quốc gia — Chi tiết kỹ thuật</h4>
+    <p><strong>Encrypted tunnel:</strong> Dữ liệu được mã hóa end-to-end trước khi truyền, vượt qua Deep Packet Inspection (DPI) của Iran. Rất có thể sử dụng kỹ thuật domain fronting hoặc giả dạng lưu lượng HTTPS hợp pháp.</p>
+    <p><strong>Bandwidth management:</strong> Không thể truyền full video stream từ hàng nghìn camera — quá "ồn". Hệ thống gần như chắc chắn dùng AI local để lọc, chỉ gửi frame chứa thông tin giá trị (ví dụ: khi phát hiện đoàn xe quan chức) hoặc metadata (biển số, vị trí, timestamp).</p>
+    <p><strong>Persistence cấp firmware:</strong> Duy trì truy cập nhiều năm mà không bị phát hiện đồng nghĩa với rootkit cấp firmware — loại malware sống sót qua cả factory reset. Kết hợp scheduled beaconing (liên lạc về C2 theo lịch, không liên tục) để tránh bị phát hiện bằng traffic analysis.</p>
+</div>
+
+<h3>Các lỗ hổng CVE cụ thể trên camera Hikvision/Dahua</h3>
+
+<p>
+    Dù chưa có báo cáo chính thức nêu đích danh CVE nào được dùng trong chiến dịch Tehran, chúng ta có thể khoanh vùng khá chính xác dựa trên những gì đã được công bố về dòng camera phổ biến tại Iran — chủ yếu Hikvision và Dahua, đều từ Trung Quốc <a class="cite" href="#ref17">[17]</a>:
+</p>
+
+<h4 style="margin-top:1.2rem; color: var(--accent-red);">Hikvision — Các CVE nghiêm trọng nhất</h4>
+
+<table class="mitre-table">
+    <thead><tr><th>CVE</th><th>CVSS</th><th>Loại</th><th>Chi tiết kỹ thuật</th></tr></thead>
+    <tbody>
+        <tr>
+            <td class="tid">CVE-2021-36260</td>
+            <td><strong style="color:var(--accent-red)">9.8</strong></td>
+            <td>Command Injection</td>
+            <td>Inject lệnh hệ thống qua HTTP request, <strong>không cần xác thực</strong>. Ảnh hưởng 100M+ thiết bị. Đã bị khai thác bởi Mirai botnet và nhiều nhóm APT. CISA liệt vào danh sách "must patch". Hơn 80.000 camera vẫn chưa vá (2024).</td>
+        </tr>
+        <tr>
+            <td class="tid">CVE-2017-7921</td>
+            <td><strong style="color:var(--accent-red)">9.8</strong></td>
+            <td>Auth Bypass</td>
+            <td>Truy cập trực tiếp video stream và cấu hình bằng cách chèn tham số vào URL: <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">http://[ip]/onvif-http/snapshot?auth=YWRtaW46MTEQ</code><br>Một chuỗi base64 giả mạo là đủ để bypass hoàn toàn. Phát hiện từ 2017, vẫn tồn tại trên hàng triệu thiết bị.</td>
+        </tr>
+        <tr>
+            <td class="tid">CVE-2025-34067</td>
+            <td><strong style="color:var(--accent-red)">10.0</strong></td>
+            <td>RCE</td>
+            <td>RCE trên HikCentral qua endpoint <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">/bic/ssoService/v1/applyCT</code>. Fastjson deserialization → load Java class tùy ý qua LDAP URL. <strong>Hàng triệu camera DVR/NVR bị chiếm trong 1 request.</strong> PoC exploit công khai. Shadowserver phát hiện khai thác từ 02/2025.</td>
+        </tr>
+        <tr>
+            <td class="tid">CVE-2013-4977</td>
+            <td><strong style="color:var(--accent-orange)">—</strong></td>
+            <td>Buffer Overflow</td>
+            <td>Tràn bộ đệm trong RTSP handler → thực thi mã tùy ý, không cần xác thực. Camera Hikvision còn có tài khoản ẩn (anonymous) với credentials hardcoded.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 style="margin-top:1.5rem; color: var(--accent-orange);">Dahua — Lỗ hổng ONVIF và RCE</h4>
+
+<table class="mitre-table">
+    <thead><tr><th>CVE</th><th>CVSS</th><th>Loại</th><th>Chi tiết kỹ thuật</th></tr></thead>
+    <tbody>
+        <tr>
+            <td class="tid">CVE-2021-33044</td>
+            <td><strong style="color:var(--accent-red)">9.8</strong></td>
+            <td>Auth Bypass</td>
+            <td>Gửi gói dữ liệu với tham số <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">NetKeyboard</code> đặc biệt → bypass hoàn toàn xác thực → chiếm quyền admin. PoC công khai từ 10/2021. Ảnh hưởng IPC-HX3XXX, HX5XXX, VTO, PTZ, Thermal. <strong>Xác suất bị khai thác: 94.27%.</strong></td>
+        </tr>
+        <tr>
+            <td class="tid">CVE-2022-30563</td>
+            <td><strong style="color:var(--accent-orange)">6.8</strong></td>
+            <td>Replay Attack</td>
+            <td>Sniff giao tiếp ONVIF chưa mã hóa → replay credentials trong request mới → chiếm quyền camera hoàn toàn.</td>
+        </tr>
+        <tr>
+            <td class="tid">CVE-2025-31700<br>CVE-2025-31701</td>
+            <td><strong style="color:var(--accent-red)">8.1</strong></td>
+            <td>Buffer Overflow</td>
+            <td>Buffer overflow trong ONVIF protocol handler và file upload. Gửi packet đặc biệt → RCE hoặc DoS, <strong>không cần xác thực</strong>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="info-box red" style="margin-top:1.2rem;">
+    <h4>Đặc điểm chung — "Cửa mở sẵn"</h4>
+    <p>Cả Hikvision và Dahua đều chia sẻ các điểm yếu hệ thống khiến việc xâm nhập trở nên dễ dàng đáng sợ:</p>
+    <p><strong>1.</strong> Stream RTSP thường <strong>không mã hóa</strong> (plain text) — ai chặn được traffic là xem được video.</p>
+    <p><strong>2.</strong> Giao diện quản trị HTTP/HTTPS <strong>lộ trực tiếp trên internet</strong> — quét Shodan là tìm thấy.</p>
+    <p><strong>3.</strong> Default credentials không đổi (<code style="background:rgba(0,0,0,0.06);padding:2px 6px;border-radius:4px;">admin/admin</code>, <code style="background:rgba(0,0,0,0.06);padding:2px 6px;border-radius:4px;">admin/12345</code>).</p>
+    <p><strong>4.</strong> Firmware <strong>hiếm khi được cập nhật</strong> tại Iran (do cấm vận, thiếu hỗ trợ kỹ thuật từ nhà sản xuất).</p>
+    <p><strong>5.</strong> Mạng camera <strong>không phân đoạn</strong> (flat network) — chiếm 1 camera = truy cập toàn mạng.</p>
+    <p><strong>6.</strong> <strong>Không có cơ chế kiểm tra firmware integrity</strong> — rootkit cấp firmware không bao giờ bị phát hiện.</p>
+</div>
+
+<p>
+    Theo TechCrunch, <em>"mạng lưới camera đô thị nổi tiếng là điểm yếu mềm — nhiều camera stream video không mã hóa hoặc dùng mật khẩu mặc định, dữ liệu thường chạy qua hạ tầng IT thành phố không phân đoạn"</em> <a class="cite" href="#ref17">[17]</a>. Nói cách khác, Unit 8200 không cần phải là thiên tài — Iran đã mở sẵn cửa cho họ.
+</p>
+
+<!-- SVG: Chuỗi khai thác camera -->
+<div class="svg-diagram">
+    <svg width="760" height="320" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="320" rx="12" class="svg-bg"/>
+        <text x="380" y="30" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" class="svg-title">CHUỖI KHAI THÁC CAMERA IP (EXPLOIT CHAIN)</text>
+        <!-- Row 1: Steps 1-3 -->
+        <!-- Step 1 -->
+        <rect x="20" y="55" width="220" height="95" rx="10" fill="#dc3545" opacity="0.08" stroke="#dc3545"/>
+        <text x="130" y="78" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#dc3545">1. SCAN</text>
+        <text x="130" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-body">Shodan / Censys</text>
+        <text x="130" y="115" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-body">RTSP :554 · ONVIF :80</text>
+        <text x="130" y="140" text-anchor="middle" font-family="Inter" font-size="10" class="svg-muted">Quét internet tìm camera lộ</text>
+        <!-- Arrow 1→2 -->
+        <path d="M240,102 L268,102" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
+        <!-- Step 2 -->
+        <rect x="275" y="55" width="220" height="95" rx="10" fill="#e67e22" opacity="0.08" stroke="#e67e22"/>
+        <text x="385" y="78" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#e67e22">2. EXPLOIT</text>
+        <text x="385" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-body">CVE-2021-36260 (9.8)</text>
+        <text x="385" y="115" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-body">CVE-2017-7921 (10.0)</text>
+        <text x="385" y="140" text-anchor="middle" font-family="Inter" font-size="10" class="svg-muted">Default creds bypass</text>
+        <!-- Arrow 2→3 -->
+        <path d="M495,102 L523,102" stroke="#e67e22" stroke-width="2" marker-end="url(#aO)"/>
+        <!-- Step 3 -->
+        <rect x="530" y="55" width="210" height="95" rx="10" fill="#7c3aed" opacity="0.08" stroke="#7c3aed"/>
+        <text x="635" y="78" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#7c3aed">3. IMPLANT</text>
+        <text x="635" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-body">Firmware rootkit</text>
+        <text x="635" y="115" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-body">Survives factory reset</text>
+        <text x="635" y="140" text-anchor="middle" font-family="Inter" font-size="10" class="svg-muted">AI edge filtering tại camera</text>
+        <!-- Arrow 3→4 (down) -->
+        <path d="M635,150 L635,170" stroke="#7c3aed" stroke-width="2" marker-end="url(#aP)"/>
+        <!-- Row 2: Steps 4-6 (reversed direction) -->
+        <!-- Step 4 -->
+        <rect x="530" y="175" width="210" height="85" rx="10" fill="#0077b6" opacity="0.08" stroke="#0077b6"/>
+        <text x="635" y="198" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#0077b6">4. LATERAL</text>
+        <text x="635" y="218" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-body">Pivot → NVR / DVR</text>
+        <text x="635" y="238" text-anchor="middle" font-family="Inter" font-size="10" class="svg-muted">Flat network → Control center</text>
+        <!-- Arrow 4→5 (right to left) -->
+        <path d="M530,217 L502,217" stroke="#0077b6" stroke-width="2"/>
+        <polygon points="502,217 512,212 512,222" fill="#0077b6"/>
+        <!-- Step 5 -->
+        <rect x="275" y="175" width="220" height="85" rx="10" fill="#198754" opacity="0.08" stroke="#198754"/>
+        <text x="385" y="198" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#198754">5. EXFILTRATE</text>
+        <text x="385" y="218" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-body">Encrypted tunnel</text>
+        <text x="385" y="238" text-anchor="middle" font-family="Inter" font-size="10" class="svg-muted">Domain fronting · Sched. beaconing</text>
+        <!-- Arrow 5→6 (right to left) -->
+        <path d="M275,217 L247,217" stroke="#198754" stroke-width="2"/>
+        <polygon points="247,217 257,212 257,222" fill="#198754"/>
+        <!-- Step 6 -->
+        <rect x="20" y="175" width="220" height="85" rx="10" class="svg-dark-node"/>
+        <text x="130" y="200" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" class="svg-dark-node-accent-cyan">6. C2 — TEL AVIV</text>
+        <text x="130" y="222" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-dark-node-accent-green">→ AI Engine (Gospel + Lavender)</text>
+        <text x="130" y="242" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-dark-node-accent-red">→ Tọa độ 14 chữ số → STRIKE</text>
+        <!-- Bottom note -->
+        <rect x="60" y="278" width="640" height="28" rx="6" fill="#dc3545" opacity="0.06" stroke="#dc3545" stroke-dasharray="4,3"/>
+        <text x="380" y="297" text-anchor="middle" font-family="Inter" font-size="11" fill="#dc3545" font-weight="600">Toàn bộ chuỗi duy trì trong NHIỀU NĂM · CVE-2021-36260 ảnh hưởng 100M+ thiết bị · VN top 5 quốc gia</text>
+    </svg>
+</div>
+
+<h3>Xâm nhập mạng di động Iran — SS7/Diameter</h3>
+
+<p>
+    Song song với camera, Israel cũng <strong>"thâm nhập sâu vào mạng điện thoại di động Iran"</strong> <a class="cite" href="#ref6">[6]</a>. Đây là mặt trận thứ hai, và về mặt kỹ thuật có thể còn phức tạp hơn.
+</p>
+
+<div class="info-box">
+    <h4>Kỹ thuật xâm nhập mạng di động — Phân tích</h4>
+    <p><strong>SS7 exploitation:</strong> Giao thức SS7 (Signalling System 7) — xương sống của mạng 2G/3G — chứa các lỗ hổng thiết kế cho phép bất kỳ ai có quyền truy cập signalling network gửi lệnh theo dõi vị trí, chặn SMS, và chuyển hướng cuộc gọi. MTN Irancell — nhà mạng lớn nhất Iran — duy trì kết nối SS7 roaming với các nhà mạng vùng Vịnh nơi có căn cứ quân sự Mỹ <a class="cite" href="#ref18">[18]</a>.</p>
+    <p><strong>Diameter protocol (4G/LTE):</strong> Phiên bản "hiện đại hơn" của SS7 nhưng vẫn chứa lỗ hổng tương tự. Cho phép truy vấn vị trí thiết bị, chặn dữ liệu, và giả mạo danh tính mạng từ bất kỳ đâu trên thế giới nếu có quyền truy cập mạng signalling.</p>
+    <p><strong>IMSI Catcher:</strong> Thiết bị giả lập trạm phát sóng (fake cell tower). Điện thoại của vệ sĩ Khamenei tự động kết nối → bị thu IMSI (danh tính thuê bao), metadata cuộc gọi, tin nhắn, và vị trí chính xác. Israel có công nghệ IMSI catcher hàng đầu thế giới — nhiều công ty cựu binh 8200 sản xuất thiết bị này.</p>
+    <p><strong>SIM cloning / Intercept:</strong> Với quyền truy cập SS7, có thể theo dõi vị trí bất kỳ số điện thoại nào mà không cần tiếp cận vật lý. Kết hợp với camera giao thông → cross-reference vị trí di động + hình ảnh xe = xác định chính xác ai đang ở đâu, lúc nào.</p>
+</div>
+
+<!-- SVG: SS7 Attack Flow -->
+<div class="svg-diagram">
+    <svg width="760" height="360" viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="360" rx="12" class="svg-bg"/>
+        <text x="380" y="30" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" class="svg-title">XÂM NHẬP MẠNG DI ĐỘNG IRAN QUA SS7 / DIAMETER</text>
+        <!-- Row 1: 4 nodes -->
+        <!-- Unit 8200 -->
+        <rect x="15" y="55" width="165" height="85" rx="10" fill="#dc3545" opacity="0.1" stroke="#dc3545"/>
+        <text x="97" y="80" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#dc3545">UNIT 8200</text>
+        <text x="97" y="100" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">SS7 signalling access</text>
+        <text x="97" y="118" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">qua roaming partner</text>
+        <path d="M180,97 L203,97" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
+        <!-- Gulf Telco -->
+        <rect x="210" y="55" width="155" height="85" rx="10" fill="#e67e22" opacity="0.1" stroke="#e67e22"/>
+        <text x="287" y="80" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#e67e22">NHÀ MẠNG VỊNH</text>
+        <text x="287" y="100" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">SS7 roaming link</text>
+        <text x="287" y="118" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">→ MTN Irancell</text>
+        <path d="M365,97 L393,97" stroke="#e67e22" stroke-width="2" marker-end="url(#aO)"/>
+        <!-- Iran Telco -->
+        <rect x="400" y="55" width="155" height="85" rx="10" fill="#0077b6" opacity="0.1" stroke="#0077b6"/>
+        <text x="477" y="80" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#0077b6">MTN IRANCELL</text>
+        <text x="477" y="100" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">HLR/HSS query</text>
+        <text x="477" y="118" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">Subscriber location</text>
+        <path d="M555,97 L578,97" stroke="#0077b6" stroke-width="2" marker-end="url(#aB)"/>
+        <!-- Target Phone -->
+        <rect x="585" y="50" width="160" height="95" rx="10" fill="#198754" opacity="0.1" stroke="#198754"/>
+        <text x="665" y="75" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#198754">ĐIỆN THOẠI VỆ SĨ</text>
+        <text x="665" y="97" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-body">→ Vị trí cell tower (real-time)</text>
+        <text x="665" y="115" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-body">→ SMS / cuộc gọi intercept</text>
+        <text x="665" y="133" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-body">→ IMSI / IMEI tracking</text>
+        <!-- Row 2: IMSI Catcher + Cross-reference -->
+        <!-- IMSI Catcher -->
+        <rect x="15" y="165" width="330" height="80" rx="10" fill="#7c3aed" opacity="0.08" stroke="#7c3aed"/>
+        <text x="180" y="192" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#7c3aed">IMSI CATCHER (Fake Cell Tower)</text>
+        <text x="180" y="212" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">Triển khai gần khu vực mục tiêu → điện thoại tự kết nối</text>
+        <text x="180" y="230" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">→ Thu IMSI, metadata, nội dung cuộc gọi, vị trí chính xác</text>
+        <!-- Cross-ref -->
+        <rect x="365" y="165" width="380" height="80" rx="10" fill="#dc3545" opacity="0.06" stroke="#dc3545" stroke-dasharray="5,4"/>
+        <text x="555" y="190" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#dc3545">CROSS-REFERENCE</text>
+        <text x="555" y="210" text-anchor="middle" font-family="Inter" font-size="10.5" class="svg-body">Camera + Di động → Xác định danh tính</text>
+        <text x="555" y="230" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">Vị trí cell tower + Biển số xe tại camera = Tọa độ chính xác</text>
+        <!-- Bottom summary -->
+        <rect x="60" y="270" width="640" height="70" rx="10" fill="rgba(0,119,182,0.05)" stroke="#0077b6" stroke-dasharray="5,4"/>
+        <text x="380" y="297" text-anchor="middle" font-family="Inter" font-size="12" font-weight="600" fill="#0077b6">Unit 8200 → SS7 Roaming → MTN Irancell → Vị trí + Nghe lén vệ sĩ Khamenei</text>
+        <text x="380" y="318" text-anchor="middle" font-family="Inter" font-size="11" class="svg-body">Ghép tất cả thành Pattern of Life → AI sản xuất tọa độ tiêu diệt 14 chữ số</text>
+    </svg>
+</div>
+
+<h3>Vô hiệu hóa ăng-ten di động — "Máy bận" cứu mạng</h3>
+
+<p>
+    Đây là chi tiết ớn lạnh nhất. Ngay trước giờ tấn công, Israel đã can thiệp vào <strong>khoảng 12 trạm ăng-ten di động gần phố Pasteur</strong> — nơi đặt khu phức hợp của Khamenei. Kết quả: bất kỳ ai gọi đến điện thoại của đội vệ sĩ Khamenei đều nhận được <strong>tín hiệu máy bận</strong>. Khi tên lửa đang trên đường đến, không ai có thể cảnh báo đội bảo vệ <a class="cite" href="#ref22">[22]</a>.
+</p>
+
+<div class="info-box red">
+    <h4>Kỹ thuật vô hiệu hóa mạng di động cục bộ</h4>
+    <p><strong>Fake eNodeB (SDR-based):</strong> Sử dụng thiết bị Software Defined Radio (SDR) tạo trạm phát sóng 4G giả. Điện thoại trong khu vực tự động kết nối vào trạm giả (vì tín hiệu mạnh hơn) → kẻ tấn công kiểm soát hoàn toàn — chặn cuộc gọi, SMS, khiến máy luôn "bận".</p>
+    <p><strong>SS7 call redirection:</strong> Thay vì phá sóng vật lý, gửi lệnh SS7 chuyển hướng cuộc gọi đến số vệ sĩ sang voicemail hoặc số không tồn tại — người gọi nghe thấy "máy bận" mà không nghi ngờ.</p>
+    <p><strong>Selective jamming:</strong> Phá sóng có chọn lọc — chỉ gây nhiễu trong bán kính hẹp quanh khu phức hợp, không ảnh hưởng toàn thành phố (để tránh bị phát hiện sớm).</p>
+    <p><strong>Ý nghĩa chiến thuật:</strong> 12 ăng-ten bị can thiệp = đội vệ sĩ bị "mù và điếc" đúng thời điểm quyết định. Khi ai đó phát hiện tên lửa và cố gọi cảnh báo → <em>máy bận</em> → Khamenei không được sơ tán kịp.</p>
+</div>
+
+<h3>Chiến tranh mạng bổ trợ — TV hijacking</h3>
+
+<p>
+    Ngoài camera và di động, chiến dịch mạng còn bao gồm một thao tác táo bạo khác: sau khi không kích phá hủy trụ sở hai đài truyền hình nhà nước IRIB, Israel <strong>chiếm quyền phát sóng và phát bài phát biểu của Trump và Netanyahu</strong> kêu gọi người dân Iran chống lại chế độ <a class="cite" href="#ref17">[17]</a>. Tướng Dan Caine, Chủ tịch Hội đồng Tham mưu trưởng Liên quân Mỹ, xác nhận: <em>"Các chiến dịch không gian mạng phối hợp đã phá vỡ hiệu quả hệ thống thông tin liên lạc và mạng cảm biến"</em> của Iran trước giờ tấn công.
+</p>
+
+<h3>Vũ khí chính xác — Tên lửa Blue Sparrow</h3>
+
+<p>
+    Toàn bộ chuỗi tình báo trên phục vụ cho đòn đánh cuối cùng: <strong>tên lửa Blue Sparrow</strong> — vũ khí phóng từ máy bay F-15 do Rafael Advanced Defense Systems phát triển <a class="cite" href="#ref23">[23]</a>.
+</p>
+
+<div class="info-box orange">
+    <h4>Blue Sparrow — "Đến từ vũ trụ"</h4>
+    <p><strong>Thông số:</strong> Dài 6,51m, nặng 1,9 tấn, tầm bắn ~2.000 km, đẩy bằng nhiên liệu rắn một tầng.</p>
+    <p><strong>Quỹ đạo quasi-ballistic:</strong> Sau khi phóng, tên lửa bay lên ngoài khí quyển (suborbital) rồi tái nhập bầu khí quyển theo góc gần như thẳng đứng với tốc độ cực cao. Quỹ đạo "từ trên trời rơi xuống" này khiến hệ thống phòng thủ tên lửa Iran (S-300, Bavar-373) gần như không thể đánh chặn.</p>
+    <p><strong>Dẫn đường:</strong> INS (hệ thống dẫn đường quán tính) kết hợp vệ tinh GPS/GNSS → độ chính xác cấp mét. Tọa độ 14 chữ số từ hệ thống AI được nạp trực tiếp vào hệ thống dẫn đường.</p>
+    <p><strong>Tại sao chọn Blue Sparrow:</strong> Ban đầu được thiết kế để thử nghiệm hệ thống phòng thủ Arrow, sau được chuyển đổi thành vũ khí tấn công. Phóng từ máy bay ngoài không phận Iran → tên lửa tự bay vào → gần như không có cách phòng thủ.</p>
+</div>
+
+<!-- SVG: Kiến trúc kỹ thuật tổng thể chiến dịch -->
+<div class="svg-diagram">
+    <svg width="760" height="560" viewBox="0 0 760 560" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="560" rx="12" class="svg-bg"/>
+        <text x="380" y="28" text-anchor="middle" font-family="Merriweather" font-size="15" font-weight="700" class="svg-title">KIẾN TRÚC KỸ THUẬT TỔNG THỂ — CHIẾN DỊCH TÌNH BÁO TEHRAN</text>
+        <text x="380" y="50" text-anchor="middle" font-family="Inter" font-size="11" class="svg-muted">5 lớp tấn công phối hợp trong nhiều năm → 1 đòn tiêu diệt chính xác</text>
+
+        <!-- Layer 1: Camera Hack -->
+        <rect x="15" y="68" width="240" height="105" rx="10" fill="#dc3545" opacity="0.08" stroke="#dc3545"/>
+        <text x="135" y="90" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#dc3545">LAYER 1: CAMERA HACK</text>
+        <text x="135" y="110" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" class="svg-body">CVE-2021-36260 (CVSS 9.8)</text>
+        <text x="135" y="126" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" class="svg-body">CVE-2017-7921 / CVE-2021-33044</text>
+        <text x="135" y="142" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" class="svg-body">CVE-2025-34067 (CVSS 10.0)</text>
+        <text x="135" y="161" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#dc3545">→ Chiếm gần 100% camera Tehran</text>
+
+        <!-- Layer 2: Mobile Intercept -->
+        <rect x="15" y="188" width="240" height="95" rx="10" fill="#e67e22" opacity="0.08" stroke="#e67e22"/>
+        <text x="135" y="210" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#e67e22">LAYER 2: MOBILE INTERCEPT</text>
+        <text x="135" y="230" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" class="svg-body">SS7/Diameter exploitation</text>
+        <text x="135" y="246" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" class="svg-body">IMSI Catcher (fake eNodeB)</text>
+        <text x="135" y="270" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#e67e22">→ Theo dõi vị trí + nghe lén vệ sĩ</text>
+
+        <!-- Layer 3: AI Processing -->
+        <rect x="275" y="68" width="250" height="215" rx="10" class="svg-dark-node"/>
+        <text x="400" y="92" text-anchor="middle" font-family="Inter" font-size="13" font-weight="800" class="svg-dark-node-accent-cyan">LAYER 3: AI FUSION</text>
+        <line x1="290" y1="102" x2="510" y2="102" class="svg-dark-node-line"/>
+        <text x="400" y="124" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" class="svg-dark-node-accent-purple">LAVENDER</text>
+        <text x="400" y="142" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">Social Network Analysis</text>
+        <text x="400" y="158" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">Tỷ data points · 90% accuracy</text>
+        <text x="400" y="174" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">WhatsApp · SIM changes · Contacts</text>
+        <line x1="290" y1="186" x2="510" y2="186" class="svg-dark-node-line"/>
+        <text x="400" y="206" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" class="svg-dark-node-accent-cyan">GOSPEL (HABSORA)</text>
+        <text x="400" y="224" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">Deep learning · Drone/Satellite</text>
+        <text x="400" y="240" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">SIGINT fusion</text>
+        <text x="400" y="270" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-dark-node-accent-green">→ 100 targets/ngày</text>
+
+        <!-- Arrows L1→L3 -->
+        <path d="M255,120 L275,120" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
+        <path d="M255,235 L275,235" stroke="#e67e22" stroke-width="2" marker-end="url(#aO)"/>
+
+        <!-- HUMINT -->
+        <rect x="545" y="68" width="100" height="90" rx="8" fill="#198754" opacity="0.1" stroke="#198754"/>
+        <text x="595" y="90" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#198754">HUMINT</text>
+        <text x="595" y="108" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-body">Mossad + CIA</text>
+        <text x="595" y="124" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-body">Xác nhận vị trí</text>
+        <text x="595" y="146" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#198754">28/02: "Đèn xanh"</text>
+        <path d="M545,115 L525,150" stroke="#198754" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+        <!-- IMINT -->
+        <rect x="660" y="68" width="85" height="90" rx="8" fill="#0077b6" opacity="0.1" stroke="#0077b6"/>
+        <text x="702" y="90" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#0077b6">IMINT</text>
+        <text x="702" y="108" text-anchor="middle" font-family="Inter" font-size="9" class="svg-body">Vệ tinh</text>
+        <text x="702" y="124" text-anchor="middle" font-family="Inter" font-size="9" class="svg-body">+ Drone</text>
+        <path d="M660,115 L525,165" stroke="#0077b6" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+        <!-- Output: Coordinate -->
+        <rect x="310" y="300" width="220" height="55" rx="10" fill="#198754" opacity="0.12" stroke="#198754" stroke-width="2"/>
+        <text x="420" y="322" text-anchor="middle" font-family="Inter" font-size="12" font-weight="800" fill="#198754">OUTPUT: TỌA ĐỘ 14 CHỮ SỐ</text>
+        <text x="420" y="342" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-body">35°42'01.2"N 51°25'18.7"E ± 1m</text>
+        <path d="M400,283 L420,300" stroke="#198754" stroke-width="2" marker-end="url(#aG)"/>
+
+        <!-- Layer 4: Jamming -->
+        <rect x="15" y="300" width="240" height="90" rx="10" fill="#7c3aed" opacity="0.08" stroke="#7c3aed"/>
+        <text x="135" y="322" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#7c3aed">LAYER 4: MOBILE JAMMING</text>
+        <text x="135" y="342" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" class="svg-body">12 ăng-ten gần phố Pasteur</text>
+        <text x="135" y="358" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" class="svg-body">Fake eNodeB / SS7 redirect</text>
+        <text x="135" y="378" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#7c3aed">→ Vệ sĩ nhận tín hiệu "MÁY BẬN"</text>
+
+        <!-- Arrow coordinate → strike -->
+        <path d="M420,355 L420,400" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
+        <text x="450" y="385" font-family="Inter" font-size="10" fill="#dc3545" font-weight="600">Tọa độ → Dẫn đường tên lửa</text>
+
+        <!-- Layer 5: Strike -->
+        <rect x="15" y="410" width="730" height="130" rx="10" fill="#dc3545" opacity="0.06" stroke="#dc3545" stroke-width="2"/>
+        <text x="380" y="435" text-anchor="middle" font-family="Inter" font-size="13" font-weight="800" fill="#dc3545">LAYER 5: KINETIC STRIKE — BLUE SPARROW</text>
+
+        <rect x="30" y="450" width="160" height="55" rx="8" class="svg-card"/>
+        <text x="110" y="472" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" class="svg-title">F-15 phóng Blue Sparrow</text>
+        <text x="110" y="490" text-anchor="middle" font-family="JetBrains Mono" font-size="9" class="svg-body">6.51m · 1.9 tấn · 2000km</text>
+
+        <path d="M190,477 L218,477" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
+
+        <rect x="225" y="450" width="140" height="55" rx="8" class="svg-card"/>
+        <text x="295" y="472" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" class="svg-title">Bay lên suborbital</text>
+        <text x="295" y="490" text-anchor="middle" font-family="JetBrains Mono" font-size="9" class="svg-body">Ngoài khí quyển</text>
+
+        <path d="M365,477 L393,477" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
+
+        <rect x="400" y="450" width="150" height="55" rx="8" class="svg-card"/>
+        <text x="475" y="472" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" class="svg-title">Tái nhập thẳng đứng</text>
+        <text x="475" y="490" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#dc3545">Không thể đánh chặn</text>
+
+        <path d="M550,477 L578,477" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
+
+        <rect x="585" y="450" width="145" height="55" rx="8" fill="#dc3545" opacity="0.15" stroke="#dc3545"/>
+        <text x="657" y="472" text-anchor="middle" font-family="Inter" font-size="11" font-weight="800" fill="#dc3545">LEADERSHIP HOUSE</text>
+        <text x="657" y="492" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#dc3545">Khamenei thiệt mạng</text>
+
+        <!-- Arrow coordinate → strike -->
+        <path d="M410,275 L410,320" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
+        <text x="430" y="300" font-family="Inter" font-size="7" fill="#dc3545" font-weight="600">Tọa độ → Dẫn đường tên lửa</text>
+
+        <!-- Arrow jamming timing -->
+        <path d="M240,270 L310,260" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="275" y="258" font-family="Inter" font-size="6.5" fill="#7c3aed">Đồng bộ thời gian</text>
+    </svg>
+</div>
+
+<p>
+    Nhìn lại toàn bộ 5 lớp, đây là chiến dịch hội tụ ít nhất 5 lĩnh vực chuyên biệt: <strong>exploit IoT/CCTV → encrypted video exfiltration → AI computer vision + graph analysis → cellular manipulation → precision strike</strong>. Không có một lỗ hổng đơn lẻ nào quyết định thành bại — mà là toàn bộ chuỗi kỹ thuật hoạt động liền mạch trong nhiều năm. Và phía Iran, dù đã được cảnh báo nhiều lần từ chính các nghị sĩ của mình <a class="cite" href="#ref16">[16]</a>, vẫn không kịp phản ứng.
+</p>
+
+<!-- ══════════ 4. AI TARGETING ══════════ -->
+<h2 id="ai-targeting"><span class="sec-num">04</span> "Cỗ máy sản xuất mục tiêu" — AI trong chiến tranh</h2>
+
+<figure class="figure">
+    <img src="images/07-ai-server.png" alt="Drone MQ-9 Reaper — vũ khí tích hợp AI được sử dụng trong chiến tranh hiện đại, góp phần thu thập tình báo và tấn công chính xác">
+    <figcaption>Drone MQ-9 Reaper của Mỹ — một trong những nền tảng vũ khí tích hợp AI dùng cho trinh sát và tấn công chính xác. Hệ thống AI Gospel và Lavender của Israel xử lý dữ liệu từ nhiều nguồn tương tự để sản xuất tọa độ mục tiêu. Nguồn: <a href="https://bisi.org.uk/reports/iran-conflict-as-a-testing-ground-for-ai-warfare-systems" target="_blank">BISI</a> <a class="cite" href="#ref9">[9]</a> / U.S. Air Force</figcaption>
+</figure>
+
+<p>
+    Nếu phần hack camera khiến bạn lo ngại, thì phần này sẽ khiến bạn <em>sợ</em>. Israel không dừng ở việc thu thập dữ liệu. Họ xây dựng hẳn một hệ sinh thái AI để tự động hóa toàn bộ quy trình: từ dữ liệu thô đến tọa độ tiêu diệt.
+</p>
+
+<div class="quote-block">
+    <p>"Một cỗ máy sản xuất mục tiêu chạy bằng AI, có khả năng xử lý lượng dữ liệu khổng lồ. Đầu vào gồm tình báo hình ảnh, tình báo con người, tình báo tín hiệu, liên lạc bị chặn, ảnh vệ tinh. Đầu ra là một vị trí chính xác — dưới dạng tọa độ lưới 14 chữ số."</p>
+    <cite>— Nguồn tình báo Israel, Financial Times <a class="cite" href="#ref6">[6]</a></cite>
+</div>
+
+<!-- SVG: AI Pipeline -->
+<div class="svg-diagram">
+    <svg width="760" height="380" viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="380" rx="12" class="svg-bg"/>
+        <text x="380" y="28" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" class="svg-title">AI-POWERED TARGET PRODUCTION PIPELINE</text>
+        <text x="90" y="58" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" class="svg-muted">ĐẦU VÀO</text>
+        <!-- Inputs — stacked left -->
+        <rect x="15" y="70" width="150" height="34" rx="6" fill="#0077b6" opacity="0.1" stroke="#0077b6"/><text x="90" y="93" text-anchor="middle" font-family="Inter" font-size="11" fill="#0077b6">VISINT (Camera)</text>
+        <rect x="15" y="110" width="150" height="34" rx="6" fill="#7c3aed" opacity="0.1" stroke="#7c3aed"/><text x="90" y="133" text-anchor="middle" font-family="Inter" font-size="11" fill="#7c3aed">SIGINT (Di động)</text>
+        <rect x="15" y="150" width="150" height="34" rx="6" fill="#e67e22" opacity="0.1" stroke="#e67e22"/><text x="90" y="173" text-anchor="middle" font-family="Inter" font-size="11" fill="#e67e22">IMINT (Vệ tinh)</text>
+        <rect x="15" y="190" width="150" height="34" rx="6" fill="#198754" opacity="0.1" stroke="#198754"/><text x="90" y="213" text-anchor="middle" font-family="Inter" font-size="11" fill="#198754">HUMINT (Mossad)</text>
+        <rect x="15" y="230" width="150" height="34" rx="6" fill="#dc3545" opacity="0.1" stroke="#dc3545"/><text x="90" y="253" text-anchor="middle" font-family="Inter" font-size="11" fill="#dc3545">COMINT (Liên lạc)</text>
+        <!-- Arrows inputs → Gospel/Lavender -->
+        <path d="M165,87 L225,130" stroke="#0077b6" stroke-width="1.5"/>
+        <path d="M165,127 L225,145" stroke="#7c3aed" stroke-width="1.5"/>
+        <path d="M165,167 L225,160" stroke="#e67e22" stroke-width="1.5"/>
+        <path d="M165,207 L225,175" stroke="#198754" stroke-width="1.5"/>
+        <path d="M165,247 L225,185" stroke="#dc3545" stroke-width="1.5"/>
+        <!-- Gospel + Lavender -->
+        <rect x="230" y="70" width="170" height="140" rx="10" class="svg-dark-node"/>
+        <text x="315" y="98" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" class="svg-dark-node-accent-cyan">GOSPEL</text>
+        <text x="315" y="116" text-anchor="middle" font-family="Inter" font-size="10" class="svg-dark-node-sub">Mục tiêu hạ tầng</text>
+        <line x1="242" y1="126" x2="388" y2="126" class="svg-dark-node-line"/>
+        <text x="315" y="148" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" class="svg-dark-node-accent-purple">LAVENDER</text>
+        <text x="315" y="166" text-anchor="middle" font-family="Inter" font-size="10" class="svg-dark-node-sub">Mục tiêu cá nhân</text>
+        <text x="315" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="svg-dark-node-accent-green">100 mục tiêu/ngày</text>
+        <!-- Arrow Gospel → SNA -->
+        <path d="M400,140 L428,140" stroke="#0077b6" stroke-width="2.5" marker-end="url(#aC)"/>
+        <!-- SNA -->
+        <rect x="435" y="70" width="170" height="140" rx="10" class="svg-dark-node"/>
+        <text x="520" y="96" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" class="svg-dark-node-accent-orange">SOCIAL NETWORK</text>
+        <text x="520" y="113" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" class="svg-dark-node-accent-orange">ANALYSIS</text>
+        <text x="520" y="138" text-anchor="middle" font-family="Inter" font-size="10" class="svg-dark-node-sub">Hàng tỷ data points</text>
+        <text x="520" y="156" text-anchor="middle" font-family="Inter" font-size="10" class="svg-dark-node-sub">Pattern of Life</text>
+        <text x="520" y="196" text-anchor="middle" font-family="Inter" font-size="10" class="svg-dark-node-accent-green">Tìm "trung tâm trọng lực"</text>
+        <!-- Arrow SNA → Output -->
+        <path d="M605,140 L628,140" stroke="#198754" stroke-width="2.5" marker-end="url(#aG)"/>
+        <!-- Output -->
+        <rect x="635" y="78" width="110" height="125" rx="10" fill="#198754" opacity="0.12" stroke="#198754" stroke-width="2"/>
+        <text x="690" y="108" text-anchor="middle" font-family="Inter" font-size="14" font-weight="800" fill="#198754">OUTPUT</text>
+        <text x="690" y="134" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-title">14-digit grid</text>
+        <text x="690" y="152" text-anchor="middle" font-family="JetBrains Mono" font-size="11" class="svg-title">coordinate</text>
+        <text x="690" y="182" text-anchor="middle" font-family="Inter" font-size="10" fill="#dc3545" font-weight="700">→ LỆNH KHÔNG KÍCH</text>
+        <!-- Bottom note — below all content -->
+        <rect x="100" y="290" width="560" height="65" rx="8" fill="rgba(0,119,182,0.05)" stroke="#0077b6" stroke-dasharray="5,4"/>
+        <text x="380" y="317" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="#0077b6">Lần đầu tiên: AI targeting quy mô lớn chống quốc gia có chủ quyền</text>
+        <text x="380" y="340" text-anchor="middle" font-family="Inter" font-size="10" class="svg-muted">Nguồn: Bloomsbury Intelligence and Security Institute (BISI) [9]</text>
+    </svg>
+</div>
+
+<h3>Bên trong Gospel và Lavender — Cách AI "nghĩ"</h3>
+
+<p>
+    Thông tin từ +972 Magazine và các nguồn quân sự cho thấy cách hai hệ thống AI này vận hành cụ thể hơn nhiều so với những gì người ta tưởng <a class="cite" href="#ref19">[19]</a>:
+</p>
+
+<div class="info-box purple">
+    <h4>Lavender — "Máy sản xuất danh sách tiêu diệt"</h4>
+    <p><strong>Đầu vào (features):</strong> Video feed, tin nhắn bị chặn, dữ liệu mạng xã hội, liên lạc điện thoại, lịch sử thay đổi SIM, lịch sử thay đổi địa chỉ, danh sách nhóm WhatsApp, quan hệ xã hội, ảnh chụp.</p>
+    <p><strong>Cơ chế scoring:</strong> Mỗi cá nhân được gán điểm "nghi ngờ" dựa trên tổ hợp các features. Ví dụ: tham gia nhóm WhatsApp có thành viên là chiến binh đã biết → +điểm. Thay SIM vài tháng/lần → +điểm. Thay địa chỉ thường xuyên → +điểm.</p>
+    <p><strong>Độ chính xác:</strong> Sau khi kiểm tra trên tập mẫu, hệ thống đạt <strong>tỷ lệ chính xác 90%</strong> — nghĩa là 10% là nhầm lẫn (đánh dấu nhầm người có liên hệ lỏng lẻo hoặc không liên quan). Quân đội Israel chấp nhận tỷ lệ này và cho phép sử dụng rộng rãi.</p>
+    <p><strong>Tốc độ:</strong> Trước Lavender, nhà phân tích con người sản xuất khoảng <strong>50 mục tiêu/năm</strong>. Lavender + Gospel sản xuất <strong>100 mục tiêu/ngày</strong> — nhanh hơn ~730 lần.</p>
+</div>
+
+<div class="info-box">
+    <h4>Gospel (Habsora) — "Bản đồ mục tiêu hạ tầng"</h4>
+    <p><strong>Chức năng:</strong> Tự động quét dữ liệu trinh sát (drone, vệ tinh, SIGINT) để xác định tòa nhà, thiết bị, phương tiện thuộc về đối phương.</p>
+    <p><strong>Deep learning:</strong> Sử dụng mạng neural nhận dạng hình ảnh để phân loại mục tiêu từ ảnh vệ tinh/drone — phân biệt giữa doanh trại quân sự, kho vũ khí, trung tâm chỉ huy, và cơ sở dân sự.</p>
+    <p><strong>Quy trình:</strong> Gospel đề xuất mục tiêu → nhà phân tích con người duyệt (thường mất khoảng 20 giây cho mỗi mục tiêu, theo +972 Magazine) → phê duyệt → gửi tọa độ đến đơn vị tấn công.</p>
+</div>
+
+<h3>Social Network Analysis — Bóc từng lớp bảo vệ</h3>
+
+<p>
+    Có lẽ kỹ thuật tinh vi nhất trong cả chiến dịch là cách Unit 8200 dùng <strong>phân tích mạng xã hội toán học</strong> (mathematical social network analysis) trên hàng tỷ data point <a class="cite" href="#ref8">[8]</a>. Không phải "mạng xã hội" kiểu Facebook — mà là thuật toán phân tích mối quan hệ giữa hàng triệu con người dựa trên dữ liệu liên lạc, di chuyển, và hành vi.
+</p>
+
+<div class="info-box purple">
+    <h4>Cách Social Network Analysis phá vỡ hệ thống bảo vệ Khamenei</h4>
+    <p><strong>Bước 1 — Xác định "node":</strong> Mỗi vệ sĩ, tài xế, người phục vụ quanh Khamenei là một node trong đồ thị xã hội.</p>
+    <p><strong>Bước 2 — Camera giao thông cho biết gì:</strong> Theo dõi xe cá nhân của vệ sĩ → biết họ sống ở đâu, đi làm ca nào, đỗ xe ở điểm nào gần khu phức hợp. Một góc camera tình cờ quay đúng chỗ vệ sĩ đỗ xe, và đó là manh mối quyết định.</p>
+    <p><strong>Bước 3 — Dữ liệu di động bổ sung:</strong> Ai gọi cho ai, lúc mấy giờ, từ trạm phát sóng nào. Ghép lại thành bản đồ quan hệ hoàn chỉnh.</p>
+    <p><strong>Bước 4 — AI phát hiện "trung tâm trọng lực":</strong> Thuật toán tìm ra những cá nhân tưởng bình thường nhưng thực chất là mắt xích then chốt — người mà khi mất đi, cả mạng lưới bảo vệ rối loạn.</p>
+    <p><strong>Bước 5 — "Pattern of Life" hoàn chỉnh:</strong> Tuyến đường, giờ giấc, nhân sự, thói quen. Như một nguồn Israel mô tả: <em>"Chúng tôi biết Tehran như biết Jerusalem"</em> <a class="cite" href="#ref10">[10]</a>.</p>
+</div>
+
+<!-- ══════════ 5. KILL CHAIN ══════════ -->
+<h2 id="killchain"><span class="sec-num">05</span> Kill Chain Analysis</h2>
+
+<p>Nhìn toàn bộ chiến dịch qua lăng kính <strong>Lockheed Martin Cyber Kill Chain</strong>, mở rộng cho bối cảnh chiến tranh lai (hybrid warfare):</p>
+
+<div class="svg-diagram">
+    <svg width="760" height="240" viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="kc" x1="0%" y1="0%" x2="100%"><stop offset="0%" style="stop-color:#dc3545"/><stop offset="15%" style="stop-color:#e67e22"/><stop offset="30%" style="stop-color:#f1c40f"/><stop offset="45%" style="stop-color:#198754"/><stop offset="60%" style="stop-color:#0077b6"/><stop offset="75%" style="stop-color:#7c3aed"/><stop offset="100%" style="stop-color:#dc3545"/></linearGradient>
+        </defs>
+        <rect width="760" height="240" rx="12" class="svg-bg"/>
+        <text x="380" y="28" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" class="svg-title">CYBER KILL CHAIN — MỞ RỘNG CHO CHIẾN TRANH LAI</text>
+        <!-- Line -->
+        <rect x="55" y="88" width="650" height="4" rx="2" fill="url(#kc)" opacity="0.3"/>
+        <g font-family="Inter" text-anchor="middle">
+            <!-- 1: Recon -->
+            <circle cx="55" cy="90" r="16" fill="#dc3545" stroke="#fff" stroke-width="2.5"/>
+            <text x="55" y="95" font-size="12" fill="#fff" font-weight="700">1</text>
+            <text x="55" y="60" font-size="12" font-weight="700" fill="#dc3545">Recon</text>
+            <text x="55" y="130" font-size="10" class="svg-body">Quét camera</text>
+            <text x="55" y="146" font-size="9" class="svg-muted">Shodan / Censys</text>
+            <!-- 2: Weaponize -->
+            <circle cx="163" cy="90" r="16" fill="#e67e22" stroke="#fff" stroke-width="2.5"/>
+            <text x="163" y="95" font-size="12" fill="#fff" font-weight="700">2</text>
+            <text x="163" y="60" font-size="12" font-weight="700" fill="#e67e22">Weaponize</text>
+            <text x="163" y="130" font-size="10" class="svg-body">Phát triển exploit</text>
+            <text x="163" y="146" font-size="9" class="svg-muted">Firmware implant</text>
+            <!-- 3: Deliver -->
+            <circle cx="271" cy="90" r="16" fill="#f1c40f" stroke="#fff" stroke-width="2.5"/>
+            <text x="271" y="95" font-size="12" fill="#fff" font-weight="700">3</text>
+            <text x="271" y="60" font-size="12" font-weight="700" fill="#b7950b">Deliver</text>
+            <text x="271" y="130" font-size="10" class="svg-body">Supply chain</text>
+            <text x="271" y="146" font-size="9" class="svg-muted">Remote exploit</text>
+            <!-- 4: Exploit -->
+            <circle cx="380" cy="90" r="16" fill="#198754" stroke="#fff" stroke-width="2.5"/>
+            <text x="380" y="95" font-size="12" fill="#fff" font-weight="700">4</text>
+            <text x="380" y="60" font-size="12" font-weight="700" fill="#198754">Exploit</text>
+            <text x="380" y="130" font-size="10" class="svg-body">Chiếm camera</text>
+            <text x="380" y="146" font-size="9" class="svg-muted">Rootkit firmware</text>
+            <!-- 5: C2 -->
+            <circle cx="489" cy="90" r="16" fill="#0077b6" stroke="#fff" stroke-width="2.5"/>
+            <text x="489" y="95" font-size="12" fill="#fff" font-weight="700">5</text>
+            <text x="489" y="60" font-size="12" font-weight="700" fill="#0077b6">C2</text>
+            <text x="489" y="130" font-size="10" class="svg-body">Encrypted tunnel</text>
+            <text x="489" y="146" font-size="9" class="svg-muted">→ Tel Aviv</text>
+            <!-- 6: AI Fusion -->
+            <circle cx="597" cy="90" r="16" fill="#7c3aed" stroke="#fff" stroke-width="2.5"/>
+            <text x="597" y="95" font-size="12" fill="#fff" font-weight="700">6</text>
+            <text x="597" y="60" font-size="12" font-weight="700" fill="#7c3aed">AI Fusion</text>
+            <text x="597" y="130" font-size="10" class="svg-body">Gospel + Lavender</text>
+            <text x="597" y="146" font-size="9" class="svg-muted">100 targets/ngày</text>
+            <!-- 7: Strike -->
+            <circle cx="705" cy="90" r="16" fill="#dc3545" stroke="#fff" stroke-width="2.5"/>
+            <text x="705" y="95" font-size="12" fill="#fff" font-weight="700">7</text>
+            <text x="705" y="60" font-size="12" font-weight="700" fill="#dc3545">Strike</text>
+            <text x="705" y="130" font-size="10" class="svg-body">Tọa độ 14 số</text>
+            <text x="705" y="146" font-size="10" fill="#dc3545" font-weight="600">→ Không kích</text>
+        </g>
+        <!-- Bottom note -->
+        <rect x="160" y="175" width="440" height="45" rx="8" fill="rgba(0,119,182,0.05)" stroke="#0077b6" stroke-dasharray="4,3"/>
+        <text x="380" y="196" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="#0077b6">Lockheed Martin Cyber Kill Chain</text>
+        <text x="380" y="212" text-anchor="middle" font-family="Inter" font-size="10" class="svg-body">Mở rộng cho chiến tranh mạng–quân sự hỗn hợp (hybrid warfare)</text>
+    </svg>
+</div>
+
+<!-- ══════════ 6. MITRE ATT&CK ══════════ -->
+<h2 id="mitre"><span class="sec-num">06</span> Ánh xạ MITRE ATT&CK</h2>
+
+<p>Dưới đây là các kỹ thuật tấn công được sử dụng (hoặc rất có thể đã sử dụng), ánh xạ theo framework MITRE ATT&CK — chuẩn phân loại kỹ thuật tấn công được ngành an ninh mạng toàn cầu sử dụng:</p>
+
+<table class="mitre-table">
+    <thead><tr><th>ID</th><th>Kỹ thuật</th><th>Cách áp dụng trong chiến dịch</th></tr></thead>
+    <tbody>
+        <tr><td class="tid">T1190</td><td>Exploit Public-Facing App</td><td>Khai thác lỗ hổng camera IP lộ trên internet (RTSP, ONVIF, HTTP admin panel)</td></tr>
+        <tr><td class="tid">T1195</td><td>Supply Chain Compromise</td><td>Cài backdoor vào firmware/hardware camera trước khi lắp đặt tại Iran</td></tr>
+        <tr><td class="tid">T1078</td><td>Valid Accounts</td><td>Sử dụng mật khẩu mặc định (admin/admin) mà Iran không đổi</td></tr>
+        <tr><td class="tid">T1021</td><td>Remote Services</td><td>Di chuyển ngang từ camera đến trung tâm điều khiển qua SSH/RDP</td></tr>
+        <tr><td class="tid">T1132</td><td>Data Encoding</td><td>Mã hóa video stream trước khi truyền về Tel Aviv</td></tr>
+        <tr><td class="tid">T1029</td><td>Scheduled Transfer</td><td>Truyền dữ liệu theo lịch (scheduled beaconing) để tránh bị phát hiện</td></tr>
+        <tr><td class="tid">T1542</td><td>Pre-OS Boot (Firmware)</td><td>Rootkit firmware duy trì truy cập qua cả factory reset</td></tr>
+        <tr><td class="tid">T1125</td><td>Video Capture</td><td>Thu video liên tục từ hệ thống camera giao thông Tehran</td></tr>
+        <tr><td class="tid">T1040</td><td>Network Sniffing</td><td>Sniff traffic nội bộ từ camera đã compromise để tìm thêm mục tiêu</td></tr>
+    </tbody>
+</table>
+
+<!-- ══════════ 7. UNIT 8200 ══════════ -->
+<h2 id="unit8200"><span class="sec-num">07</span> Unit 8200 & Mossad — Những "kiến trúc sư" của chiến dịch</h2>
+
+<figure class="figure">
+    <img src="images/08-military-tech.jpg" alt="Minh họa trung tâm điều khiển tình báo mạng — Unit 8200 vận hành hệ thống SIGINT tinh vi nhất Israel">
+    <figcaption>Trung tâm điều khiển an ninh mạng (ảnh minh họa) — Unit 8200 là đơn vị SIGINT tinh nhuệ nhất của Israel. Nguồn tham khảo: <a href="https://www.timesofisrael.com/topic/unit-8200/" target="_blank">Times of Israel</a>. Ảnh: Unsplash</figcaption>
+</figure>
+
+<p>
+    Nói đến tình báo mạng Israel mà không nhắc <strong>Unit 8200</strong> thì cũng giống nói đến Silicon Valley mà bỏ qua Google. Đây là đơn vị SIGINT (tình báo tín hiệu) tinh nhuệ nhất quân đội Israel, tương đương NSA của Mỹ — nhưng với tinh thần startup: gọn nhẹ, sáng tạo đến mức "ngông", và không ngại phá luật chơi. Rất nhiều cựu binh 8200 sau giải ngũ đã sáng lập các công ty bảo mật đình đám: NSO Group, Check Point, Wiz, CyberArk... <a class="cite" href="#ref10">[10]</a>
+</p>
+
+<div class="comparison-grid">
+    <div class="comparison-card">
+        <h5 style="color: var(--accent-cyan);">Unit 8200 — SIGINT</h5>
+        <ul>
+            <li>Thu thập tín hiệu (camera, di động, vệ tinh)</li>
+            <li>Phát triển & vận hành AI (Gospel, Lavender)</li>
+            <li>Xâm nhập hệ thống mạng Iran</li>
+            <li>Social Network Analysis trên hàng tỷ data point</li>
+            <li>Sản xuất tọa độ mục tiêu cho không quân</li>
+        </ul>
+    </div>
+    <div class="comparison-card">
+        <h5 style="color: var(--accent-orange);">Mossad — HUMINT</h5>
+        <ul>
+            <li>Tuyển mộ nguồn tin người bên trong Iran</li>
+            <li>Xác minh chéo thông tin từ SIGINT</li>
+            <li>Tình báo "last mile" — điều camera không thấy</li>
+            <li>Phối hợp CIA xác nhận vị trí Khamenei</li>
+        </ul>
+    </div>
+</div>
+
+<p>
+    Sự kết hợp <strong>SIGINT + HUMINT + IMINT + AI</strong> tạo nên cái mà giới phân tích gọi là <strong>Multi-INT Fusion</strong> — dung hợp đa nguồn tình báo. Đây là đỉnh cao hiện tại của nghệ thuật tình báo quân sự, và chiến dịch 28/02 là bài kiểm tra thực chiến đầu tiên ở quy mô quốc gia.
+</p>
+
+<!-- ══════════ 8. SO SÁNH ══════════ -->
+<h2 id="comparison"><span class="sec-num">08</span> Từ Stuxnet đến Roaring Lion — 16 năm tiến hóa</h2>
+
+<figure class="figure">
+    <img src="images/09-nuclear.webp" alt="Sơ đồ cơ chế hoạt động của Stuxnet — vũ khí mạng đầu tiên gây thiệt hại vật lý cho máy ly tâm hạt nhân Iran">
+    <figcaption>Sơ đồ "How Stuxnet Worked" — 6 giai đoạn từ lây nhiễm qua USB, tìm hệ thống SCADA Siemens, đến chiếm quyền điều khiển và phá hủy máy ly tâm tại Natanz (2010). Nguồn: <a href="https://spectrum.ieee.org/the-real-story-of-stuxnet" target="_blank">IEEE Spectrum</a></figcaption>
+</figure>
+
+<h3>Stuxnet (2010) — Vũ khí mạng đầu tiên phá hủy hạ tầng vật lý</h3>
+
+<p>
+    Stuxnet là cái tên mà bất kỳ ai học về an ninh mạng đều phải biết. Được phát hiện năm 2010, đây là <strong>vũ khí mạng đầu tiên trong lịch sử gây thiệt hại vật lý cho hạ tầng công nghiệp</strong> — mở ra kỷ nguyên mới của chiến tranh, nơi dòng code có thể phá hủy máy móc thật.
+</p>
+
+<p>
+    Mục tiêu: <strong>cơ sở làm giàu uranium Natanz</strong> của Iran, nơi hàng nghìn máy ly tâm IR-1 quay ở tốc độ siêu thanh để tách đồng vị U-235. Stuxnet được cho là sản phẩm hợp tác giữa Mỹ (NSA) và Israel (Unit 8200) trong chương trình mật mang tên <strong>Operation Olympic Games</strong>.
+</p>
+
+<div class="info-box purple">
+    <h4>Cách Stuxnet hoạt động — 6 giai đoạn</h4>
+    <p><strong>1. Lây nhiễm (Infection):</strong> Stuxnet xâm nhập qua USB drive — vì Natanz là mạng air-gapped (không kết nối internet). Worm tự nhân bản qua mọi USB cắm vào máy tính Windows, sử dụng tới <strong>4 lỗ hổng zero-day</strong> chưa từng được biết đến — một con số chưa có tiền lệ.</p>
+    <p><strong>2. Tìm kiếm (Search):</strong> Sau khi lây vào máy Windows, Stuxnet không kích hoạt ngay. Nó âm thầm kiểm tra: máy tính này có kết nối với hệ thống SCADA Siemens Step 7 không? Nếu không → nằm im và tiếp tục lan. Nếu có → chuyển sang giai đoạn tiếp.</p>
+    <p><strong>3. Cập nhật (Update):</strong> Nếu tìm thấy hệ thống SCADA Siemens đang điều khiển biến tần (frequency converter) của máy ly tâm, Stuxnet kết nối internet (nếu có) để tải về phiên bản mới nhất của chính nó.</p>
+    <p><strong>4. Chiếm quyền (Compromise):</strong> Stuxnet khai thác các lỗ hổng zero-day trong phần mềm Siemens Step 7 để chiếm quyền điều khiển PLC (Programmable Logic Controller) — bộ não điều khiển tốc độ quay máy ly tâm.</p>
+    <p><strong>5. Phá hoại (Control):</strong> Stuxnet thay đổi tốc độ quay máy ly tâm — đẩy lên 1.410 Hz (so với bình thường 1.064 Hz) rồi hạ xuống 2 Hz, tạo rung lắc phá hủy cấu trúc rotor bằng nhôm mỏng manh. Quá trình này diễn ra <strong>từ từ, trong nhiều tháng</strong>, khiến máy ly tâm hỏng dần như "lão hóa tự nhiên".</p>
+    <p><strong>6. Đánh lừa (Deceive):</strong> Đây là phần thiên tài nhất — trong khi phá hoại, Stuxnet gửi <strong>dữ liệu giả</strong> về màn hình giám sát, hiển thị mọi thứ hoạt động bình thường. Kỹ sư Iran nhìn màn hình thấy OK, nhưng máy ly tâm đang tự hủy. Khi phát hiện ra, <strong>khoảng 1.000 máy ly tâm</strong> (gần 1/5 tổng số) đã bị phá hủy.</p>
+</div>
+
+<div class="info-box">
+    <h4>Ý nghĩa lịch sử của Stuxnet</h4>
+    <p><strong>Tiền lệ pháp lý:</strong> Stuxnet chứng minh rằng một cuộc tấn công mạng có thể đạt được mục tiêu chiến lược (trì hoãn chương trình hạt nhân Iran ước tính 2–3 năm) mà không cần đổ máu — nhưng cũng mở ra "hộp Pandora" cho mọi quốc gia khác.</p>
+    <p><strong>Kỹ thuật đột phá:</strong> Sử dụng đồng thời 4 zero-day, chứng chỉ số bị đánh cắp từ Realtek và JMicron, và khả năng tấn công PLC — mức độ phức tạp mà chỉ có nguồn lực cấp quốc gia mới đạt được.</p>
+    <p><strong>Hệ quả không lường trước:</strong> Stuxnet thoát ra khỏi Natanz và lây lan trên internet, lây nhiễm hơn 100.000 máy tính tại 115 quốc gia. Mã nguồn bị phân tích ngược và trở thành "giáo trình" cho các nhóm tấn công khác — bao gồm cả Iran, nước sau đó phát triển năng lực tấn công mạng riêng (Shamoon, APT33, APT34).</p>
+    <p><strong>"Cha đẻ" của Roaring Lion:</strong> Không có Stuxnet, sẽ không có Predatory Sparrow, không có chiến dịch hack camera Tehran. Stuxnet chứng minh nguyên tắc — mạng có thể gây thiệt hại vật lý. 16 năm sau, Roaring Lion đưa nguyên tắc đó lên một tầm hoàn toàn mới: <strong>mạng không chỉ phá hủy, mà còn là nền tảng tình báo cho toàn bộ chiến dịch quân sự.</strong></p>
+</div>
+
+<p>Để hiểu vị trí của chiến dịch 2026 trong dòng chảy tiến hóa này, hãy nhìn bảng so sánh:</p>
+
+<table class="mitre-table">
+    <thead><tr><th>Tiêu chí</th><th>Stuxnet (2010)</th><th>Predatory Sparrow (2021–23)</th><th>Roaring Lion (2026)</th></tr></thead>
+    <tbody>
+        <tr><td><strong>Mục tiêu</strong></td><td>Máy ly tâm Natanz</td><td>Hạ tầng dân sự (đường sắt, trạm xăng, nhà máy thép)</td><td>Lãnh đạo tối cao + toàn bộ hạ tầng quân sự</td></tr>
+        <tr><td><strong>Phạm vi</strong></td><td>1 cơ sở</td><td>Nhiều mục tiêu phân tán</td><td>Toàn quốc — 900 đợt không kích</td></tr>
+        <tr><td><strong>Vai trò cyber</strong></td><td>Vũ khí chính (phá hủy vật lý)</td><td>Vũ khí chính (disruption)</td><td>Nền tảng tình báo cho tấn công động học</td></tr>
+        <tr><td><strong>AI</strong></td><td>Không</td><td>Hạn chế</td><td>Trung tâm — sản xuất mục tiêu tự động</td></tr>
+        <tr><td><strong>Nhận trách nhiệm</strong></td><td>Phủ nhận</td><td>Nhóm hacktivist (nghi Israel)</td><td>Công khai</td></tr>
+    </tbody>
+</table>
+
+<div class="info-box orange">
+    <h4>Bước ngoặt lớn</h4>
+    <p>Stuxnet (2010) chứng minh cyber gây được thiệt hại vật lý. Predatory Sparrow (2021–23) chứng minh cyber phá được hạ tầng cả nước <a class="cite" href="#ref7">[7]</a>. Roaring Lion (2026) chứng minh <strong>cyber + AI có thể là nền tảng tình báo cho toàn bộ chiến dịch quân sự quy ước</strong> — một kỷ nguyên mới <a class="cite" href="#ref9">[9]</a>.</p>
+</div>
+
+<!-- ══════════ 9. PHẢN ỨNG IRAN ══════════ -->
+<h2 id="iran-response"><span class="sec-num">09</span> Phản ứng của Iran — Mặt trận mạng</h2>
+
+<figure class="figure">
+    <img src="images/12-network-cables.jpg" alt="Minh họa hạ tầng mạng — Iran huy động hơn 60 nhóm mạng phản công sau cuộc không kích">
+    <figcaption>Hạ tầng mạng (ảnh minh họa) — Iran huy động hơn 60 nhóm tấn công mạng phản công sau cuộc không kích 28/02/2026. Nguồn: <a href="https://unit42.paloaltonetworks.com/iranian-cyberattacks-2026/" target="_blank">Palo Alto Unit 42</a>. Ảnh: Unsplash</figcaption>
+</figure>
+
+<p>Iran không ngồi yên. Trong vòng vài giờ sau đợt không kích, hơn <strong>60 nhóm mạng liên kết với Iran</strong> đồng loạt vào cuộc <a class="cite" href="#ref11">[11]</a>:</p>
+
+<div class="info-box red">
+    <h4>Phản công mạng Iran (28/02 – 05/03/2026)</h4>
+    <p><strong>DDoS:</strong> Tấn công ít nhất 110 tổ chức tại 16 quốc gia, chủ yếu khu vực Trung Đông <a class="cite" href="#ref12">[12]</a>.</p>
+    <p><strong>SCADA/PLC:</strong> Nhóm FAD Team tuyên bố xâm nhập hệ thống Unitronics Vision Series tại Israel.</p>
+    <p><strong>Quân sự:</strong> 500+ tên lửa đạn đạo + 2.000 drone — 40% nhắm Israel, 60% nhắm căn cứ Mỹ <a class="cite" href="#ref1">[1]</a>.</p>
+    <p><strong>AI hỗ trợ:</strong> Các nhóm hacktivist sử dụng AI quét phát hiện hơn 40.000 hệ thống ICS lộ trên internet <a class="cite" href="#ref11">[11]</a>.</p>
+</div>
+
+<!-- ══════════ 10. VIỆT NAM ══════════ -->
+<h2 id="vietnam"><span class="sec-num">10</span> Cảnh báo cho Việt Nam: Tehran không xa đâu</h2>
+
+<p>
+    Đến đây, nhiều bạn đọc có thể nghĩ: "Chuyện Iran, liên quan gì đến mình?" Câu trả lời thẳng thắn là: <strong>liên quan rất nhiều</strong>. Và lý do nằm ngay trên đầu chúng ta — theo nghĩa đen.
+</p>
+
+<figure class="figure">
+    <img src="images/11-traffic-cam-vn.jpg" alt="Camera giám sát giao thông tại nút giao ở Việt Nam, ghi nhận hình ảnh xe cộ qua lại">
+    <figcaption>Hệ thống camera giám sát giao thông tại Việt Nam — hơn 95% có xuất xứ Trung Quốc. Đề án mở rộng camera toàn quốc đến 2050 sẽ tăng bề mặt tấn công theo cấp số nhân. Nguồn: <a href="https://vietnamnet.vn/giam-thieu-thiet-bi-camera-giam-sat-tiem-an-nguy-co-mat-an-toan-du-lieu-2481441.html" target="_blank">VietnamNet</a></figcaption>
+</figure>
+
+<!-- SVG: Cảnh báo VN -->
+<div class="svg-diagram">
+    <svg width="760" height="190" viewBox="0 0 760 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="190" rx="12" class="svg-bg-warn"/>
+        <text x="380" y="25" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#dc3545">THỰC TRẠNG CAMERA GIÁM SÁT TẠI VIỆT NAM</text>
+        <rect x="25" y="45" width="170" height="75" rx="8" class="svg-card-warn"/>
+        <text x="110" y="72" text-anchor="middle" font-family="JetBrains Mono" font-size="28" font-weight="900" fill="#dc3545">95%</text>
+        <text x="110" y="92" text-anchor="middle" font-family="Inter" font-size="8.5" class="svg-body">Camera có xuất xứ</text>
+        <text x="110" y="105" text-anchor="middle" font-family="Inter" font-size="8.5" class="svg-body">từ Trung Quốc [13]</text>
+
+        <rect x="210" y="45" width="170" height="75" rx="8" class="svg-card-warn"/>
+        <text x="295" y="72" text-anchor="middle" font-family="JetBrains Mono" font-size="28" font-weight="900" fill="#e67e22">90%</text>
+        <text x="295" y="92" text-anchor="middle" font-family="Inter" font-size="8.5" class="svg-body">Chưa kiểm tra ATTT</text>
+        <text x="295" y="105" text-anchor="middle" font-family="Inter" font-size="8.5" class="svg-body">trước khi vận hành [14]</text>
+
+        <rect x="395" y="45" width="170" height="75" rx="8" class="svg-card-warn"/>
+        <text x="480" y="72" text-anchor="middle" font-family="JetBrains Mono" font-size="28" font-weight="900" fill="#0077b6">9.8</text>
+        <text x="480" y="92" text-anchor="middle" font-family="Inter" font-size="8.5" class="svg-body">CVSS Score lỗ hổng</text>
+        <text x="480" y="105" text-anchor="middle" font-family="Inter" font-size="8.5" class="svg-body">Hikvision [15]</text>
+
+        <rect x="580" y="45" width="155" height="75" rx="8" class="svg-card-warn"/>
+        <text x="657" y="72" text-anchor="middle" font-family="JetBrains Mono" font-size="28" font-weight="900" fill="#7c3aed">2050</text>
+        <text x="657" y="92" text-anchor="middle" font-family="Inter" font-size="8.5" class="svg-body">Đề án camera</text>
+        <text x="657" y="105" text-anchor="middle" font-family="Inter" font-size="8.5" class="svg-body">toàn quốc VN [13]</text>
+
+        <rect x="25" y="135" width="710" height="42" rx="8" class="svg-card"/>
+        <text x="380" y="155" text-anchor="middle" font-family="Inter" font-size="9" font-weight="600" fill="#dc3545">VN nằm trong TOP 5 quốc gia có nhiều camera Hikvision dính lỗ hổng nhất thế giới [15]</text>
+        <text x="380" y="170" text-anchor="middle" font-family="Inter" font-size="8" class="svg-muted">Hơn 100 triệu thiết bị Hikvision bị ảnh hưởng bởi lỗ hổng CVSS 9.8 — hơn 80.000 camera vẫn chưa được vá</text>
+    </svg>
+</div>
+
+
+<p>
+    Theo Bộ Thông tin và Truyền thông, hơn <strong>95% camera giám sát tại Việt Nam có xuất xứ từ nước ngoài, chủ yếu là Trung Quốc</strong> (Hikvision, Dahua). Các thiết bị này đều có giao thức kết nối ngầm về máy chủ nước ngoài — bản thân đó đã là nguy cơ bị cài mã độc và phần mềm gián điệp <a class="cite" href="#ref13">[13]</a>.
+</p>
+
+<p>
+    Đáng lo ngại hơn: khoảng <strong>90% hệ thống camera chưa từng được kiểm tra, đánh giá an toàn thông tin</strong> trước khi đưa vào sử dụng, cũng như chưa có đánh giá định kỳ hằng năm <a class="cite" href="#ref14">[14]</a>. Nói cách khác, chúng ta đang "mở toang cửa" mà chẳng biết ai đang nhìn vào.
+</p>
+
+<div class="info-box red">
+    <h4>Hệ thống giám sát có thể trở thành "tai mắt" của thế lực thù địch</h4>
+    <p>Sự kiện Tehran là minh chứng sống: hệ thống camera lẽ ra để bảo vệ an ninh quốc gia lại trở thành <strong>mạng lưới do thám hoạt động 24/7 không ngừng nghỉ</strong> cho đối phương. Tại Việt Nam, nguy cơ này không hề xa vời khi phần lớn camera đang đẩy dữ liệu về cloud và server đặt tại nước ngoài.</p>
+    <p>Mỗi camera giao thông, mỗi thiết bị giám sát kết nối internet đều là một "con mắt" có thể bị chiếm quyền. Khi hàng trăm nghìn camera trên toàn quốc liên tục truyền hình ảnh đường phố, nút giao, khu vực trọng yếu về server ngoài lãnh thổ — đó không chỉ là rủi ro an ninh mạng, mà là <strong>vi phạm nghiêm trọng chủ quyền dữ liệu quốc gia</strong>.</p>
+    <p>Hãy hình dung: nếu một thế lực thù địch chiếm quyền truy cập vào hệ thống này — giống như Israel đã làm với Tehran — họ sẽ có khả năng theo dõi di chuyển của lãnh đạo, lập bản đồ triển khai quân sự, giám sát mọi hoạt động tại các khu vực nhạy cảm, <strong>và tất cả diễn ra trong im lặng, liên tục, suốt ngày đêm</strong>. Iran đã mất Lãnh tụ Tối cao vì chính xác lý do này.</p>
+</div>
+
+<div class="vn-warning">
+    <h4>6 CẢNH BÁO CHO VIỆT NAM TỪ SỰ KIỆN TEHRAN</h4>
+    <p style="color: var(--text-secondary); font-size: 0.88rem;">
+        <strong>1. Bài học về phụ thuộc nhà cung cấp:</strong> Hikvision và Dahua đã bị Mỹ, Anh, và Australia hạn chế sử dụng trong cơ quan chính phủ do lo ngại an ninh. Camera của hai hãng này chiếm 33% tổng số sự cố bảo mật IoT doanh nghiệp dù chỉ chiếm 5% số lượng thiết bị <a class="cite" href="#ref15">[15]</a>. Việt Nam cần tự đặt câu hỏi: tại sao các nước khác hạn chế mà mình lại mở rộng?
+    </p>
+    <p style="color: var(--text-secondary); font-size: 0.88rem;">
+        <strong>2. Lỗ hổng đã biết nhưng chưa vá:</strong> Lỗ hổng Hikvision với điểm CVSS 9.8/10 (mức nguy hiểm nhất) được phát hiện từ 2021, ảnh hưởng hơn 100 triệu thiết bị. Nhưng theo The Register, vẫn còn ít nhất 80.000 camera chưa được patch. Việt Nam nằm trong top 5 quốc gia bị ảnh hưởng <a class="cite" href="#ref15">[15]</a>.
+    </p>
+    <p style="color: var(--text-secondary); font-size: 0.88rem;">
+        <strong>3. Mở rộng = nhân rủi ro:</strong> Đề án mở rộng camera toàn quốc đến 2050 sẽ tăng diện tích bề mặt tấn công (attack surface) theo cấp số nhân. Mỗi camera mới là thêm một entry point cho kẻ xâm nhập <a class="cite" href="#ref13">[13]</a>.
+    </p>
+    <p style="color: var(--text-secondary); font-size: 0.88rem;">
+        <strong>4. QCVN 135:2024 phải được thực thi nghiêm:</strong> Quy chuẩn kỹ thuật quốc gia về ATTT cho camera giám sát đã có — bây giờ cần thực thi, không phải chỉ ký ban hành rồi để đó <a class="cite" href="#ref14">[14]</a>.
+    </p>
+    <p style="color: var(--text-secondary); font-size: 0.88rem;">
+        <strong>5. Network segmentation bắt buộc:</strong> Mạng camera PHẢI được phân đoạn hoàn toàn khỏi các hệ thống quan trọng khác. Flat network chính là "tấm vé mời" cho thảm họa — Tehran vừa chứng minh điều đó.
+    </p>
+    <p style="color: var(--text-secondary); font-size: 0.88rem;">
+        <strong>6. Chủ quyền dữ liệu — không thể nhượng bộ:</strong> Dữ liệu video từ camera giám sát phải được lưu trữ và xử lý <strong>trên lãnh thổ Việt Nam</strong>, không được truyền về cloud hay server nước ngoài. Mỗi dòng dữ liệu rời khỏi biên giới là một mối đe dọa tiềm tàng. Cần yêu cầu bắt buộc <strong>data localization</strong> cho toàn bộ hệ thống camera giám sát — đặc biệt camera tại các khu vực cơ quan nhà nước, quân sự, và hạ tầng trọng yếu.
+    </p>
+</div>
+
+<div class="info-box green">
+    <h4>Khuyến cáo: Việt Nam cần làm chủ thiết kế camera và hạ tầng dữ liệu</h4>
+    <p>Sự kiện Tehran đặt ra một câu hỏi mang tính sống còn: <strong>có nên giao an ninh quốc gia vào tay thiết bị mà mình không kiểm soát được từ phần cứng đến firmware?</strong> Câu trả lời rõ ràng là không.</p>
+    <p><strong>Làm chủ thiết kế camera:</strong> Việt Nam cần đầu tư phát triển và sử dụng camera giám sát <strong>do doanh nghiệp Việt Nam làm chủ thiết kế</strong> — từ phần cứng, firmware, đến phần mềm quản lý. Khi tự thiết kế, chúng ta kiểm soát được toàn bộ chuỗi: không có backdoor ẩn, không có giao thức kết nối ngầm về server nước ngoài, không phụ thuộc vào nhà cung cấp nước ngoài để vá lỗ hổng. Các doanh nghiệp công nghệ Việt Nam hoàn toàn có đủ năng lực để làm điều này — vấn đề là chính sách và quyết tâm.</p>
+    <p><strong>Cloud trong nước — tuyệt đối:</strong> Toàn bộ dữ liệu video giám sát phải được lưu trữ và xử lý trên <strong>hạ tầng cloud trong nước</strong>, do doanh nghiệp Việt Nam vận hành, đặt tại trung tâm dữ liệu trên lãnh thổ Việt Nam. Không một frame hình ảnh nào từ camera giám sát an ninh được phép rời khỏi biên giới số quốc gia. Đây không phải khuyến nghị — đây phải là <strong>quy định bắt buộc</strong>.</p>
+    <p><strong>Bài học từ Tehran:</strong> Iran cũng từng nghĩ camera của mình an toàn. Họ cũng từng tin rằng mạng lưới giám sát phục vụ an ninh quốc gia. Kết quả? Toàn bộ hệ thống trở thành vũ khí trong tay đối phương, hoạt động âm thầm suốt nhiều năm mà không ai hay biết. Việt Nam có lợi thế mà Iran không có: chúng ta được cảnh báo trước. Câu hỏi là liệu chúng ta có hành động kịp thời hay không.</p>
+</div>
+
+<div class="info-box red">
+    <h4>Nguy cơ tấn công vật lý: Thẻ nhớ — "Điểm yếu chí mạng" ít ai nghĩ đến</h4>
+    <p>Bên cạnh tấn công qua mạng, còn một vector nguy hiểm mà hầu hết mọi người bỏ qua: <strong>tấn công vật lý vào phần cứng camera</strong>.</p>
+    <p>Rất nhiều camera AI hiện đại chạy firmware hoặc thậm chí cả hệ điều hành trên <strong>thẻ nhớ SD/microSD gắn bên trong</strong>. Đây là thiết kế phổ biến để dễ dàng cập nhật và lưu trữ video cục bộ — nhưng đồng thời cũng là <strong>điểm yếu chí mạng</strong>.</p>
+    <p><strong>Kịch bản tấn công:</strong> Kẻ tấn công chỉ cần trèo lên cột camera vào ban đêm — khi ít người qua lại và ánh sáng hạn chế — tháo vỏ hộp camera, rút thẻ nhớ gốc của nhà sản xuất và thay bằng <strong>thẻ nhớ đã cài sẵn firmware độc hại</strong>. Camera khởi động lại, load firmware từ thẻ nhớ mới, và từ đó trở thành thiết bị do thám hoàn hảo — truyền video về server kẻ tấn công, hoạt động như cửa hậu (backdoor) vào mạng nội bộ, hoặc thậm chí phát tán mã độc sang các thiết bị khác trong cùng mạng.</p>
+    <p><strong>Tại sao nguy cơ này rất thực tế tại Việt Nam:</strong></p>
+    <p>&#8226; Phần lớn camera ngoài trời được lắp trên cột đèn, cột tín hiệu giao thông — <strong>không có bảo vệ vật lý</strong> nào ngăn cản việc tháo lắp.</p>
+    <p>&#8226; Vỏ hộp camera thường chỉ dùng ốc vít thông thường, không có seal chống tháo hay cảm biến phát hiện mở nắp.</p>
+    <p>&#8226; Camera không có cơ chế <strong>Secure Boot</strong> — tức không xác minh tính toàn vẹn của firmware trước khi khởi chạy. Thẻ nhớ nào cắm vào cũng được chấp nhận.</p>
+    <p>&#8226; Không có hệ thống giám sát tập trung phát hiện khi một camera bị ngắt kết nối hoặc thay đổi firmware bất thường.</p>
+</div>
+
+<div class="info-box orange">
+    <h4>Khuyến cáo: Bảo vệ vật lý cho camera ngoài trời</h4>
+    <p><strong>1. Secure Boot bắt buộc:</strong> Mọi camera giám sát phải hỗ trợ <strong>Secure Boot</strong> — chỉ chấp nhận firmware được ký số (digitally signed) bởi nhà sản xuất. Nếu thẻ nhớ bị thay bằng firmware không có chữ ký hợp lệ, camera từ chối khởi động và gửi cảnh báo về trung tâm.</p>
+    <p><strong>2. Tamper detection — Cảnh báo khi bị tháo vỏ:</strong> Camera ngoài trời phải được trang bị <strong>cảm biến chống tháo</strong> (tamper switch). Khi vỏ hộp bị mở, camera lập tức gửi cảnh báo thời gian thực về hệ thống giám sát trung tâm — kèm ảnh chụp, vị trí GPS, và thời điểm chính xác. Đây là tính năng đã có trên nhiều dòng camera cao cấp nhưng hiếm khi được yêu cầu trong các đề án triển khai tại Việt Nam.</p>
+    <p><strong>3. Firmware integrity checking định kỳ:</strong> Hệ thống quản lý trung tâm cần tự động kiểm tra hash firmware của từng camera theo lịch — nếu hash thay đổi so với bản gốc mà không qua quy trình cập nhật chính thức, đó là dấu hiệu bị xâm nhập.</p>
+    <p><strong>4. Vỏ hộp chống tháo:</strong> Sử dụng ốc vít bảo mật chuyên dụng (security screws), seal niêm phong có mã QR xác minh, và thiết kế vỏ hộp chống phá hoại (vandal-proof) đạt chuẩn IK10. Việc tháo vỏ phải để lại dấu vết vật lý không thể xóa.</p>
+</div>
+
+<!-- ══════════ 11. BÀI HỌC ══════════ -->
+<h2 id="lessons"><span class="sec-num">11</span> Bài học An ninh mạng</h2>
+
+<p>Rút ra từ toàn bộ chiến dịch, đây là những bài học mà bất kỳ quốc gia hay tổ chức nào cũng cần ghi nhớ:</p>
+
+<figure class="figure">
+    <img src="images/06-cctv-camera.jpg" alt="Camera CCTV — Hikvision bị phát hiện chứa lỗ hổng CVSS 9.8, ảnh hưởng hơn 100 triệu thiết bị">
+    <figcaption>Camera CCTV (ảnh minh họa) — Hikvision bị phát hiện chứa lỗ hổng CVSS 9.8, ảnh hưởng hơn 100 triệu thiết bị toàn cầu. Nguồn: <a href="https://www.bleepingcomputer.com/news/security/over-80-000-exploitable-hikvision-cameras-exposed-online/" target="_blank">BleepingComputer</a>. Ảnh: Unsplash</figcaption>
+</figure>
+
+<h3>1. Hệ thống giám sát chính là "gót chân Achilles"</h3>
+<p>Iran xây mạng camera để kiểm soát dân — nhưng không bảo mật chính nó. Bất kỳ hệ thống IoT/SCADA nào kết nối mạng mà thiếu bảo mật đều là con dao hai lưỡi. Càng nhiều camera, càng rộng bề mặt tấn công.</p>
+
+<h3>2. Supply chain là vector nguy hiểm nhất</h3>
+<p>Khi phụ thuộc vào thiết bị nước ngoài — dù vì bị cấm vận hay vì giá rẻ — bạn đang đặt cược an ninh quốc gia vào lòng tốt của nhà cung cấp. <strong>Phần cứng không kiểm soát được nguồn gốc = bom hẹn giờ.</strong></p>
+
+<h3>3. AI thay đổi "luật chơi" tình báo</h3>
+<p>Khi AI xử lý được petabyte dữ liệu và xuất 100 mục tiêu/ngày <a class="cite" href="#ref9">[9]</a>, tốc độ ra quyết định của bên tấn công vượt xa khả năng phản ứng của bên phòng thủ. Đây là cuộc chạy đua mà bên nào không có AI sẽ thua.</p>
+
+<h3>4. Network segmentation: không bàn cãi</h3>
+<p>Nếu mạng camera Tehran được tách biệt hoàn toàn khỏi hạ tầng nhạy cảm, thiệt hại đã khác. Flat network = một điểm thâm nhập = toàn bộ mạng sụp đổ.</p>
+
+<h3>5. Giám sát liên tục, không phải kiểm tra định kỳ</h3>
+<p>Israel duy trì quyền truy cập nhiều năm mà Iran không hay. Quét lỗ hổng mỗi quý là không đủ — cần continuous monitoring, behavioral analytics, và firmware integrity checking.</p>
+
+<div class="info-box">
+    <h4>Lời kết</h4>
+    <p>Chiến dịch Roaring Lion / Epic Fury đánh dấu kỷ nguyên mới: <strong>cyber không còn chỉ là vũ khí, mà là nền tảng tình báo cho toàn bộ chiến dịch quân sự quy ước</strong>. Sự kết hợp SIGINT + HUMINT + AI + vũ khí động học là khuôn mẫu cho mọi cuộc xung đột tương lai — và là lời cảnh tỉnh nghiêm khắc cho bất kỳ quốc gia nào còn xem nhẹ an ninh mạng hạ tầng trọng yếu. <strong>Bao gồm cả Việt Nam.</strong></p>
+</div>
+
+<!-- ══════════ TÀI LIỆU THAM KHẢO (IEEE) ══════════ -->
+<section class="references" id="references">
+    <h3>Tài liệu tham khảo</h3>
+    <ol>
+        <li id="ref1">Al Jazeera, "US, Israel attack Iran updates: Khamenei, top security officials killed," <em>Al Jazeera</em>, 28/02/2026. [Online]. Available: <a href="https://www.aljazeera.com/news/liveblog/2026/2/28/live-israel-launches-attacks-on-iran-multiple-explosions-heard-in-tehran" target="_blank">https://www.aljazeera.com/news/liveblog/2026/2/28/</a></li>
+        <li id="ref2">CNN, "How the plot to kill Iran's Ayatollah Ali Khamenei came together using hacked traffic cameras in Tehran and US intelligence," <em>CNN</em>, 03/03/2026. [Online]. Available: <a href="https://www.cnn.com/2026/03/03/middleeast/us-israel-plot-kill-iran-khamenei-latam-intl" target="_blank">https://www.cnn.com/2026/03/03/middleeast/</a></li>
+        <li id="ref3">NPR, "Iran's supreme leader, Ayatollah Ali Khamenei, has been killed," <em>NPR</em>, 28/02/2026. [Online]. Available: <a href="https://www.npr.org/2026/02/28/nx-s1-5730158/israel-iran-strikes-trump-us" target="_blank">https://www.npr.org/2026/02/28/</a></li>
+        <li id="ref4">NBC News, "Iran Supreme Leader Ali Khamenei is dead after U.S., Israel attack," <em>NBC News</em>, 28/02/2026. [Online]. Available: <a href="https://www.nbcnews.com/world/iran/live-blog/israel-iran-live-updates-rcna261099" target="_blank">https://www.nbcnews.com/world/iran/</a></li>
+        <li id="ref5">PBS/AP, "Iran built a vast camera network to control dissent. Israel used it to track targets," <em>PBS News</em>, 2026. [Online]. Available: <a href="https://www.pbs.org/newshour/amp/world/iran-built-a-vast-camera-network-to-control-dissent-israel-used-it-to-track-targets-ap-sources-say" target="_blank">https://www.pbs.org/newshour/</a></li>
+        <li id="ref6">Financial Times / J. Post, "Israel hacked Tehran's traffic cameras, used AI to plan Khamenei's assassination," <em>Jerusalem Post</em>, 2026. [Online]. Available: <a href="https://www.jpost.com/middle-east/iran-news/article-888598" target="_blank">https://www.jpost.com/middle-east/iran-news/</a></li>
+        <li id="ref7">Binding Hook, "Predatory Sparrow: cyber sabotage with a conscience?," <em>Binding Hook</em>. [Online]. Available: <a href="https://bindinghook.com/predatory-sparrow-cyber-sabotage-with-a-conscience/" target="_blank">https://bindinghook.com/predatory-sparrow/</a></li>
+        <li id="ref8">Times of Israel, "Report: Israel hacked Tehran traffic cameras to track Khamenei ahead of assassination," <em>Times of Israel</em>, 2026. [Online]. Available: <a href="https://www.timesofisrael.com/report-israel-hacked-tehran-traffic-cameras-to-track-khamenei-ahead-of-assassination/" target="_blank">https://www.timesofisrael.com/report/</a></li>
+        <li id="ref9">Bloomsbury Intelligence and Security Institute, "Iran conflict as a testing ground for AI warfare systems," <em>BISI</em>, 03/2026. [Online]. Available: <a href="https://bisi.org.uk/reports/iran-conflict-as-a-testing-ground-for-ai-warfare-systems" target="_blank">https://bisi.org.uk/reports/</a></li>
+        <li id="ref10">Hvylya, "'We Knew Tehran Like Jerusalem': How Unit 8200 Built a Real-Time Map of Iran's Capital," <em>Hvylya</em>, 2026. [Online]. Available: <a href="https://en.hvylya.net/news/875-we-knew-tehran-like-jerusalem-how-unit-8200-built-a-real-time-map-of-iran-s-capital" target="_blank">https://en.hvylya.net/news/875/</a></li>
+        <li id="ref11">Palo Alto Networks Unit 42, "Threat Brief: March 2026 Escalation of Cyber Risk Related to Iran," <em>Unit 42</em>, 03/2026. [Online]. Available: <a href="https://unit42.paloaltonetworks.com/iranian-cyberattacks-2026/" target="_blank">https://unit42.paloaltonetworks.com/</a></li>
+        <li id="ref12">ZENDATA Cybersecurity, "Cyber Warfare in the US-Israel vs Iran Conflict (Roaring Lion & Epic Fury)," <em>ZENDATA</em>, 02/03/2026. [Online]. Available: <a href="https://zendata.security/2026/03/02/cyber-warfare-in-the-us-israel-vs-iran-conflict-roaring-lion-epic-fury/" target="_blank">https://zendata.security/2026/03/02/</a></li>
+        <li id="ref13">VietnamNet, "Giảm thiểu thiết bị camera giám sát tiềm ẩn nguy cơ mất an toàn dữ liệu," <em>VietnamNet</em>, 2025. [Online]. Available: <a href="https://vietnamnet.vn/giam-thieu-thiet-bi-camera-giam-sat-tiem-an-nguy-co-mat-an-toan-du-lieu-2481441.html" target="_blank">https://vietnamnet.vn/giam-thieu-thiet-bi-camera/</a></li>
+        <li id="ref14">VietnamNet, "Xây dựng quy chuẩn về an ninh hệ thống camera giám sát trong cơ quan nhà nước," <em>VietnamNet</em>, 2025. [Online]. Available: <a href="https://vietnamnet.vn/xay-dung-quy-chuan-ve-an-ninh-he-thong-camera-giam-sat-trong-co-quan-nha-nuoc-2483669.html" target="_blank">https://vietnamnet.vn/xay-dung-quy-chuan/</a></li>
+        <li id="ref15">IPVM, "Hikvision Has 'Highest Level of Critical Vulnerability,' Impacting 100+ Million Devices," <em>IPVM</em>. [Online]. Available: <a href="https://ipvm.com/reports/hikvision-36260" target="_blank">https://ipvm.com/reports/hikvision-36260</a></li>
+        <li id="ref16">Iran International, "Tehran city official confirms traffic-camera images were sent abroad," <em>Iran International</em>, 11/2025. [Online]. Available: <a href="https://www.iranintl.com/en/202511178627" target="_blank">https://www.iranintl.com/en/202511178627</a></li>
+        <li id="ref17">TechCrunch, "Hacked traffic cams and hijacked TVs: How cyber operations supported the war against Iran," <em>TechCrunch</em>, 03/03/2026. [Online]. Available: <a href="https://techcrunch.com/2026/03/03/hacked-traffic-cams-and-hijacked-tvs-how-cyber-operations-supported-the-war-against-iran/" target="_blank">https://techcrunch.com/2026/03/03/</a></li>
+        <li id="ref18">National Security News, "The targeting chain: how the IRGC exploits MTN-Irancell's Gulf telecom connections," <em>National Security News</em>, 03/2026. [Online]. Available: <a href="https://nationalsecuritynews.com/2026/03/the-targeting-chain-how-the-irgc-exploits-mtn-irancells-gulf-telecom-connections-to-guide-its-missiles/" target="_blank">https://nationalsecuritynews.com/2026/03/</a></li>
+        <li id="ref19">+972 Magazine, "'Lavender': The AI machine directing Israel's bombing spree in Gaza," <em>+972 Magazine</em>, 04/2024. [Online]. Available: <a href="https://www.972mag.com/lavender-ai-israeli-army-gaza/" target="_blank">https://www.972mag.com/lavender-ai-israeli-army-gaza/</a></li>
+        <li id="ref20">The Hacker News, "Critical Dahua Camera Flaws Enable Remote Hijack via ONVIF and File Upload Exploits," <em>The Hacker News</em>, 07/2025. [Online]. Available: <a href="https://thehackernews.com/2025/07/critical-dahua-camera-flaws-enable.html" target="_blank">https://thehackernews.com/2025/07/</a></li>
+        <li id="ref21">Cybernews, "Israel hacked Iran's traffic cameras to pinpoint Khamenei," <em>Cybernews</em>, 03/2026. [Online]. Available: <a href="https://cybernews.com/editorial/israel-hacked-iran-traffic-cameras-us-war/" target="_blank">https://cybernews.com/editorial/</a></li>
+        <li id="ref22">Ynet News, "'We knew Tehran like Jerusalem': inside the operation that eliminated Khamenei," <em>Ynet</em>, 03/2026. [Online]. Available: <a href="https://www.ynetnews.com/article/hjayhkqk11e" target="_blank">https://www.ynetnews.com/article/hjayhkqk11e</a></li>
+        <li id="ref23">Army Recognition, "Israel May Have Employed Blue Sparrow Air-Launched Missiles in Early Waves of Iran Strike Campaign," <em>Army Recognition</em>, 03/2026. [Online]. Available: <a href="https://www.armyrecognition.com/news/aerospace-news/2026/israel-may-have-employed-blue-sparrow-air-launched-missiles-in-early-waves-of-iran-strike-campaign" target="_blank">https://www.armyrecognition.com/news/</a></li>
+    </ol>
+</section>
+
+</article>
+
+<footer class="footer">
+    <p><strong>Tác giả: TS. Đặng Minh Tuấn, CMC ATI & CMC University</strong></p>
+    <p>Bài phân tích được viết với mục đích giáo dục và nghiên cứu an ninh mạng. Toàn bộ thông tin dựa trên nguồn công khai (OSINT).</p>
+    <p style="margin-top: 0.3rem;">&copy; 2026 — Cyber War Analysis</p>
+</footer>
+
+</main>
+
+<script>
+function toggleTheme() {
+    const h = document.documentElement;
+    h.setAttribute('data-theme', h.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    localStorage.setItem('theme', h.getAttribute('data-theme'));
+}
+(function(){ const s = localStorage.getItem('theme'); if(s) document.documentElement.setAttribute('data-theme', s); })();
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e){
+        if(this.classList.contains('cite')) return;
+        e.preventDefault();
+        const t = document.querySelector(this.getAttribute('href'));
+        if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+});
+
+const secs = document.querySelectorAll('h2[id]');
+const tocs = document.querySelectorAll('.sidebar-toc a');
+window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if(window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    tocs.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + cur); });
+});
+</script>
+
+</body>
+</html>
