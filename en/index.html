@@ -939,7 +939,7 @@
 <div class="timeline">
     <div class="timeline-item">
         <div class="time">~2020–2023 — Silent Infiltration Phase</div>
-        <div class="desc">Unit 8200 — Israel's most elite signals intelligence unit — began penetrating Tehran's traffic camera network. Video data was encrypted and transmitted directly to servers in Tel Aviv and southern Israel. In parallel, Iran's mobile phone network was also deeply compromised <a class="cite" href="#ref6">[6]</a>.</div>
+        <div class="desc">Unit 8200 — Israel's most elite intelligence unit — began penetrating Tehran's traffic camera network. Video data was encrypted and transmitted directly to servers in Tel Aviv and southern Israel. In parallel, Iran's mobile phone network was also deeply compromised <a class="cite" href="#ref6">[6]</a>.</div>
     </div>
     <div class="timeline-item">
         <div class="time">2021–2023 — Predatory Sparrow "Stress Tests" Infrastructure</div>
@@ -1099,7 +1099,7 @@
 <h3>Specific CVE Vulnerabilities in Hikvision/Dahua Cameras</h3>
 
 <p>
-    Although no official report names exactly which CVEs were used in the Tehran campaign, we can narrow down the likely candidates with considerable accuracy based on publicly disclosed vulnerabilities in the camera models prevalent in Iran — primarily Hikvision and Dahua, both Chinese-made <a class="cite" href="#ref17">[17]</a>:
+    Although no official report names exactly which CVEs were used in the Tehran campaign, we can narrow down the likely candidates with considerable accuracy based on publicly disclosed vulnerabilities in the camera models prevalent in Iran — primarily Hikvision and Dahua, both originating from China <a class="cite" href="#ref17">[17]</a>:
 </p>
 
 <h4 style="margin-top:1.2rem; color: var(--accent-red);">Hikvision — Most Critical CVEs</h4>
@@ -1122,7 +1122,7 @@
         <tr>
             <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-34067" target="_blank">CVE-2025-34067</a></td>
             <td><strong style="color:var(--accent-red)">10.0</strong></td>
-            <td>RCE</td>
+            <td>RCE (Remote Code Execution)</td>
             <td>RCE on Hikvision iSecure Center (centralized camera management platform, Chinese market) via endpoint <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">/bic/ssoService/v1/applyCT</code>. Fastjson deserialization → loads arbitrary Java class via LDAP URL. PoC exploit publicly available. Shadowserver detected exploitation since 02/2025. <em>Note: HikCentral (international version) is not affected according to Hikvision.</em></td>
         </tr>
         <tr>
@@ -1306,7 +1306,7 @@
     <p><strong>Fake eNodeB (SDR-based):</strong> Using Software Defined Radio (SDR) equipment to create a fake 4G cell tower. Phones in the area automatically connect to the fake tower (stronger signal) → attacker gains full control — blocking calls, SMS, keeping phones perpetually "busy."</p>
     <p><strong>SS7 call redirection:</strong> Instead of physically jamming signals, SS7 commands redirect calls to the security detail's numbers to voicemail or non-existent numbers — callers hear "busy" without suspecting anything.</p>
     <p><strong>Selective jamming:</strong> Targeted signal jamming — only creating interference within a narrow radius around the compound, without affecting the entire city (to avoid early detection).</p>
-    <p><strong>Tactical significance:</strong> 12 tampered antennas = the security detail was "blind and deaf" at the decisive moment. When someone spotted the missiles and tried to call a warning → <em>busy signal</em> → Khamenei was not evacuated in time.</p>
+    <p><strong>Tactical significance:</strong> 12 tampered antennas = the security detail was "blind and deaf" at the decisive moment. When someone spotted the missiles and tried to call a warning → <em>busy signal</em> → Khamenei was not evacuated in time to safety.</p>
 </div>
 
 <h3>Supporting Cyber Warfare — TV Hijacking</h3>
@@ -1450,7 +1450,7 @@
 </figure>
 
 <p>
-    If the camera hack concerns you, this part should <em>terrify</em> you. Israel did not stop at collecting data. They built an entire AI ecosystem to automate the full pipeline: from raw data to kill coordinates.
+    If the camera hack concerns you, this part should deeply <em>concern</em> you. Israel did not stop at collecting data. They built an entire AI ecosystem to automate the full pipeline: from raw data to kill coordinates.
 </p>
 
 <div class="quote-block">
@@ -1743,7 +1743,7 @@
 <h2 id="vietnam"><span class="sec-num">10</span> Warning for Vietnam: Tehran Is Not Far Away</h2>
 
 <p>
-    At this point you might be thinking: "That is Iran's problem — what does it have to do with us?" The short answer: <strong>everything</strong>. And the reason is literally hanging above our heads.
+    At this point you might be thinking: "That is Iran's problem — what does it have to do with us?" The short answer: <strong>everything</strong>. And the reason is quite literally hanging above our heads.
 </p>
 
 <figure class="figure">
@@ -1784,7 +1784,7 @@
 
 
 <p>
-    According to Vietnam's Ministry of Information and Communications, over <strong>95% of surveillance cameras in Vietnam originate from abroad, primarily China</strong> (Hikvision, Dahua). These devices all have protocols that silently connect back to foreign servers — which itself constitutes a risk of malware and spyware implantation <a class="cite" href="#ref13">[13]</a>.
+    According to Vietnam's Ministry of Information and Communications (now the Ministry of Science and Technology), over <strong>95% of surveillance cameras in Vietnam originate from abroad, primarily Hikvision and Dahua</strong>. These devices all have protocols that silently connect back to foreign servers — which itself constitutes a risk of malware and spyware implantation <a class="cite" href="#ref13">[13]</a>.
 </p>
 
 <p>
