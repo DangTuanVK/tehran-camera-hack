@@ -134,6 +134,15 @@
         [data-theme="dark"] .theme-toggle::after {
             transform: translateX(20px); background: var(--accent-cyan);
         }
+        .view-counter {
+            display: flex; align-items: center; gap: 5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--text-muted);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 4px 10px; border-radius: 6px;
+        }
+        .view-counter svg { opacity: 0.6; }
         .theme-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; }
         .btn-print {
             display: flex; align-items: center; gap: 5px;
@@ -499,7 +508,7 @@
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
 
         @media print {
-            .topbar, .sidebar, .theme-toggle, .theme-label, .btn-print { display: none !important; }
+            .topbar, .sidebar, .theme-toggle, .theme-label, .btn-print, .view-counter { display: none !important; }
             .main { margin-left: 0 !important; margin-top: 0 !important; }
             .hero { background: #1a1a2e !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .content { max-width: 100%; padding: 1.5rem; }
@@ -531,6 +540,7 @@
             .topbar-brand svg { width: 22px; height: 22px; }
             .btn-print span { display: none; }
             .btn-print { padding: 4px 8px; }
+            .view-counter { font-size: 0.68rem; padding: 3px 7px; }
             .theme-label { display: none; }
             .theme-toggle { width: 36px; height: 20px; }
             .theme-toggle::after { width: 14px; height: 14px; }
@@ -626,6 +636,10 @@
         </ul>
     </nav>
     <div class="topbar-right">
+        <div class="view-counter" title="Lượt xem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span id="view-count">...</span>
+        </div>
         <button class="btn-print" onclick="window.print()" title="In / Lưu PDF">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
             <span>In / PDF</span>
@@ -1779,6 +1793,22 @@
 </main>
 
 <script>
+// View counter using counterapi.dev
+(function() {
+    const ns = 'dangtuanvk-tehran-camera-hack';
+    const key = 'views';
+    fetch('https://api.counterapi.dev/v1/' + ns + '/' + key + '/up')
+        .then(r => r.json())
+        .then(data => {
+            const el = document.getElementById('view-count');
+            if (el && data.count) el.textContent = data.count.toLocaleString('vi-VN');
+        })
+        .catch(() => {
+            const el = document.getElementById('view-count');
+            if (el) el.textContent = '—';
+        });
+})();
+
 function toggleTheme() {
     const h = document.documentElement;
     h.setAttribute('data-theme', h.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
