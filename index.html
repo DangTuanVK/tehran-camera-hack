@@ -134,6 +134,54 @@
         [data-theme="dark"] .theme-toggle::after {
             transform: translateX(20px); background: var(--accent-cyan);
         }
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none; background: none; border: none;
+            color: var(--text-secondary); cursor: pointer;
+            padding: 4px; border-radius: 4px;
+        }
+        .mobile-menu-btn:hover { color: var(--accent-cyan); }
+        .mobile-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.4); z-index: 1100;
+        }
+        .mobile-overlay.open { display: block; }
+        .mobile-drawer {
+            position: fixed; top: 0; left: -280px;
+            width: 280px; height: 100vh;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            z-index: 1200; overflow-y: auto;
+            transition: left 0.3s cubic-bezier(.4,0,.2,1);
+            padding: 0 0 2rem;
+        }
+        .mobile-drawer.open { left: 0; }
+        .mobile-drawer-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 1.2rem; border-bottom: 1px solid var(--border-color);
+            font-weight: 700; font-size: 0.95rem; color: var(--text-primary);
+        }
+        .mobile-close-btn {
+            background: none; border: none;
+            color: var(--text-muted); cursor: pointer; padding: 4px;
+        }
+        .mobile-close-btn:hover { color: var(--accent-red); }
+        .mobile-drawer a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 0.7rem 1.2rem; text-decoration: none;
+            color: var(--text-secondary); font-size: 0.88rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.15s;
+        }
+        .mobile-drawer a:hover, .mobile-drawer a:active {
+            color: var(--accent-cyan); background: rgba(0,119,182,0.06);
+        }
+        [data-theme="dark"] .mobile-drawer a:hover { background: rgba(0,212,255,0.06); }
+        .mobile-drawer a .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--accent-cyan); min-width: 22px;
+        }
         .view-counter {
             display: flex; align-items: center; gap: 5px;
             font-family: 'JetBrains Mono', monospace;
@@ -508,7 +556,7 @@
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
 
         @media print {
-            .topbar, .sidebar, .theme-toggle, .theme-label, .btn-print, .view-counter { display: none !important; }
+            .topbar, .sidebar, .theme-toggle, .theme-label, .btn-print, .view-counter, .mobile-menu-btn, .mobile-drawer, .mobile-overlay { display: none !important; }
             .main { margin-left: 0 !important; margin-top: 0 !important; }
             .hero { background: #1a1a2e !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .content { max-width: 100%; padding: 1.5rem; }
@@ -541,6 +589,7 @@
             .btn-print span { display: none; }
             .btn-print { padding: 4px 8px; }
             .view-counter { font-size: 0.68rem; padding: 3px 7px; }
+            .mobile-menu-btn { display: block; }
             .theme-label { display: none; }
             .theme-toggle { width: 36px; height: 20px; }
             .theme-toggle::after { width: 14px; height: 14px; }
@@ -615,6 +664,9 @@
 
 <!-- TOPBAR -->
 <header class="topbar">
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" title="Mục lục">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="topbar-brand">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
             <rect width="28" height="28" rx="6" fill="url(#tbg)"/>
@@ -648,6 +700,30 @@
         <div class="theme-toggle" onclick="toggleTheme()" title="Chuyển đổi giao diện sáng/tối"></div>
     </div>
 </header>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<nav class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+        <span>Mục lục</span>
+        <button class="mobile-close-btn" onclick="toggleMobileMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <a href="#overview" onclick="toggleMobileMenu()"><span class="num">01</span> Mở đầu — 28/02/2026</a>
+    <a href="#background" onclick="toggleMobileMenu()"><span class="num">02</span> Bối cảnh chiến dịch</a>
+    <a href="#timeline" onclick="toggleMobileMenu()"><span class="num">03</span> Timeline sự kiện</a>
+    <a href="#cyber" onclick="toggleMobileMenu()"><span class="num">04</span> Hack Camera Tehran</a>
+    <a href="#ai-targeting" onclick="toggleMobileMenu()"><span class="num">05</span> AI & Máy Sản Xuất Mục Tiêu</a>
+    <a href="#killchain" onclick="toggleMobileMenu()"><span class="num">06</span> Kill Chain Analysis</a>
+    <a href="#mitre" onclick="toggleMobileMenu()"><span class="num">07</span> MITRE ATT&CK</a>
+    <a href="#unit8200" onclick="toggleMobileMenu()"><span class="num">08</span> Unit 8200 & Mossad</a>
+    <a href="#comparison" onclick="toggleMobileMenu()"><span class="num">09</span> So sánh với Stuxnet</a>
+    <a href="#iran-response" onclick="toggleMobileMenu()"><span class="num">10</span> Phản ứng của Iran</a>
+    <a href="#vietnam" onclick="toggleMobileMenu()"><span class="num">11</span> Cảnh báo cho Việt Nam</a>
+    <a href="#lessons" onclick="toggleMobileMenu()"><span class="num">12</span> Bài học ANTT</a>
+    <a href="#references" onclick="toggleMobileMenu()"><span class="num">13</span> Tài liệu tham khảo</a>
+</nav>
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
@@ -1793,6 +1869,13 @@
 </main>
 
 <script>
+// Mobile menu toggle
+function toggleMobileMenu() {
+    document.getElementById('mobileDrawer').classList.toggle('open');
+    document.getElementById('mobileOverlay').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('mobileDrawer').classList.contains('open') ? 'hidden' : '';
+}
+
 // View counter using counterapi.dev
 (function() {
     const ns = 'dangtuanvk-tehran-camera-hack';
