@@ -939,7 +939,7 @@
 <div class="timeline">
     <div class="timeline-item">
         <div class="time">~2020–2023 -Giai đoạn xâm nhập âm thầm</div>
-        <div class="desc">Unit 8200 -đơn vị tình báo tín hiệu tinh nhuệ nhất của Israel -bắt đầu thâm nhập hệ thống camera giao thông Tehran. Dữ liệu video được mã hóa rồi truyền thẳng về server ở Tel Aviv và miền nam Israel. Song song, mạng điện thoại di động Iran cũng bị "cắm rễ" sâu <a class="cite" href="#ref6">[6]</a>.</div>
+        <div class="desc">Unit 8200 -đơn vị tình báo tinh nhuệ nhất của Israel -bắt đầu thâm nhập hệ thống camera giao thông Tehran. Dữ liệu video được mã hóa rồi truyền thẳng về server ở Tel Aviv và miền nam Israel. Song song, mạng điện thoại di động Iran cũng bị "cắm rễ" sâu <a class="cite" href="#ref6">[6]</a>.</div>
     </div>
     <div class="timeline-item">
         <div class="time">2021–2023 -Predatory Sparrow "nắn gân" hạ tầng</div>
@@ -964,7 +964,7 @@
     </div>
     <div class="timeline-item">
         <div class="time">2024–2025 -"Cỗ máy AI" vào guồng</div>
-        <div class="desc">Hệ thống AI Gospel (xác định mục tiêu hạ tầng) và Lavender (xác định mục tiêu cá nhân) được tinh chỉnh cho chiến trường Iran. Đến đầu 2026, hệ thống đã có khả năng xuất <strong>100 mục tiêu mỗi ngày</strong> -một con số mà hàng nghìn nhà phân tích cũng không thể đạt được bằng tay <a class="cite" href="#ref9">[9]</a>.</div>
+        <div class="desc">Hệ thống AI Gospel (xác định mục tiêu hạ tầng) và Lavender (xác định mục tiêu cá nhân) được tinh chỉnh cho chiến trường Iran. Đến đầu năm 2026, hệ thống đã có khả năng xuất <strong>100 mục tiêu mỗi ngày</strong> -một con số mà hàng nghìn nhà phân tích cũng không thể đạt được bằng tay <a class="cite" href="#ref9">[9]</a>.</div>
     </div>
     <div class="timeline-item critical">
         <div class="time">Cuối tháng 2/2026 -Mảnh ghép cuối cùng</div>
@@ -1086,7 +1086,7 @@
 <h3>Kênh C2 (Command and Control -máy chủ chỉ huy và điều khiển) và cách dữ liệu "chảy" về Israel</h3>
 
 <p>
-    Theo Financial Times, video từ <strong>gần như toàn bộ camera giao thông Tehran</strong> đã được mã hóa và truyền đều đặn về server tại Tel Aviv trong nhiều năm liền <a class="cite" href="#ref6">[6]</a>. Nghĩ mà xem -hàng nghìn camera truyền video liên tục xuyên biên giới mà Iran không hề phát hiện. Điều này nói lên rất nhiều về trình độ của bên tấn công:
+    Theo Financial Times, video từ <strong>gần như toàn bộ camera giao thông Tehran</strong> đã được mã hóa và truyền đều đặn về server tại Tel Aviv trong nhiều năm liền <a class="cite" href="#ref6">[6]</a>. Thử nghĩ mà xem -hàng nghìn camera truyền video liên tục xuyên biên giới mà Iran không hề phát hiện. Điều này nói lên rất nhiều về trình độ của bên tấn công:
 </p>
 
 <div class="info-box green">
@@ -1099,7 +1099,7 @@
 <h3>Các lỗ hổng CVE (Common Vulnerabilities and Exposures - danh mục lỗ hổng bảo mật đã được công bố) cụ thể trên camera Hikvision/Dahua</h3>
 
 <p>
-    Dù chưa có báo cáo chính thức nêu đích danh CVE nào được dùng trong chiến dịch Tehran, chúng ta có thể khoanh vùng khá chính xác dựa trên những gì đã được công bố về dòng camera phổ biến tại Iran -chủ yếu Hikvision và Dahua, đều từ Trung Quốc <a class="cite" href="#ref17">[17]</a>:
+    Dù chưa có báo cáo chính thức nêu đích danh CVE nào được dùng trong chiến dịch Tehran, chúng ta có thể khoanh vùng khá chính xác dựa trên những gì đã được công bố về dòng camera phổ biến tại Iran -chủ yếu là Hikvision và Dahua, đều có xuất xứ từ Trung Quốc <a class="cite" href="#ref17">[17]</a>:
 </p>
 
 <h4 style="margin-top:1.2rem; color: var(--accent-red);">Hikvision -Các CVE nghiêm trọng nhất</h4>
@@ -1122,7 +1122,7 @@
         <tr>
             <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-34067" target="_blank">CVE-2025-34067</a></td>
             <td><strong style="color:var(--accent-red)">10.0</strong></td>
-            <td>RCE</td>
+            <td>RCE (Remote Code Execution - thực thi mã từ xa)</td>
             <td>RCE trên Hikvision iSecure Center (nền tảng quản lý camera tập trung, thị trường Trung Quốc) qua endpoint <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">/bic/ssoService/v1/applyCT</code>. Fastjson deserialization → load Java class tùy ý qua LDAP URL. PoC exploit công khai. Shadowserver phát hiện khai thác từ 02/2025. <em>Lưu ý: HikCentral (phiên bản quốc tế) không bị ảnh hưởng theo Hikvision.</em></td>
         </tr>
         <tr>
@@ -1306,7 +1306,7 @@
     <p><strong>Fake eNodeB (SDR-based):</strong> Sử dụng thiết bị Software Defined Radio (SDR) tạo trạm phát sóng 4G giả. Điện thoại trong khu vực tự động kết nối vào trạm giả (vì tín hiệu mạnh hơn) → kẻ tấn công kiểm soát hoàn toàn -chặn cuộc gọi, SMS, khiến máy luôn "bận".</p>
     <p><strong>SS7 call redirection:</strong> Thay vì phá sóng vật lý, gửi lệnh SS7 chuyển hướng cuộc gọi đến số vệ sĩ sang voicemail hoặc số không tồn tại -người gọi nghe thấy "máy bận" mà không nghi ngờ.</p>
     <p><strong>Selective jamming:</strong> Phá sóng có chọn lọc -chỉ gây nhiễu trong bán kính hẹp quanh khu phức hợp, không ảnh hưởng toàn thành phố (để tránh bị phát hiện sớm).</p>
-    <p><strong>Ý nghĩa chiến thuật:</strong> 12 ăng-ten bị can thiệp = đội vệ sĩ bị "mù và điếc" đúng thời điểm quyết định. Khi ai đó phát hiện tên lửa và cố gọi cảnh báo → <em>máy bận</em> → Khamenei không được sơ tán kịp.</p>
+    <p><strong>Ý nghĩa chiến thuật:</strong> 12 ăng-ten bị can thiệp = đội vệ sĩ bị "mù và điếc" đúng thời điểm quyết định. Khi ai đó phát hiện tên lửa và cố gọi cảnh báo → <em>máy bận</em> → Khamenei không được sơ tán kịp thời.</p>
 </div>
 
 <h3>Chiến tranh mạng bổ trợ -TV hijacking</h3>
@@ -1450,7 +1450,7 @@
 </figure>
 
 <p>
-    Nếu phần hack camera khiến bạn lo ngại, thì phần này sẽ khiến bạn <em>sợ</em>. Israel không dừng ở việc thu thập dữ liệu. Họ xây dựng hẳn một hệ sinh thái AI để tự động hóa toàn bộ quy trình: từ dữ liệu thô đến tọa độ tiêu diệt.
+    Nếu phần hack camera khiến bạn lo ngại, thì phần này sẽ khiến bạn <em>lo sợ</em>. Israel không dừng ở việc thu thập dữ liệu. Họ xây dựng hẳn một hệ sinh thái AI để tự động hóa toàn bộ quy trình: từ dữ liệu thô đến tọa độ tiêu diệt.
 </p>
 
 <div class="quote-block">
@@ -1743,7 +1743,7 @@
 <h2 id="vietnam"><span class="sec-num">10</span> Cảnh báo cho Việt Nam: Tehran không xa đâu</h2>
 
 <p>
-    Đến đây, nhiều bạn đọc có thể nghĩ: "Chuyện Iran, liên quan gì đến mình?" Câu trả lời thẳng thắn là: <strong>liên quan rất nhiều</strong>. Và lý do nằm ngay trên đầu chúng ta -theo nghĩa đen.
+    Đến đây, nhiều bạn đọc có thể nghĩ: "Chuyện Iran, liên quan gì đến mình?" Câu trả lời thẳng thắn là: <strong>liên quan rất nhiều</strong>. Và lý do nằm ngay trên đầu chúng ta -theo đúng nghĩa đen.
 </p>
 
 <figure class="figure">
@@ -1784,7 +1784,7 @@
 
 
 <p>
-    Theo Bộ Thông tin và Truyền thông, hơn <strong>95% camera giám sát tại Việt Nam có xuất xứ từ nước ngoài, chủ yếu là Trung Quốc</strong> (Hikvision, Dahua). Các thiết bị này đều có giao thức kết nối ngầm về máy chủ nước ngoài -bản thân đó đã là nguy cơ bị cài mã độc và phần mềm gián điệp <a class="cite" href="#ref13">[13]</a>.
+    Theo Bộ Thông tin và Truyền thông (nay là Bộ Khoa học và Công nghệ), hơn <strong>95% camera giám sát tại Việt Nam có xuất xứ từ nước ngoài, chủ yếu là Trung Quốc</strong> (Hikvision, Dahua). Các thiết bị này đều có giao thức kết nối ngầm về máy chủ nước ngoài -bản thân đó đã là nguy cơ bị cài mã độc và phần mềm gián điệp <a class="cite" href="#ref13">[13]</a>.
 </p>
 
 <p>
