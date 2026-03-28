@@ -1058,28 +1058,28 @@
     <thead><tr><th>CVE</th><th>CVSS</th><th>Loại</th><th>Chi tiết kỹ thuật</th></tr></thead>
     <tbody>
         <tr>
-            <td class="tid">CVE-2021-36260</td>
+            <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-36260" target="_blank">CVE-2021-36260</a></td>
             <td><strong style="color:var(--accent-red)">9.8</strong></td>
             <td>Command Injection</td>
-            <td>Inject lệnh hệ thống qua HTTP request, <strong>không cần xác thực</strong>. Ảnh hưởng 100M+ thiết bị. Đã bị khai thác bởi Mirai botnet và nhiều nhóm APT. CISA liệt vào danh sách "must patch". Hơn 80.000 camera vẫn chưa vá (2024).</td>
+            <td>Inject lệnh hệ thống qua HTTP request, <strong>không cần xác thực</strong>. Ảnh hưởng 100M+ thiết bị. Đã bị khai thác bởi Mirai botnet và nhiều nhóm APT. CISA liệt vào danh sách KEV "must patch". Hơn 80.000 camera vẫn chưa vá (2024).</td>
         </tr>
         <tr>
-            <td class="tid">CVE-2017-7921</td>
+            <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2017-7921" target="_blank">CVE-2017-7921</a></td>
             <td><strong style="color:var(--accent-red)">9.8</strong></td>
             <td>Auth Bypass</td>
-            <td>Truy cập trực tiếp video stream và cấu hình bằng cách chèn tham số vào URL: <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">http://[ip]/onvif-http/snapshot?auth=YWRtaW46MTEQ</code><br>Một chuỗi base64 giả mạo là đủ để bypass hoàn toàn. Phát hiện từ 2017, vẫn tồn tại trên hàng triệu thiết bị.</td>
+            <td>Truy cập trực tiếp video stream và cấu hình bằng cách chèn tham số vào URL: <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">http://[ip]/onvif-http/snapshot?auth=YWRtaW46MTEQ</code><br>Một chuỗi base64 giả mạo là đủ để bypass hoàn toàn. CISA đã thêm vào danh sách KEV. Phát hiện từ 2017, vẫn tồn tại trên hàng triệu thiết bị.</td>
         </tr>
         <tr>
-            <td class="tid">CVE-2025-34067</td>
+            <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-34067" target="_blank">CVE-2025-34067</a></td>
             <td><strong style="color:var(--accent-red)">10.0</strong></td>
             <td>RCE</td>
-            <td>RCE trên HikCentral qua endpoint <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">/bic/ssoService/v1/applyCT</code>. Fastjson deserialization → load Java class tùy ý qua LDAP URL. <strong>Hàng triệu camera DVR/NVR bị chiếm trong 1 request.</strong> PoC exploit công khai. Shadowserver phát hiện khai thác từ 02/2025.</td>
+            <td>RCE trên Hikvision iSecure Center (nền tảng quản lý camera tập trung, thị trường Trung Quốc) qua endpoint <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">/bic/ssoService/v1/applyCT</code>. Fastjson deserialization → load Java class tùy ý qua LDAP URL. PoC exploit công khai. Shadowserver phát hiện khai thác từ 02/2025. <em>Lưu ý: HikCentral (phiên bản quốc tế) không bị ảnh hưởng theo Hikvision.</em></td>
         </tr>
         <tr>
-            <td class="tid">CVE-2013-4977</td>
-            <td><strong style="color:var(--accent-orange)">—</strong></td>
+            <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2013-4977" target="_blank">CVE-2013-4977</a></td>
+            <td><strong style="color:var(--accent-red)">10.0</strong></td>
             <td>Buffer Overflow</td>
-            <td>Tràn bộ đệm trong RTSP handler → thực thi mã tùy ý, không cần xác thực. Camera Hikvision còn có tài khoản ẩn (anonymous) với credentials hardcoded.</td>
+            <td>Tràn bộ đệm trong RTSP handler (tham số Range) → thực thi mã tùy ý từ xa, không cần xác thực. Ảnh hưởng Hikvision DS-2CD7153-E và các dòng tương tự. Camera còn có tài khoản ẩn (anonymous) với credentials hardcoded.</td>
         </tr>
     </tbody>
 </table>
@@ -1090,22 +1090,22 @@
     <thead><tr><th>CVE</th><th>CVSS</th><th>Loại</th><th>Chi tiết kỹ thuật</th></tr></thead>
     <tbody>
         <tr>
-            <td class="tid">CVE-2021-33044</td>
+            <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-33044" target="_blank">CVE-2021-33044</a></td>
             <td><strong style="color:var(--accent-red)">9.8</strong></td>
             <td>Auth Bypass</td>
-            <td>Gửi gói dữ liệu với tham số <code style="background:var(--bg-card);padding:2px 6px;border-radius:4px;font-size:0.78rem;">NetKeyboard</code> đặc biệt → bypass hoàn toàn xác thực → chiếm quyền admin. PoC công khai từ 10/2021. Ảnh hưởng IPC-HX3XXX, HX5XXX, VTO, PTZ, Thermal. <strong>Xác suất bị khai thác: 94.27%.</strong></td>
+            <td>RPC2 login chấp nhận empty-password hash → bypass hoàn toàn xác thực → chiếm quyền admin. PoC công khai từ 10/2021. Ảnh hưởng IPC-HX3XXX, HX5XXX, VTO, PTZ, Thermal. CISA liệt vào danh sách KEV.</td>
         </tr>
         <tr>
-            <td class="tid">CVE-2022-30563</td>
-            <td><strong style="color:var(--accent-orange)">6.8</strong></td>
+            <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2022-30563" target="_blank">CVE-2022-30563</a></td>
+            <td><strong style="color:var(--accent-orange)">7.4</strong></td>
             <td>Replay Attack</td>
-            <td>Sniff giao tiếp ONVIF chưa mã hóa → replay credentials trong request mới → chiếm quyền camera hoàn toàn.</td>
+            <td>Man-in-the-middle sniff giao tiếp ONVIF (WS-UsernameToken) chưa mã hóa → replay credentials trong request mới → tạo tài khoản admin và chiếm quyền camera hoàn toàn.</td>
         </tr>
         <tr>
-            <td class="tid">CVE-2025-31700<br>CVE-2025-31701</td>
+            <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-31700" target="_blank">CVE-2025-31700</a><br><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-31701" target="_blank">CVE-2025-31701</a></td>
             <td><strong style="color:var(--accent-red)">8.1</strong></td>
             <td>Buffer Overflow</td>
-            <td>Buffer overflow trong ONVIF protocol handler và file upload. Gửi packet đặc biệt → RCE hoặc DoS, <strong>không cần xác thực</strong>.</td>
+            <td>Stack overflow trong ONVIF request handler (Host header) và .bss overflow trong RPC upload handler. Gửi packet đặc biệt → RCE hoặc DoS, <strong>không cần xác thực</strong>. Ảnh hưởng IPC-1XXX, IPC-2XXX, SD series. Vá từ 16/04/2025.</td>
         </tr>
     </tbody>
 </table>
