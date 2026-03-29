@@ -964,7 +964,7 @@
     </div>
     <div class="timeline-item">
         <div class="time">2024–2025 — The "AI Machine" Ramps Up</div>
-        <div class="desc">The AI systems Gospel (infrastructure targeting) and Lavender (individual targeting) were fine-tuned for the Iranian theater. By early 2026, the system could generate <strong>100 targets per day</strong> — a figure that thousands of human analysts could never match manually <a class="cite" href="#ref9">[9]</a>.</div>
+        <div class="desc">The AI systems Gospel (infrastructure targeting) and Lavender (individual targeting) were fine-tuned for the Iranian theater. According to +972 Magazine's reporting on the Gaza campaign, the system could generate <strong>100 targets per day</strong> — a figure that thousands of human analysts could never match manually. A similar capability is believed to have been applied to Iran <a class="cite" href="#ref9">[9]</a>.</div>
     </div>
     <div class="timeline-item critical">
         <div class="time">Late February 2026 — The Final Piece</div>
@@ -1092,7 +1092,7 @@
 <div class="info-box green">
     <h4>Nation-State C2 Infrastructure — Technical Details</h4>
     <p><strong>Encrypted tunnel:</strong> Data was encrypted end-to-end before transmission, bypassing Iran's Deep Packet Inspection (DPI). Most likely using domain fronting techniques or disguising traffic as legitimate HTTPS.</p>
-    <p><strong>Bandwidth management:</strong> Streaming full video from thousands of cameras would be too "noisy." The system almost certainly used local AI to filter, sending only frames containing valuable information (e.g., when official motorcades were detected) or metadata (license plates, locations, timestamps).</p>
+    <p><strong>Bandwidth management:</strong> Streaming full video from thousands of cameras would be too "noisy." The system may have used local AI to filter, sending only frames containing valuable information (e.g., when official motorcades were detected) or metadata (license plates, locations, timestamps).</p>
     <p><strong>Firmware-level persistence:</strong> Maintaining access for years undetected implies firmware-level rootkits — malware that survives even factory resets. Combined with scheduled beaconing (contacting C2 on a schedule, not continuously) to avoid detection through traffic analysis.</p>
 </div>
 
@@ -1111,7 +1111,7 @@
             <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-36260" target="_blank">CVE-2021-36260</a></td>
             <td><strong style="color:var(--accent-red)">9.8</strong></td>
             <td>Command Injection</td>
-            <td>System command injection via HTTP request, <strong>no authentication required</strong>. Affects 100M+ devices. Exploited by Mirai botnet and multiple APT groups. CISA listed in KEV "must patch" catalog. Over 80,000 cameras still unpatched (2024).</td>
+            <td>System command injection via HTTP request, <strong>no authentication required</strong>. Affects 100M+ devices. Exploited by Mirai botnet and multiple APT groups. CISA listed in KEV "must patch" catalog. 80,000+ cameras still unpatched as of 2022 (per BleepingComputer/Cyfirma).</td>
         </tr>
         <tr>
             <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2017-7921" target="_blank">CVE-2017-7921</a></td>
@@ -1312,13 +1312,13 @@
 <h3>Supporting Cyber Warfare — TV Hijacking</h3>
 
 <p>
-    Beyond cameras and mobile networks, the cyber campaign included another audacious move: after airstrikes destroyed the headquarters of two state TV networks (IRIB), Israel <strong>hijacked the broadcast and aired speeches by Trump and Netanyahu</strong> calling on the Iranian people to rise against the regime <a class="cite" href="#ref17">[17]</a>. General Dan Caine, Chairman of the U.S. Joint Chiefs of Staff, confirmed: <em>"Coordinated cyberspace operations effectively disrupted communications systems and sensor networks"</em> in Iran prior to the attack.
+    Beyond cameras and mobile networks, the cyber campaign included another audacious move: after airstrikes destroyed the headquarters of two state TV networks (IRIB), Israel <strong>hijacked the broadcast and aired speeches by Trump and Netanyahu</strong> calling on the Iranian people to rise against the regime <a class="cite" href="#ref17">[17]</a>. According to TechCrunch, U.S. military officials confirmed that <em>"coordinated cyberspace operations effectively disrupted communications systems and sensor networks"</em> in Iran prior to the attack <a class="cite" href="#ref17">[17]</a>.
 </p>
 
 <h3>Precision Weapon — The Blue Sparrow Missile</h3>
 
 <p>
-    The entire intelligence chain above served one final strike: the <strong>Blue Sparrow missile</strong> — an air-launched weapon fired from F-15s, developed by Rafael Advanced Defense Systems <a class="cite" href="#ref23">[23]</a>.
+    The entire intelligence chain above reportedly served one final strike: the <strong>Blue Sparrow missile</strong> — an air-launched weapon that may have been employed from F-15s, developed by Rafael Advanced Defense Systems. According to Army Recognition, Israel "May Have Employed" Blue Sparrow missiles in the early waves of the campaign <a class="cite" href="#ref23">[23]</a>.
 </p>
 
 <div class="info-box orange">
@@ -1326,7 +1326,7 @@
     <p><strong>Specifications:</strong> Length 6.51m, weight 1.9 tons, range ~2,000 km, single-stage solid fuel propulsion.</p>
     <p><strong>Quasi-ballistic trajectory:</strong> After launch, the missile ascends beyond the atmosphere (suborbital) then re-enters at a near-vertical angle at extreme velocity. This "falling from the sky" trajectory makes Iran's missile defense systems (S-300, Bavar-373) nearly incapable of interception.</p>
     <p><strong>Guidance:</strong> INS (inertial navigation system) combined with GPS/GNSS satellite → meter-level accuracy. The 14-digit coordinates from the AI system were loaded directly into the guidance system.</p>
-    <p><strong>Why Blue Sparrow:</strong> Originally designed to test the Arrow missile defense system, later converted into an offensive weapon. Launched from aircraft outside Iranian airspace → missile flies in autonomously → virtually no defense possible.</p>
+    <p><strong>Why Blue Sparrow:</strong> Originally designed to test the Arrow missile defense system, reportedly converted into an offensive weapon. Launched from aircraft outside Iranian airspace → missile flies in autonomously → extremely difficult to intercept.</p>
 </div>
 
 <!-- SVG: Kiến trúc kỹ thuật tổng thể chiến dịch -->
@@ -1357,7 +1357,7 @@
         <line x1="290" y1="102" x2="510" y2="102" class="svg-dark-node-line"/>
         <text x="400" y="124" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" class="svg-dark-node-accent-purple">LAVENDER</text>
         <text x="400" y="142" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">Social Network Analysis</text>
-        <text x="400" y="158" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">Billions of data points · 90% accuracy</text>
+        <text x="400" y="158" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">Billions of data points · 90% accuracy (per +972 Mag, Gaza)</text>
         <text x="400" y="174" text-anchor="middle" font-family="Inter" font-size="9.5" class="svg-dark-node-sub">WhatsApp · SIM changes · Contacts</text>
         <line x1="290" y1="186" x2="510" y2="186" class="svg-dark-node-line"/>
         <text x="400" y="206" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" class="svg-dark-node-accent-cyan">GOSPEL (HABSORA)</text>
@@ -1419,7 +1419,7 @@
 
         <rect x="400" y="450" width="150" height="55" rx="8" class="svg-card"/>
         <text x="475" y="472" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" class="svg-title">Vertical re-entry</text>
-        <text x="475" y="490" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#dc3545">Uninterceptable</text>
+        <text x="475" y="490" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#dc3545">Extremely difficult to intercept</text>
 
         <path d="M550,477 L578,477" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
 
@@ -1518,7 +1518,7 @@
     <h4>Lavender — "The Kill List Factory"</h4>
     <p><strong>Inputs (features):</strong> Video feeds, intercepted messages, social media data, phone communications, SIM change history, address change history, WhatsApp group memberships, social connections, photos.</p>
     <p><strong>Scoring mechanism:</strong> Each individual is assigned a "suspicion" score based on a combination of features. For example: membership in a WhatsApp group containing known combatants → +points. Changing SIMs every few months → +points. Frequently changing addresses → +points.</p>
-    <p><strong>Accuracy:</strong> After validation on a test sample, the system achieved a <strong>90% accuracy rate</strong> — meaning 10% were false positives (flagging individuals with loose or no actual connections). The Israeli military accepted this rate and authorized widespread use.</p>
+    <p><strong>Accuracy:</strong> According to +972 Magazine, based on Israeli military sources in the Gaza campaign, the system achieved a <strong>90% accuracy rate</strong> — meaning 10% were false positives (flagging individuals with loose or no actual connections). The Israeli military accepted this rate and authorized widespread use.</p>
     <p><strong>Speed:</strong> Before Lavender, human analysts produced approximately <strong>50 targets/year</strong>. Lavender + Gospel produces <strong>100 targets/day</strong> — roughly 730 times faster.</p>
 </div>
 
@@ -1538,7 +1538,7 @@
 <div class="info-box purple">
     <h4>How Social Network Analysis Broke Khamenei's Security Apparatus</h4>
     <p><strong>Step 1 — Identify "nodes":</strong> Every bodyguard, driver, and aide around Khamenei was a node in the social graph.</p>
-    <p><strong>Step 2 — What traffic cameras revealed:</strong> Tracking bodyguards' personal vehicles → knowing where they lived, which shifts they worked, where they parked near the compound. A camera angle happened to capture the exact spot where bodyguards parked — and that was the decisive clue.</p>
+    <p><strong>Step 2 — What traffic cameras revealed:</strong> Tracking bodyguards' personal vehicles → knowing where they lived, which shifts they worked, where they parked near the compound. According to the Financial Times, one camera had a vantage point overlooking the spot where bodyguards parked — and that was the decisive clue.</p>
     <p><strong>Step 3 — Mobile data supplements:</strong> Who called whom, at what time, from which cell tower. Combined into a complete relationship map.</p>
     <p><strong>Step 4 — AI identifies "center of gravity":</strong> The algorithm found seemingly ordinary individuals who were actually critical links — people whose removal would throw the entire protection network into disarray.</p>
     <p><strong>Step 5 — Complete "Pattern of Life":</strong> Routes, schedules, personnel, habits. As one Israeli source described it: <em>"We knew Tehran like we knew Jerusalem"</em> <a class="cite" href="#ref10">[10]</a>.</p>
@@ -1778,7 +1778,7 @@
 
         <rect x="25" y="135" width="710" height="42" rx="8" class="svg-card"/>
         <text x="380" y="155" text-anchor="middle" font-family="Inter" font-size="9" font-weight="600" fill="#dc3545">VN ranks in the TOP 5 countries with the most vulnerable Hikvision cameras worldwide [15]</text>
-        <text x="380" y="170" text-anchor="middle" font-family="Inter" font-size="8" class="svg-muted">Over 100 million Hikvision devices affected by CVSS 9.8 vulnerability — over 80,000 cameras still unpatched</text>
+        <text x="380" y="170" text-anchor="middle" font-family="Inter" font-size="8" class="svg-muted">Over 100 million Hikvision devices affected by CVSS 9.8 vulnerability — 80,000+ cameras still unpatched as of 2022</text>
     </svg>
 </div>
 
@@ -1801,10 +1801,10 @@
 <div class="vn-warning">
     <h4>6 WARNINGS FOR VIETNAM FROM THE TEHRAN INCIDENT</h4>
     <p style="color: var(--text-secondary); font-size: 0.88rem;">
-        <strong>1. Lessons on vendor dependency:</strong> Hikvision and Dahua have been restricted from government use by the U.S., UK, and Australia due to security concerns. Cameras from these two brands account for 33% of all enterprise IoT security incidents despite representing only 5% of device count <a class="cite" href="#ref15">[15]</a>. Vietnam must ask itself: why are other countries restricting while we are expanding?
+        <strong>1. Lessons on vendor dependency:</strong> Hikvision and Dahua have been restricted from government use by the U.S., UK, and Australia due to security concerns. Critical vulnerabilities in cameras from both manufacturers have been listed by CISA (US) as mandatory emergency patches <a class="cite" href="#ref15">[15]</a>. Vietnam must ask itself: why are other countries restricting while we are expanding?
     </p>
     <p style="color: var(--text-secondary); font-size: 0.88rem;">
-        <strong>2. Known but unpatched vulnerabilities:</strong> The Hikvision vulnerability with a CVSS score of 9.8/10 (maximum severity) was discovered in 2021, affecting over 100 million devices. Yet according to The Register, at least 80,000 cameras remain unpatched. Vietnam ranks in the top 5 affected countries <a class="cite" href="#ref15">[15]</a>.
+        <strong>2. Known but unpatched vulnerabilities:</strong> The Hikvision vulnerability with a CVSS score of 9.8/10 (maximum severity) was discovered in 2021, affecting over 100 million devices. Yet according to The Register, 80,000+ cameras remained unpatched as of 2022 (per BleepingComputer/Cyfirma). Vietnam ranks in the top 5 affected countries <a class="cite" href="#ref15">[15]</a>.
     </p>
     <p style="color: var(--text-secondary); font-size: 0.88rem;">
         <strong>3. Expansion = multiplied risk:</strong> The nationwide camera expansion plan through 2050 will increase the attack surface exponentially. Every new camera is another entry point for intruders <a class="cite" href="#ref13">[13]</a>.

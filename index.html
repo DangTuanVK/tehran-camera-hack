@@ -964,7 +964,7 @@
     </div>
     <div class="timeline-item">
         <div class="time">2024–2025 -"Cỗ máy AI" vào guồng</div>
-        <div class="desc">Hệ thống AI Gospel (xác định mục tiêu hạ tầng) và Lavender (xác định mục tiêu cá nhân) được tinh chỉnh cho chiến trường Iran. Đến đầu năm 2026, hệ thống đã có khả năng xuất <strong>100 mục tiêu mỗi ngày</strong> -một con số mà hàng nghìn nhà phân tích cũng không thể đạt được bằng tay <a class="cite" href="#ref9">[9]</a>.</div>
+        <div class="desc">Hệ thống AI Gospel (xác định mục tiêu hạ tầng) và Lavender (xác định mục tiêu cá nhân) được tinh chỉnh cho chiến trường Iran. Theo báo cáo từ +972 Magazine về chiến dịch tại Gaza, hệ thống này có khả năng xuất tới <strong>100 mục tiêu mỗi ngày</strong> -một con số mà hàng nghìn nhà phân tích cũng không thể đạt được bằng tay. Năng lực tương tự được cho là đã áp dụng tại Iran <a class="cite" href="#ref9">[9]</a>.</div>
     </div>
     <div class="timeline-item critical">
         <div class="time">Cuối tháng 2/2026 -Mảnh ghép cuối cùng</div>
@@ -1092,7 +1092,7 @@
 <div class="info-box green">
     <h4>Hạ tầng C2 cấp quốc gia -Chi tiết kỹ thuật</h4>
     <p><strong>Encrypted tunnel:</strong> Dữ liệu được mã hóa end-to-end trước khi truyền, vượt qua Deep Packet Inspection (DPI) của Iran. Rất có thể sử dụng kỹ thuật domain fronting hoặc giả dạng lưu lượng HTTPS hợp pháp.</p>
-    <p><strong>Bandwidth management:</strong> Không thể truyền full video stream từ hàng nghìn camera -quá "ồn". Hệ thống gần như chắc chắn dùng AI local để lọc, chỉ gửi frame chứa thông tin giá trị (ví dụ: khi phát hiện đoàn xe quan chức) hoặc metadata (biển số, vị trí, timestamp).</p>
+    <p><strong>Bandwidth management:</strong> Không thể truyền full video stream từ hàng nghìn camera -quá "ồn". Hệ thống có thể đã dùng AI local để lọc, chỉ gửi frame chứa thông tin giá trị (ví dụ: khi phát hiện đoàn xe quan chức) hoặc metadata (biển số, vị trí, timestamp).</p>
     <p><strong>Persistence cấp firmware:</strong> Duy trì truy cập nhiều năm mà không bị phát hiện đồng nghĩa với rootkit cấp firmware -loại malware sống sót qua cả factory reset. Kết hợp scheduled beaconing (liên lạc về C2 theo lịch, không liên tục) để tránh bị phát hiện bằng traffic analysis.</p>
 </div>
 
@@ -1111,7 +1111,7 @@
             <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-36260" target="_blank">CVE-2021-36260</a></td>
             <td><strong style="color:var(--accent-red)">9.8</strong></td>
             <td>Command Injection</td>
-            <td>Inject lệnh hệ thống qua HTTP request, <strong>không cần xác thực</strong>. Ảnh hưởng 100M+ thiết bị. Đã bị khai thác bởi Mirai botnet và nhiều nhóm APT. CISA liệt vào danh sách KEV "must patch". Hơn 80.000 camera vẫn chưa vá (2024).</td>
+            <td>Inject lệnh hệ thống qua HTTP request, <strong>không cần xác thực</strong>. Ảnh hưởng 100M+ thiết bị. Đã bị khai thác bởi Mirai botnet và nhiều nhóm APT. CISA liệt vào danh sách KEV "must patch". Hơn 80.000 camera vẫn chưa vá tính đến 2022 (theo BleepingComputer/Cyfirma).</td>
         </tr>
         <tr>
             <td class="tid"><a href="https://nvd.nist.gov/vuln/detail/CVE-2017-7921" target="_blank">CVE-2017-7921</a></td>
@@ -1312,13 +1312,13 @@
 <h3>Chiến tranh mạng bổ trợ -TV hijacking</h3>
 
 <p>
-    Ngoài camera và di động, chiến dịch mạng còn bao gồm một thao tác táo bạo khác: sau khi không kích phá hủy trụ sở hai đài truyền hình nhà nước IRIB, Israel <strong>chiếm quyền phát sóng và phát bài phát biểu của Trump và Netanyahu</strong> kêu gọi người dân Iran chống lại chế độ <a class="cite" href="#ref17">[17]</a>. Tướng Dan Caine, Chủ tịch Hội đồng Tham mưu trưởng Liên quân Mỹ, xác nhận: <em>"Các chiến dịch không gian mạng phối hợp đã phá vỡ hiệu quả hệ thống thông tin liên lạc và mạng cảm biến"</em> của Iran trước giờ tấn công.
+    Ngoài camera và di động, chiến dịch mạng còn bao gồm một thao tác táo bạo khác: sau khi không kích phá hủy trụ sở hai đài truyền hình nhà nước IRIB, Israel <strong>chiếm quyền phát sóng và phát bài phát biểu của Trump và Netanyahu</strong> kêu gọi người dân Iran chống lại chế độ <a class="cite" href="#ref17">[17]</a>. Theo TechCrunch, giới chức quân sự Mỹ xác nhận rằng <em>"các chiến dịch không gian mạng phối hợp đã phá vỡ hiệu quả hệ thống thông tin liên lạc và mạng cảm biến"</em> của Iran trước giờ tấn công <a class="cite" href="#ref17">[17]</a>.
 </p>
 
 <h3>Vũ khí chính xác -Tên lửa Blue Sparrow</h3>
 
 <p>
-    Toàn bộ chuỗi tình báo trên phục vụ cho đòn đánh cuối cùng: <strong>tên lửa Blue Sparrow</strong> -vũ khí phóng từ máy bay F-15 do Rafael Advanced Defense Systems phát triển <a class="cite" href="#ref23">[23]</a>.
+    Toàn bộ chuỗi tình báo trên được cho là phục vụ cho đòn đánh cuối cùng: <strong>tên lửa Blue Sparrow</strong> -vũ khí phóng từ máy bay F-15 do Rafael Advanced Defense Systems phát triển. Theo Army Recognition, Israel "có thể đã sử dụng" (may have employed) tên lửa này trong đợt tấn công đầu tiên <a class="cite" href="#ref23">[23]</a>.
 </p>
 
 <div class="info-box orange">
@@ -1419,7 +1419,7 @@
 
         <rect x="400" y="450" width="150" height="55" rx="8" class="svg-card"/>
         <text x="475" y="472" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" class="svg-title">Tái nhập thẳng đứng</text>
-        <text x="475" y="490" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#dc3545">Không thể đánh chặn</text>
+        <text x="475" y="490" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#dc3545">Rất khó đánh chặn</text>
 
         <path d="M550,477 L578,477" stroke="#dc3545" stroke-width="2" marker-end="url(#aR)"/>
 
@@ -1518,7 +1518,7 @@
     <h4>Lavender -"Máy sản xuất danh sách tiêu diệt"</h4>
     <p><strong>Đầu vào (features):</strong> Video feed, tin nhắn bị chặn, dữ liệu mạng xã hội, liên lạc điện thoại, lịch sử thay đổi SIM, lịch sử thay đổi địa chỉ, danh sách nhóm WhatsApp, quan hệ xã hội, ảnh chụp.</p>
     <p><strong>Cơ chế scoring:</strong> Mỗi cá nhân được gán điểm "nghi ngờ" dựa trên tổ hợp các features. Ví dụ: tham gia nhóm WhatsApp có thành viên là chiến binh đã biết → +điểm. Thay SIM vài tháng/lần → +điểm. Thay địa chỉ thường xuyên → +điểm.</p>
-    <p><strong>Độ chính xác:</strong> Sau khi kiểm tra trên tập mẫu, hệ thống đạt <strong>tỷ lệ chính xác 90%</strong> -nghĩa là 10% là nhầm lẫn (đánh dấu nhầm người có liên hệ lỏng lẻo hoặc không liên quan). Quân đội Israel chấp nhận tỷ lệ này và cho phép sử dụng rộng rãi.</p>
+    <p><strong>Độ chính xác:</strong> Theo +972 Magazine (dựa trên nguồn tin quân sự Israel trong chiến dịch Gaza), hệ thống đạt <strong>tỷ lệ chính xác khoảng 90%</strong> -nghĩa là 10% là nhầm lẫn (đánh dấu nhầm người có liên hệ lỏng lẻo hoặc không liên quan). Quân đội Israel chấp nhận tỷ lệ này và cho phép sử dụng rộng rãi.</p>
     <p><strong>Tốc độ:</strong> Trước Lavender, nhà phân tích con người sản xuất khoảng <strong>50 mục tiêu/năm</strong>. Lavender + Gospel sản xuất <strong>100 mục tiêu/ngày</strong> -nhanh hơn ~730 lần.</p>
 </div>
 
@@ -1538,7 +1538,7 @@
 <div class="info-box purple">
     <h4>Cách Social Network Analysis phá vỡ hệ thống bảo vệ Khamenei</h4>
     <p><strong>Bước 1 -Xác định "node":</strong> Mỗi vệ sĩ, tài xế, người phục vụ quanh Khamenei là một node trong đồ thị xã hội.</p>
-    <p><strong>Bước 2 -Camera giao thông cho biết gì:</strong> Theo dõi xe cá nhân của vệ sĩ → biết họ sống ở đâu, đi làm ca nào, đỗ xe ở điểm nào gần khu phức hợp. Một góc camera tình cờ quay đúng chỗ vệ sĩ đỗ xe, và đó là manh mối quyết định.</p>
+    <p><strong>Bước 2 -Camera giao thông cho biết gì:</strong> Theo dõi xe cá nhân của vệ sĩ → biết họ sống ở đâu, đi làm ca nào, đỗ xe ở điểm nào gần khu phức hợp. Theo Financial Times, một góc camera có vị trí thuận lợi để quan sát nơi vệ sĩ đỗ xe cá nhân gần khu phức hợp, cung cấp manh mối quan trọng về hoạt động bên trong.</p>
     <p><strong>Bước 3 -Dữ liệu di động bổ sung:</strong> Ai gọi cho ai, lúc mấy giờ, từ trạm phát sóng nào. Ghép lại thành bản đồ quan hệ hoàn chỉnh.</p>
     <p><strong>Bước 4 -AI phát hiện "trung tâm trọng lực":</strong> Thuật toán tìm ra những cá nhân tưởng bình thường nhưng thực chất là mắt xích then chốt -người mà khi mất đi, cả mạng lưới bảo vệ rối loạn.</p>
     <p><strong>Bước 5 -"Pattern of Life" hoàn chỉnh:</strong> Tuyến đường, giờ giấc, nhân sự, thói quen. Như một nguồn Israel mô tả: <em>"Chúng tôi biết Tehran như biết Jerusalem"</em> <a class="cite" href="#ref10">[10]</a>.</p>
@@ -1801,7 +1801,7 @@
 <div class="vn-warning">
     <h4>6 CẢNH BÁO CHO VIỆT NAM TỪ SỰ KIỆN TEHRAN</h4>
     <p style="color: var(--text-secondary); font-size: 0.88rem;">
-        <strong>1. Bài học về phụ thuộc nhà cung cấp:</strong> Hikvision và Dahua đã bị Mỹ, Anh, và Australia hạn chế sử dụng trong cơ quan chính phủ do lo ngại an ninh. Camera của hai hãng này chiếm 33% tổng số sự cố bảo mật IoT doanh nghiệp dù chỉ chiếm 5% số lượng thiết bị <a class="cite" href="#ref15">[15]</a>. Việt Nam cần tự đặt câu hỏi: tại sao các nước khác hạn chế mà mình lại mở rộng?
+        <strong>1. Bài học về phụ thuộc nhà cung cấp:</strong> Hikvision và Dahua đã bị Mỹ, Anh, và Australia hạn chế sử dụng trong cơ quan chính phủ do lo ngại an ninh. Các lỗ hổng nghiêm trọng trên camera của hai hãng này đã được CISA (Mỹ) liệt vào danh sách phải vá khẩn cấp <a class="cite" href="#ref15">[15]</a>. Việt Nam cần tự đặt câu hỏi: tại sao các nước khác hạn chế mà mình lại mở rộng?
     </p>
     <p style="color: var(--text-secondary); font-size: 0.88rem;">
         <strong>2. Lỗ hổng đã biết nhưng chưa vá:</strong> Lỗ hổng Hikvision với điểm CVSS 9.8/10 (mức nguy hiểm nhất) được phát hiện từ 2021, ảnh hưởng hơn 100 triệu thiết bị. Nhưng theo The Register, vẫn còn ít nhất 80.000 camera chưa được patch. Việt Nam nằm trong top 5 quốc gia bị ảnh hưởng <a class="cite" href="#ref15">[15]</a>.
